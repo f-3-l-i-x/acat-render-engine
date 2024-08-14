@@ -9,12 +9,14 @@ use DOMException;
 /**
  *
  */
-class LineBreakPlaceholder extends ACatPlaceholder {
+class LineBreakPlaceholder extends ACatPlaceholder
+{
 
     /**
      * @return string
      */
-    public function getXMLTagAsString() : string {
+    public function getXMLTagAsString() : string
+    {
         return "<w:br/>";
     }
 
@@ -23,21 +25,24 @@ class LineBreakPlaceholder extends ACatPlaceholder {
      * @return DOMNode
      * @throws DOMException
      */
-    public function getDOMNode(DOMDocument $domDocument) : DOMNode {
+    public function getDOMNode(DOMDocument $domDocument) : DOMNode
+    {
         return $domDocument->createElement('w:br');
     }
 
     /**
      * @return int
      */
-    public function length() : int {
+    public function length() : int
+    {
         return 0;
     }
 
     /**
      * @return string
      */
-    function getNodeAsString() : string {
+    public function getNodeAsString() : string
+    {
         return "";
     }
 

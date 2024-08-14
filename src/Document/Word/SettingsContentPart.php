@@ -5,29 +5,29 @@ namespace ACAT\Document\Word;
 
 use DOMException;
 use ACAT\Exception\DocumentException;
-use ACAT\Placeholder\WordDocumentProtectionPlaceholder;
+use ACAT\Parser\Placeholder\WordDocumentProtectionPlaceholder;
 
 /**
  *
  */
-class SettingsContentPart extends WordContentPart {
+class SettingsContentPart extends ContentPart
+{
 
     /**
-     * @param DocumentProtectionn $documentProtection
+     * @param DocumentProtection $documentProtection
      * @return void
      * @throws DocumentException
      * @throws DOMException
      */
-	public function protect(DocumentProtectionn $documentProtection) {
+    public function protect(DocumentProtection $documentProtection) : void
+    {
+        $wordDocumentProtectionPlaceHolder = new WordDocumentProtectionPlaceholder($documentProtection);
+        $nodes = $this->getXPath()->query('//w:settings');
 
-		$wordDocumentProtectionPlaceHolder = new WordDocumentProtectionPlaceholder($documentProtection);
-		$nodes = $this->getXPath()->query('//w:settings');
+        if (!$nodes || $nodes->length <> 1) {
+            throw new DocumentException($this->path . ' has no root node');
+        }
 
-		if (!$nodes || $nodes->length <> 1) {
-			throw new DocumentException($this->path . ' has no root node');
-		}
-
-		$nodes->item(0)->appendChild($wordDocumentProtectionPlaceHolder->getDOMNode($this->domDocument));
-
-	}
+        $nodes->item(0)->appendChild($wordDocumentProtectionPlaceHolder->getDOMNode($this->domDocument));
+    }
 }

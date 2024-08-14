@@ -4,6 +4,7 @@ namespace ACAT\Exception;
 
 use Exception;
 
-class ElementException extends Exception {
+class ElementException extends Exception
+{
 
 }

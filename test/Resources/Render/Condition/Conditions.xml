@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+        mc:Ignorable="w14 w15 wp14">
+    <w:body>
+
+        <!-- 151 is not empty -->
+        <w:r>
+            <w:rPr>
+                <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de" id="1" field="151" action="0">
+                    <![CDATA[<>]]>
+                </acat:condition>
+            </w:rPr>
+        </w:r>
+
+        <!-- 151 not equal 1 -->
+        <w:r>
+            <w:rPr>
+                <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de" id="2" field="151" action="1">
+                    <![CDATA[<>1]]>
+                </acat:condition>
+            </w:rPr>
+        </w:r>
+
+        <!-- 151 less then -->
+        <w:r>
+            <w:rPr>
+                <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de" id="3" field="151" action="2">
+                    <![CDATA[<100]]>
+                </acat:condition>
+            </w:rPr>
+        </w:r>
+
+        <!-- 151 greater then -->
+        <w:r>
+            <w:rPr>
+                <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de" id="4" field="151" action="3">
+                    <![CDATA[>100]]>
+                </acat:condition>
+            </w:rPr>
+        </w:r>
+
+        <!-- 151 is equal -->
+        <w:r>
+            <w:rPr>
+                <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de" id="5" field="151" action="4">
+                    <![CDATA[=100]]>
+                </acat:condition>
+            </w:rPr>
+        </w:r>
+
+        <!-- unknown operator  -->
+        <w:r>
+            <w:rPr>
+                <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de" id="6" field="151" action="0">
+                    <![CDATA[!100]]>
+                </acat:condition>
+            </w:rPr>
+        </w:r>
+
+    </w:body>
+
+</w:document>

@@ -2,189 +2,200 @@
 
 namespace ACAT\Document\Word;
 
-use ACAT\Document\MarkupDocument;
-use DOMDocument;
 use Exception;
 use ZipArchive;
+use DOMDocument;
 use ACAT\Utils\FileUtils;
 use ACAT\Exception\DocumentException;
 
 /**
  *
  */
-class WordDocument extends MarkupDocument {
+class WordDocument
+{
 
-	/**
-	 * @var ZipArchive|null
-	 */
-	private ?ZipArchive $zipArchive = null;
+    /**
+     * @var string
+     */
+    protected string $path;
 
-	/**
-	 * @var array
-	 */
-	private array $contentParts = [];
+    /**
+     *
+     */
+    private const string ROOT = "[Content_Types].xml";
 
-	/**
-	 *
-	 */
-	private const ROOT = "[Content_Types].xml";
+    /**
+     * @var ZipArchive|null
+     */
+    private ?ZipArchive $zipArchive = null;
 
-	/**
-	 * @return array
-	 * @throws DocumentException
-	 */
-	public function getContentParts(): array {
+    /**
+     * @var array
+     */
+    private array $contentParts = [];
 
-		if (!$this->zipArchive) {
-			$this->open();
-		}
+    /**
+     * @param string $path
+     * @throws DocumentException
+     */
+    public function __construct(string $path)
+    {
+        if (!is_readable($path) || filesize($path) == 0) {
+            throw new DocumentException($path . ' is not readable');
+        }
+        $this->path = $path;
+    }
 
-		if (!empty($this->contentParts)) {
-			return $this->contentParts;
-		}
+    /**
+     * @param string|null $password
+     * @return void
+     * @throws DocumentException
+     * @throws Exception
+     */
+    public function protect(string $password = null) : void
+    {
+        $settingsContentPart = $this->getContentParts()['word/settings.xml'];
 
-		$domDocument = $this->getDomDocument($this->readFromFile(self::ROOT));
-		$nodes = $domDocument->getElementsByTagName('Override');
+        if (!$settingsContentPart) {
+            throw new DocumentException($this->path . ' has no settings');
+        }
 
-		if (count($nodes) == 0) {
-			throw new DocumentException('no related xml documents found');
-		}
+        $settingsContentPart->protect(new DocumentProtection($password));
+    }
 
-		foreach ($nodes as $node) {
+    /**
+     * @return array
+     * @throws DocumentException
+     */
+    public function getContentParts() : array
+    {
+        if (!$this->zipArchive) {
+            $this->open();
+        }
 
-			if ($node->hasAttributes()) {
+        if (!empty($this->contentParts)) {
+            return $this->contentParts;
+        }
 
-				$path = FileUtils::stripTrailingSlash($node->attributes->getNamedItem('PartName')->nodeValue);
-				$content = $this->readFromFile($path);
+        $domDocument = $this->getDomDocument($this->readFromFile(self::ROOT));
+        $nodes = $domDocument->getElementsByTagName('Override');
 
-				if ($path === 'word/settings.xml') {
-					$contentPart = new SettingsContentPart($content, $path);
-				}
-				else {
-					$contentPart = new WordContentPart($content, $path);
-				}
+        if (count($nodes) == 0) {
+            throw new DocumentException('no related xml documents found');
+        }
 
-				$this->contentParts[$path] = $contentPart;
+        foreach ($nodes as $node) {
+            if ($node->hasAttributes()) {
+                $path = FileUtils::stripTrailingSlash($node->attributes->getNamedItem('PartName')->nodeValue);
+                $content = $this->readFromFile($path);
 
-			}
+                if ($path === 'word/settings.xml') {
+                    $contentPart = new SettingsContentPart($content, $path);
+                } else {
+                    $contentPart = new ContentPart($content, $path);
+                }
 
-		}
+                $this->contentParts[$path] = $contentPart;
+            }
+        }
 
-		return $this->contentParts;
+        return $this->contentParts;
+    }
 
-	}
+    /**
+     * @return void
+     * @throws DocumentException
+     */
+    public function open() : void
+    {
+        if (!$this->zipArchive) {
+            $zipArchive = new ZipArchive();
+            if (($result = $zipArchive->open($this->path)) === true) {
+                $this->zipArchive = $zipArchive;
+            } else {
+                throw new DocumentException('could not open document ' . $this->path . ' (' . $result . ')');
+            }
+        }
+    }
 
-	/**
-	 * @param string|null $password
-	 * @return void
-	 * @throws DocumentException
-	 * @throws Exception
-	 */
-	public function protect(string $password = null): void {
+    /**
+     * @param string $content
+     * @return DOMDocument
+     */
+    private function getDomDocument(string $content) : DOMDocument
+    {
+        $domDocument = new DOMDocument('1.0', 'utf-8');
+        $domDocument->loadXML($content);
 
-		$settingsContentPart = $this->getContentParts()['word/settings.xml'];
+        return $domDocument;
+    }
 
-		if (!$settingsContentPart) {
-			throw new DocumentException($this->path . ' has no settings');
-		}
+    /**
+     * @param string $file
+     * @return string
+     * @throws DocumentException
+     */
+    private function readFromFile(string $file) : string
+    {
+        if (!$this->zipArchive) {
+            throw new DocumentException('document ' . $this->path . ' is not open');
+        }
+        return $this->zipArchive->getFromName($file);
+    }
 
-		$settingsContentPart->protect(new DocumentProtection($password));
+    /**
+     *
+     */
+    public function __destruct()
+    {
+        try {
+            $this->close();
+        } catch (DocumentException) {
+            //
+        }
+    }
 
-	}
+    /**
+     * @param bool $save
+     * @return void
+     * @throws DocumentException
+     */
+    public function close(bool $save = false) : void
+    {
+        if ($save) {
+            $this->save();
+        }
 
-	/**
-	 * @param string $file
-	 * @return string
-	 * @throws DocumentException
-	 */
-	private function readFromFile(string $file): string {
-		if (!$this->zipArchive) {
-			throw new DocumentException('document ' . $this->path . ' is not open');
-		}
-		return $this->zipArchive->getFromName($file);
-	}
+        if (!$this->zipArchive) {
+            throw new DocumentException('no document is open');
+        }
 
-	/**
-	 * @return void
-	 * @throws DocumentException
-	 */
-	public function open(): void {
-		if (!$this->zipArchive) {
-			$zipArchive = new ZipArchive();
-			if (($result = $zipArchive->open($this->path)) === true) {
-				$this->zipArchive = $zipArchive;
-			}
-			else {
-				throw new DocumentException('could not open document ' . $this->path . ' (' . $result . ')');
-			}
-		}
-	}
+        $this->zipArchive->close();
+        $this->zipArchive = null;
+    }
 
-	/**
-	 * @param bool $save
-	 * @return void
-	 * @throws DocumentException
-	 */
-	public function close(bool $save = false): void {
+    /**
+     * @return void
+     * @throws DocumentException
+     */
+    public function save() : void
+    {
+        if (!$this->zipArchive) {
+            throw new DocumentException('document is not open');
+        }
 
-		if ($save) {
-			$this->save();
-		}
+        foreach ($this->contentParts as $contentPart) {
+            if (!$this->zipArchive->deleteName($contentPart->getPath())) {
+                throw new DocumentException(
+                    'could not delete content part ' . $contentPart->getPath() . ' in document ' . $this->path
+                );
+            }
 
-		if (!$this->zipArchive) {
-			throw new DocumentException('no document is open');
-		}
-
-		$this->zipArchive->close();
-		$this->zipArchive = null;
-
-	}
-
-	/**
-	 * @return void
-	 * @throws DocumentException
-	 */
-	public function save(): void {
-
-		if (!$this->zipArchive) {
-			throw new DocumentException('document is not open');
-		}
-
-		foreach ($this->contentParts as $contentPart) {
-
-			if (!$this->zipArchive->deleteName($contentPart->getPath())) {
-				throw new DocumentException('could not delete content part ' . $contentPart->getPath() . ' in document ' . $this->path);
-			}
-
-			if (!$this->zipArchive->addFromString($contentPart->getPath(), $contentPart->getContent())) {
-				throw new DocumentException('could not save content part ' . $contentPart->getPath() . ' in document ' . $this->path);
-			}
-
-		}
-	}
-
-	/**
-	 * @param string $content
-	 * @return DOMDocument
-	 */
-	private function getDomDocument(string $content) : DOMDocument {
-
-		$domDocument = new DOMDocument('1.0', 'utf-8');
-		$domDocument->loadXML($content);
-
-		return $domDocument;
-
-	}
-
-	/**
-	 *
-	 */
-	public function __destruct() {
-		try {
-			$this->close();
-		}
-		catch (DocumentException) {
-			//
-		}
-	}
+            if (!$this->zipArchive->addFromString($contentPart->getPath(), $contentPart->getContent())) {
+                throw new DocumentException(
+                    'could not save content part ' . $contentPart->getPath() . ' in document ' . $this->path
+                );
+            }
+        }
+    }
 }

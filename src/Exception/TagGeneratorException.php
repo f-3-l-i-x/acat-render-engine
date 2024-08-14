@@ -4,6 +4,7 @@ namespace ACAT\Exception;
 
 use Exception;
 
-class TagGeneratorException extends Exception {
+class TagGeneratorException extends Exception
+{
 
 }

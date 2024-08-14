@@ -2,137 +2,153 @@
 
 namespace ACAT\Parser\Tag;
 
-use ACAT\Document\ContentPart;
-use ACAT\Document\HTML\HTMLContentPart;
-use ACAT\Document\Word\WordContentPart;
+use DOMNode;
+use DOMNodeList;
+use Psr\Log\LogLevel;
+use Psr\Log\LoggerInterface;
+use ACAT\Parser\ParserConstants;
+use ACAT\Document\Word\ContentPart;
 use ACAT\Exception\PlaceholderException;
-use ACAT\Exception\TagGeneratorException;
 use ACAT\Parser\Placeholder\ACatPlaceholder;
 use ACAT\Parser\Placeholder\WordTextPlaceholder;
-use DOMNodeList;
-use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
 
 /**
  *
  */
-abstract class TagGenerator {
+class TagGenerator
+{
 
-	/**
-	 * @var LoggerInterface|null
-	 */
-	private ?LoggerInterface $logger;
+    /**
+     * @var ContentPart
+     */
+    protected ContentPart $contentPart;
+    /**
+     * @var LoggerInterface|null
+     */
+    private ?LoggerInterface $logger;
 
-	/**
-	 * @var ContentPart
-	 */
-	protected ContentPart $contentPart;
+    /**
+     * @param ContentPart $contentPart
+     * @param LoggerInterface|null $logger
+     */
+    public function __construct(ContentPart $contentPart, LoggerInterface $logger = null)
+    {
+        $this->logger = $logger;
+        $this->contentPart = $contentPart;
+    }
 
-	/**
-	 * @param ContentPart $contentPart
-	 * @param LoggerInterface|null $logger
-	 */
-	private function __construct(ContentPart $contentPart, LoggerInterface $logger = null) {
-		$this->logger = $logger;
-		$this->contentPart = $contentPart;
-	}
+    /**
+     * @param array $matches
+     * @param string $nodeValue
+     * @return array
+     */
+    public function getTags(array $matches, string $nodeValue) : array
+    {
+        $nodes = [];
+        $currentIndex = 0;
 
-	/**
-	 * @param ContentPart $contentPart
-	 * @param LoggerInterface|null $logger
-	 * @return static
-	 * @throws TagGeneratorException
-	 */
-	public static function getInstance(ContentPart $contentPart, LoggerInterface $logger = null) : self {
+        foreach ($matches[0] as $match) {
+            $value = $match[0];
+            $offset = $match[1];
 
-		if ($contentPart instanceof WordContentPart) {
-			return new WordTagGenerator($contentPart, $logger);
-		}
-		else if ($contentPart instanceof HTMLContentPart) {
-			return new HTMLTagGenerator($contentPart, $logger);
-		}
+            $this->log(LogLevel::DEBUG, 'replacing "' . $nodeValue . '" from "' . $value . '"');
 
-		throw new TagGeneratorException('unimplemented content part');
+            if ($offset > 0 && $currentIndex < $offset) {
+                $currentValue = substr($nodeValue, $currentIndex, ($offset - $currentIndex));
+                $node = new WordTextPlaceholder($currentValue);
+                $currentIndex = $currentIndex + $node->length();
 
-	}
+                $this->log(LogLevel::DEBUG, 'created node ' . $node->getXMLTagAsString());
 
-	/**
-	 * @param array $matches
-	 * @param string $nodeValue
-	 * @return array
-	 */
-	public function getTags(array $matches, string $nodeValue): array {
+                $nodes[] = $node;
+            }
 
-		$nodes = [];
-		$currentIndex = 0;
+            try {
+                $node = ACatPlaceholder::getPlaceholder($value);
+            } catch (PlaceholderException $e) {
+                $this->log(LogLevel::WARNING, $e);
+                $node = new WordTextPlaceholder($value);
+            }
 
-		foreach ($matches[0] as $match) {
+            $this->log(LogLevel::DEBUG, 'created node ' . $node->getXMLTagAsString());
 
-			$value = $match[0];
-			$offset = $match[1];
+            $currentIndex = $currentIndex + $node->length();
+            $nodes[] = $node;
+        }
 
-			$this->log(LogLevel::DEBUG, 'replacing "' . $nodeValue . '" from "' . $value . '"');
+        if ($currentIndex > 0 && $currentIndex < strlen($nodeValue)) {
+            $currentValue = substr($nodeValue, $currentIndex, (strlen($nodeValue) - $currentIndex));
+            $node = new WordTextPlaceholder($currentValue);
 
-			if ($offset > 0 && $currentIndex < $offset) {
+            $this->log(LogLevel::DEBUG, 'created node ' . $node->getXMLTagAsString());
 
-				$currentValue = substr($nodeValue, $currentIndex, ($offset - $currentIndex));
-				$node = new WordTextPlaceholder($currentValue);
-				$currentIndex = $currentIndex + $node->length();
+            $nodes[] = $node;
+        }
 
-				$this->log(LogLevel::DEBUG, 'created node ' . $node->getXMLTagAsString());
+        $this->log(LogLevel::INFO, 'created ' . count($nodes) . ' nodes');
 
-				$nodes[] = $node;
-			}
+        return $nodes;
+    }
 
-			try {
-				$node = ACatPlaceholder::getPlaceholder($value);
-			}
-			catch (PlaceholderException $e) {
-				$this->log(LogLevel::WARNING, $e);
-				$node = new WordTextPlaceholder($value);
-			}
+    /**
+     * @param string $level
+     * @param string $message
+     * @return void
+     */
+    protected function log(string $level, string $message) : void
+    {
+        $this->logger?->log($level, $message);
+    }
 
-			$this->log(LogLevel::DEBUG, 'created node ' . $node->getXMLTagAsString());
+    /**
+     * @return void
+     */
+    public function generateTags() : void
+    {
+        $this->log(LogLevel::INFO, 'starting tag generator for content part ' . $this->contentPart->getPath());
 
-			$currentIndex = $currentIndex + $node->length();
-			$nodes[] = $node;
+        $textNodes = $this->getTextNodes();
 
-		}
+        $this->log(LogLevel::DEBUG, 'content part hast ' . $textNodes->length . ' text nodes');
 
-		if ($currentIndex > 0 && $currentIndex < strlen($nodeValue)) {
+        foreach ($textNodes as $textNode) {
+            preg_match_all(ParserConstants::MARKER_REG_EX, $textNode->nodeValue, $matches, PREG_OFFSET_CAPTURE);
+            if ($matches[0]) {
+                $nodes = $this->getTags($matches, $textNode->nodeValue);
+                $this->insertNodes($nodes, $textNode);
+            }
+        }
 
-			$currentValue = substr($nodeValue, $currentIndex, (strlen($nodeValue) - $currentIndex));
-			$node = new WordTextPlaceholder($currentValue);
+        $this->log(LogLevel::DEBUG, $this->contentPart->getDomDocument()->saveXML());
+        $this->log(LogLevel::INFO, 'finished tag generator');
+    }
 
-			$this->log(LogLevel::DEBUG, 'created node ' . $node->getXMLTagAsString());
+    /**
+     * @return DOMNodeList
+     */
+    protected function getTextNodes() : DOMNodeList
+    {
+        return $this->contentPart->getXPath()->query(ParserConstants::WORD_TEXT_NODES);
+    }
 
-			$nodes[] = $node;
+    /**
+     * @param array $nodes
+     * @param DOMNode $textNode
+     */
+    private function insertNodes(array $nodes, DOMNode $textNode) : void
+    {
+        $this->log(LogLevel::INFO, 'inserting tags in content part');
 
-		}
+        $beforeNode = $textNode;
 
-		$this->log(LogLevel::INFO, 'created ' . count($nodes) . ' nodes');
+        for ($i = count($nodes) - 1; $i >= 0; $i--) {
+            $this->log(LogLevel::DEBUG, 'inserting tag ' . $nodes[$i]->getXMLTagAsString());
 
-		return $nodes;
+            $insertNode = $nodes[$i]->getDOMNode($this->contentPart->getDomDocument());
+            $beforeNode = $textNode->parentNode->insertBefore($insertNode, $beforeNode);
+        }
 
-	}
-
-	/**
-	 * @param string $level
-	 * @param string $message
-	 * @return void
-	 */
-	protected function log(string $level, string $message) {
-		$this->logger?->log($level, $message);
-	}
-
-	/**
-	 * @return void
-	 */
-	abstract function generateTags() : void;
-
-	/**
-	 * @return DOMNodeList
-	 */
-	protected abstract function getTextNodes() : DOMNodeList;
+        $textNode->parentNode->removeChild($textNode);
+    }
 
 }

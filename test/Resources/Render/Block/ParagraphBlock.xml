@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+        mc:Ignorable="w14 w15 wp14">
+    <w:body>
+
+        <!-- start paragraph -->
+        <w:p type="start" w:rsidR="000743B1" w:rsidRPr="000743B1" w:rsidRDefault="000743B1" w:rsidP="000743B1">
+            <w:pPr>
+                <w:pStyle w:val="TableParagraph"/>
+                <w:spacing w:before="58"/>
+                <w:ind w:left="140"/>
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                    <w:spacing w:val="-1"/>
+                    <w:sz w:val="20"/>
+                    <w:szCs w:val="20"/>
+                    <w:lang w:val="de-DE"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="000743B1">
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                    <w:noProof/>
+                    <w:sz w:val="18"/>
+                </w:rPr>
+                <acat:block xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                            id="8659c5a0-543a-4f5e-8588-300bbc48e110" type="start"/>
+            </w:r>
+        </w:p>
+
+        <!-- content paragraph -->
+        <w:p type="content" w:rsidR="00F843EF" w:rsidRDefault="00A32CD5" w:rsidP="00F843EF">
+            <w:pPr>
+                <w:tabs>
+                    <w:tab w:val="left" w:pos="1843"/>
+                </w:tabs>
+                <w:spacing w:line="276" w:lineRule="auto"/>
+                <w:ind w:left="140" w:right="107"/>
+                <w:rPr>
+                    <w:rFonts w:cs="Arial"/>
+                    <w:noProof/>
+                    <w:sz w:val="18"/>
+                </w:rPr>
+            </w:pPr>
+            <w:bookmarkStart w:id="0" w:name="_GoBack"/>
+            <w:r>
+                <w:rPr>
+                    <w:rFonts w:cs="Arial"/>
+                    <w:noProof/>
+                    <w:sz w:val="18"/>
+                </w:rPr>
+                <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                id="a2f2c418-772e-4f51-b158-f69a5099b342" field="1786" action="0">
+                    <![CDATA[<F1742]]></acat:condition>
+                <w:t xml:space="preserve">Rate </w:t>
+                <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                            id="14ef7292-b758-4f3d-8241-c926821708b1" field="1787"/>
+                <w:t xml:space="preserve"> fällig </w:t>
+                <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                            id="50410903-5501-4fb6-a0a1-f15a7e639350" field="1786"/>
+            </w:r>
+        </w:p>
+        <w:p type="content" w:rsidR="00576AF7" w:rsidRDefault="00576AF7" w:rsidP="00576AF7">
+            <w:pPr>
+                <w:tabs>
+                    <w:tab w:val="left" w:pos="1843"/>
+                </w:tabs>
+                <w:spacing w:line="276" w:lineRule="auto"/>
+                <w:ind w:left="140" w:right="107"/>
+                <w:rPr>
+                    <w:rFonts w:cs="Arial"/>
+                    <w:noProof/>
+                    <w:sz w:val="18"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:rFonts w:cs="Arial"/>
+                    <w:noProof/>
+                    <w:sz w:val="18"/>
+                </w:rPr>
+                <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                id="663d970c-ae6a-4f02-a5cc-d3c5c0f79a46" field="1786" action="0">
+                    <![CDATA[>F1742]]></acat:condition>
+            </w:r>
+            <w:r w:rsidRPr="00576AF7">
+                <w:rPr>
+                    <w:rFonts w:cs="Arial"/>
+                    <w:noProof/>
+                    <w:sz w:val="18"/>
+                </w:rPr>
+                <w:t xml:space="preserve">Rate </w:t>
+                <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                            id="5abed606-a1c2-4f6a-b006-6cb835d5ba18" field="1787"/>
+                <w:t xml:space="preserve"> vom </w:t>
+                <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                            id="0698c719-b09f-4fb0-9180-ffd8ac7dd591" field="1786"/>
+                <w:t xml:space="preserve"> ist sofort fällig</w:t>
+            </w:r>
+        </w:p>
+
+        <!-- end paragraph -->
+        <w:p type="end" w:rsidR="000743B1" w:rsidRPr="00F843EF" w:rsidRDefault="000743B1" w:rsidP="00576AF7">
+            <w:pPr>
+                <w:tabs>
+                    <w:tab w:val="left" w:pos="1843"/>
+                </w:tabs>
+                <w:spacing w:line="276" w:lineRule="auto"/>
+                <w:ind w:left="140" w:right="107"/>
+                <w:rPr>
+                    <w:rFonts w:cs="Arial"/>
+                    <w:noProof/>
+                    <w:sz w:val="18"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="000743B1">
+                <w:rPr>
+                    <w:rFonts w:cs="Arial"/>
+                    <w:noProof/>
+                    <w:sz w:val="18"/>
+                </w:rPr>
+                <acat:block xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                            id="0373a6a7-e7b9-4f4a-aa88-083113e4c837" type="end"/>
+            </w:r>
+        </w:p>
+
+    </w:body>
+</w:document>

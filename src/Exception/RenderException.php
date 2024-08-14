@@ -4,6 +4,7 @@ namespace ACAT\Exception;
 
 use Exception;
 
-class RenderException extends Exception {
+class RenderException extends Exception
+{
 
 }

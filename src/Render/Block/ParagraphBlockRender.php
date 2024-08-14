@@ -2,49 +2,50 @@
 
 namespace ACAT\Render\Block;
 
-use ACAT\Parser\Element\BlockElement;
-use ACAT\Utils\DOMUtils;
 use DOMNode;
+use ACAT\Utils\DOMUtils;
+use ACAT\Parser\Element\BlockElement;
 
 /**
  *
  */
-class ParagraphBlockRender extends BlockRender {
+class ParagraphBlockRender extends BlockRender
+{
 
     /**
      * @param BlockElement $blockElement
      * @param array $values
      */
-	public function __construct(BlockElement $blockElement, array $values) {
+    public function __construct(BlockElement $blockElement, array $values)
+    {
+        parent::__construct();
         $this->values = $values;
         $this->blockElement = $blockElement;
-	}
+    }
 
-	/**
-	 * @return void
-	 */
-	public function cleanUpBlock() : void {
+    /**
+     * @return void
+     */
+    public function cleanUpBlock() : void
+    {
+        parent::cleanUpBlock();
 
-		parent::cleanUpBlock();
+        $this->deleteParentParagraph($this->blockElement->getEnd());
+        $this->deleteParentParagraph($this->blockElement->getStart());
+    }
 
-		$this->deleteParentParagraph($this->blockElement->getEnd());
-		$this->deleteParentParagraph($this->blockElement->getStart());
-
-	}
-
-	/**
-	 * @param DOMNode $node
-	 * @return void
-	 */
-	private function deleteParentParagraph(DOMNode $node) : void {
-
-		if (!DOMUtils::isRemoved($node)) {
-			$paragraph = DOMUtils::getParentNode($node, 'w:p');
-			if ($paragraph && !DOMUtils::isRemoved($paragraph)) {
-				$paragraph->parentNode->removeChild($paragraph);
-			}
-		}
-
-	}
+    /**
+     * @param DOMNode $node
+     * @return void
+     */
+    private function deleteParentParagraph(DOMNode $node) : void
+    {
+        if (!DOMUtils::isRemoved($node)) {
+            $paragraph = DOMUtils::getParentNode($node, 'w:p');
+            if ($paragraph && !DOMUtils::isRemoved($paragraph)) {
+                $paragraph->parentNode->removeChild($paragraph);
+            }
+        }
+    }
 
 }

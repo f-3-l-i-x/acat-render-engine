@@ -7,13 +7,15 @@ use ACAT\Exception\PlaceholderException;
 /**
  *
  */
-class EndBlockPlaceholder extends BlockPlaceholder {
+class EndBlockPlaceholder extends BlockPlaceholder
+{
 
-	/**
-	 * @throws PlaceholderException
-	 */
-	public function __construct() {
-		parent::__construct(1);
-	}
+    /**
+     * @throws PlaceholderException
+     */
+    public function __construct()
+    {
+        parent::__construct(1);
+    }
 
 }

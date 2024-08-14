@@ -7,13 +7,15 @@ use DOMNode;
 /**
  *
  */
-class TextBlock extends BlockElement {
+class TextBlock extends BlockElement
+{
 
-	/**
-	 * @return DOMNode
-	 */
-	public function getContextNode() : DOMNode {
-		// TODO: Implement getContextNode() method.
-	}
+    /**
+     * @return DOMNode
+     */
+    public function getContextNode() : DOMNode
+    {
+        // TODO: Implement getContextNode() method.
+    }
 
 }

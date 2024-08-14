@@ -7,14 +7,15 @@ use JetBrains\PhpStorm\Pure;
 /**
  *
  */
-class FileUtils {
+class FileUtils
+{
 
     /**
      * @param string $file
      * @return string
      */
-    #[Pure]
-    static function stripTrailingSlash(string $file): string {
+    public static function stripTrailingSlash(string $file) : string
+    {
         if ($file === '' || !StringUtils::startsWith($file, '/')) {
             return $file;
         }

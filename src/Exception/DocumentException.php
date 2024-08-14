@@ -7,6 +7,7 @@ use Exception;
 /**
  *
  */
-class DocumentException extends Exception {
+class DocumentException extends Exception
+{
 
 }

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+        xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
+        mc:Ignorable="w14 w15 wp14">
+    <w:body>
+
+        <w:p w14:paraId="06C7EA6E" w14:textId="195AA311" w:rsidR="00444697" w:rsidRPr="006A6B0B"
+             w:rsidRDefault="00444697" w:rsidP="00444697">
+            <w:pPr>
+                <w:jc w:val="both"/>
+                <w:rPr>
+                    <w:bCs/>
+                    <w:szCs w:val="19"/>
+                    <w:lang w:val="en-US"/>
+                </w:rPr>
+            </w:pPr>
+
+            <w:r w:rsidRPr="006A6B0B">
+                <w:rPr>
+                    <w:lang w:val="en-US"/>
+                </w:rPr>
+                <acat:view xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                           id="215dd8cf-7a6c-4b3c-a3ed-e68779e1056d" view="V_SALUTATION"/>
+                <w:t xml:space="preserve"> </w:t>
+                <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                id="befd8f8b-3b00-4576-8f05-b49ec8cf41fd" field="V_TITLE" action="4">
+                    <![CDATA[=]]></acat:condition>
+                <acat:view xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                           id="73a00f08-f422-4b63-8d22-80a1393330ac" view="V_TITLE"/>
+            </w:r>
+
+
+            <w:proofErr w:type="gramStart"/>
+            <w:proofErr w:type="gramEnd"/>
+            <w:r w:rsidRPr="006A6B0B">
+                <w:rPr>
+                    <w:bCs/>
+                    <w:szCs w:val="19"/>
+                    <w:lang w:val="en-US"/>
+                </w:rPr>
+                <w:t xml:space="preserve"> </w:t>
+                <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                            id="8b9ff3e6-365e-4b0b-9dbb-74b91c00afcc" field="70"/>
+                <w:t xml:space="preserve">,</w:t>
+            </w:r>
+        </w:p>
+
+        <w:p w14:paraId="669647BB" w14:textId="7FC55A4F" w:rsidR="006A6B0B" w:rsidRDefault="006A6B0B"
+             w:rsidP="00435C01">
+            <w:pPr>
+                <w:rPr>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="00B433FF">
+                <w:rPr>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                id="c38778e4-1456-493c-8f84-474a1e7df3aa" field="V_TERMINATE_DATE_1" action="0">
+                    <![CDATA[=]]></acat:condition>
+            </w:r>
+            <w:proofErr w:type="gramStart"/>
+            <w:proofErr w:type="gramEnd"/>
+            <w:r w:rsidR="00435C01" w:rsidRPr="00412359">
+                <w:rPr>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <w:t>Sollten Sie gezwungen sein, die Weiterbildung ab</w:t>
+            </w:r>
+            <w:r w:rsidR="00435C01">
+                <w:rPr>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <w:t>zubrechen, können Sie Ihre Teil</w:t>
+            </w:r>
+            <w:r w:rsidR="00435C01" w:rsidRPr="00412359">
+                <w:rPr>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <w:t xml:space="preserve">nahme nach einem Jahr bzw. </w:t>
+            </w:r>
+            <w:r w:rsidR="00435C01">
+                <w:rPr>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <w:t xml:space="preserve">ggf. </w:t>
+            </w:r>
+            <w:r w:rsidR="00435C01" w:rsidRPr="00412359">
+                <w:rPr>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <w:t xml:space="preserve">nach zwei Jahren kündigen. Ihre Kündigung muss schriftlich erfolgen und bis zum </w:t>
+            </w:r>
+            <w:r w:rsidR="00435C01">
+                <w:rPr>
+                    <w:bCs/>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <acat:view xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                           id="d95a0888-f483-4727-970a-f44987b0719d" view="V_TERMINATE_DATE_1"/>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+            <w:proofErr w:type="gramStart"/>
+            <w:proofErr w:type="gramEnd"/>
+            <w:r w:rsidR="00435C01" w:rsidRPr="00B433FF">
+                <w:rPr>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                id="096bae04-b5b6-4641-a5c3-84a9430bc65f" field="V_TERMINATE_DATE_2" action="4">
+                    <![CDATA[=]]></acat:condition>
+            </w:r>
+            <w:r w:rsidR="00435C01" w:rsidRPr="00412359">
+                <w:rPr>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <w:t xml:space="preserve">bzw. </w:t>
+            </w:r>
+            <w:r w:rsidR="00435C01">
+                <w:rPr>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <w:t xml:space="preserve">bis zum </w:t>
+            </w:r>
+            <w:r w:rsidR="00435C01">
+                <w:rPr>
+                    <w:bCs/>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <acat:view xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                           id="90004c00-6074-44d8-a091-cc071552e333" view="V_TERMINATE_DATE_2"/>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+            <w:r w:rsidR="00435C01">
+                <w:rPr>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <w:t>bei der Akademie für Weiterbil</w:t>
+            </w:r>
+            <w:r w:rsidR="00435C01" w:rsidRPr="00412359">
+                <w:rPr>
+                    <w:szCs w:val="19"/>
+                </w:rPr>
+                <w:t>dung eingegangen sein. Für weitere Erläuterungen siehe Punkt 8 der Teilnahmebedingungen.</w:t>
+            </w:r>
+        </w:p>
+
+    </w:body>
+
+</w:document>

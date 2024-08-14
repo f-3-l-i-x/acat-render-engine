@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+
+<div>
+    Ich bin der Test ${F:12} <span>${T:TEST}</span>
+</div>
+
+${C:1760:<>:0}${C:1858:=:0}${F:1858}
+${C:1760:<>:0}${C:1744:=:0}${F:1744}
+${C:1760:<>:0}${C:1752:=:2}${F:1752} ${F:1745} ${F:1747}
+${C:1760:<>:0}${F:1748}
+${C:1760:<>:0}${F:1749} ${F:1750}
+${C:1757:=:0}${F:1757}
+${C:1860:=:0}${F:1860}
+${C:1862:=:0}${F:1862} ${F:1863}
+${C:1760:=:0}${F:1760}
+${C:1761:=:0}${F:1761} ${F:1762}
+
+<span>
+    <p>Sollten Felder syntaktisch nicht gültig sein, wie z.B. ${FUBU oder {FA} oder $C156 ${C:12}, dann werden diese von der Normalisierung ausgenommen, blieben aber trotzdem im Doku-ment erhalten.</p>
+</span>
+
+${B:0}
+${F:156}
+${B:1}
+
+${B:0}
+<span>${F:156}</span>
+${B:1}
+
+<div>
+    Der Start und das Ende eines Blockes müssen Geschwisterknoten sein. Befinden sich diese in unterschiedlichen
+    Absätzen, so bezieht sich die Prüfung auf die Absätze. Schlägt die Prü-fung fehl, dann werden diese
+    Blockmarkierungen nicht weiter berücksichtigt.
+    Eine Verschachtelung von Blöcken ist nicht möglich!
+    Textblock:
+    ${B:0} ${F:157} ${B:1}
+    Absatzblock:
+    ${B:0}
+    ${F:156}
+    ${B:1}
+
+</div>
+
+</body>
+</html>

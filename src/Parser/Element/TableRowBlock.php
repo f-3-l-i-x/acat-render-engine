@@ -3,19 +3,21 @@
 namespace ACAT\Parser\Element;
 
 
-use ACAT\Utils\DOMUtils;
 use DOMNode;
+use ACAT\Utils\DOMUtils;
 
 /**
  *
  */
-class TableRowBlock extends BlockElement {
+class TableRowBlock extends BlockElement
+{
 
-	/**
-	 * @return DOMNode
-	 */
-	public function getContextNode() : DOMNode {
-		return DOMUtils::getParentNode($this->getEnd(), 'w:tr');
-	}
+    /**
+     * @return DOMNode
+     */
+    public function getContextNode() : DOMNode
+    {
+        return DOMUtils::getParentNode($this->getEnd(), 'w:tr');
+    }
 
 }

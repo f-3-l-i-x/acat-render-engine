@@ -1,0 +1,664 @@
+<w:document
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+        mc:Ignorable="w14 w15 wp14">
+    <w:body>
+        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="TableNormal"/>
+                <w:tblW w:w="0" w:type="auto"/>
+                <w:tblInd w:w="6" w:type="dxa"/>
+                <w:tblLayout w:type="fixed"/>
+                <w:tblCellMar>
+                    <w:top w:w="57" w:type="dxa"/>
+                    <w:left w:w="57" w:type="dxa"/>
+                    <w:bottom w:w="57" w:type="dxa"/>
+                    <w:right w:w="57" w:type="dxa"/>
+                </w:tblCellMar>
+                <w:tblLook w:val="01E0" w:firstRow="1" w:lastRow="1" w:firstColumn="1" w:lastColumn="1" w:noHBand="0"
+                           w:noVBand="0"/>
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="555"/>
+                <w:gridCol w:w="851"/>
+                <w:gridCol w:w="3260"/>
+                <w:gridCol w:w="1418"/>
+                <w:gridCol w:w="1417"/>
+            </w:tblGrid>
+
+            <!-- block start -->
+            <w:tr id="b_start" w:rsidR="00FA4E13" w:rsidRPr="0006727E" w:rsidTr="00D34EB1">
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7501" w:type="dxa"/>
+                        <w:gridSpan w:val="5"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="6" w:space="0" w:color="000000"/>
+                            <w:right w:val="single" w:sz="6" w:space="0" w:color="000000"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="00FA4E13" w:rsidRPr="008006B4" w:rsidRDefault="00FA4E13" w:rsidP="00FA4E13">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                        <w:r w:rsidRPr="008006B4">
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                            <acat:block xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                        id="e5d5404c-8100-4f32-8d7c-5b57fcf733a1" type="start"/>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+
+            <!-- block content -->
+            <w:tr type="b_content" w:rsidR="00FA4E13" w:rsidRPr="0006727E" w:rsidTr="008B67A2">
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="555" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="5" w:space="0" w:color="000000"/>
+                            <w:right w:val="single" w:sz="5" w:space="0" w:color="000000"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="00FA4E13" w:rsidRPr="008006B4" w:rsidRDefault="00FA4E13" w:rsidP="007D640B">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:spacing w:line="276" w:lineRule="auto"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="851" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="5" w:space="0" w:color="000000"/>
+                            <w:right w:val="single" w:sz="5" w:space="0" w:color="000000"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="00FA4E13" w:rsidRPr="008006B4" w:rsidRDefault="00FA4E13" w:rsidP="007D640B">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:spacing w:line="276" w:lineRule="auto"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3260" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="5" w:space="0" w:color="000000"/>
+                            <w:right w:val="single" w:sz="5" w:space="0" w:color="000000"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="00FA4E13" w:rsidRPr="00052162" w:rsidRDefault="0037243D" w:rsidP="00E67493">
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:val="left" w:pos="1843"/>
+                            </w:tabs>
+                            <w:spacing w:line="276" w:lineRule="auto"/>
+                            <w:ind w:left="140" w:right="107"/>
+                            <w:rPr>
+                                <w:rFonts w:cs="Arial"/>
+                                <w:noProof/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr>
+                                <w:rFonts w:cs="Arial"/>
+                                <w:noProof/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                            <w:t xml:space="preserve">Gutschein: </w:t>
+                        </w:r>
+                        <w:r w:rsidR="00992950" w:rsidRPr="00052162">
+                            <w:rPr>
+                                <w:rFonts w:cs="Arial"/>
+                                <w:noProof/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                            <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                        id="e10ef6f3-fe9a-4f99-bcf5-7ff07e451b55" field="1909"/>
+                        </w:r>
+                        <w:r w:rsidR="00E67493" w:rsidRPr="00052162">
+                            <w:rPr>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                            <w:t xml:space="preserve"> </w:t>
+                        </w:r>
+                        <w:r w:rsidR="00052162" w:rsidRPr="00052162">
+                            <w:rPr>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                            <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                            id="66e8cb96-4762-4fa2-b74f-c3e9aa9d97d4" field="1910" action="3">
+                                <![CDATA[=]]></acat:condition>
+                        </w:r>
+                        <w:r w:rsidR="00E2382C">
+                            <w:rPr>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                            <w:t xml:space="preserve"> </w:t>
+                        </w:r>
+                        <w:r w:rsidR="00E67493" w:rsidRPr="00052162">
+                            <w:rPr>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                            <w:t>(</w:t>
+                        </w:r>
+                        <w:r w:rsidR="006532DA">
+                            <w:rPr>
+                                <w:rFonts w:cs="Arial"/>
+                                <w:noProof/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                            <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                        id="d72c92e5-d82e-4fbd-b771-105f4445ade1" field="1910"/>
+                            <w:t xml:space="preserve">)</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1418" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="5" w:space="0" w:color="000000"/>
+                            <w:right w:val="single" w:sz="5" w:space="0" w:color="000000"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="002A3148" w:rsidRPr="008006B4" w:rsidRDefault="00062998" w:rsidP="008006B4">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:ind w:left="167" w:firstLine="79"/>
+                            <w:jc w:val="right"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                        <w:r w:rsidRPr="008006B4">
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                            <w:t xml:space="preserve">- </w:t>
+                        </w:r>
+                        <w:r w:rsidR="002A3148" w:rsidRPr="008006B4">
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                            <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                        id="713466d4-0ff1-4fcf-8702-6ec178f9f646" field="1914"/>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1417" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="5" w:space="0" w:color="000000"/>
+                            <w:right w:val="single" w:sz="5" w:space="0" w:color="000000"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="00FA4E13" w:rsidRPr="008006B4" w:rsidRDefault="001844AC" w:rsidP="008006B4">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:ind w:left="167" w:firstLine="79"/>
+                            <w:jc w:val="right"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                            <w:t xml:space="preserve">- </w:t>
+                            <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                        id="fddaba3e-972a-4f23-92e6-ee092cba1a39" field="1914"/>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+
+            <!-- block end -->
+            <w:tr id="b_end" w:rsidR="00FA4E13" w:rsidRPr="0006727E" w:rsidTr="00D34EB1">
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="7501" w:type="dxa"/>
+                        <w:gridSpan w:val="5"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="5" w:space="0" w:color="000000"/>
+                            <w:right w:val="single" w:sz="5" w:space="0" w:color="000000"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="00FA4E13" w:rsidRPr="008006B4" w:rsidRDefault="00FA4E13" w:rsidP="00FA4E13">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                        <w:r w:rsidRPr="008006B4">
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                            <acat:block xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                        id="bc7769ab-defb-4fe3-8450-bb47fc7c183f" type="end"/>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+
+            <!-- content rows -->
+            <w:tr type="content" w:rsidR="000743B1" w:rsidRPr="0006727E" w:rsidTr="00FC409D">
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="555" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="000743B1" w:rsidRPr="008006B4" w:rsidRDefault="000743B1" w:rsidP="007D640B">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:spacing w:line="276" w:lineRule="auto"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="851" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="000743B1" w:rsidRPr="008006B4" w:rsidRDefault="000743B1" w:rsidP="007D640B">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:spacing w:line="276" w:lineRule="auto"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3260" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="000743B1" w:rsidRPr="003517C2" w:rsidRDefault="000743B1" w:rsidP="003517C2">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:spacing w:before="120" w:after="120"/>
+                            <w:ind w:left="142"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                        <w:r w:rsidRPr="000743B1">
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                            <w:t>Der Gesamtbetrag ist lt. AGB sofort fällig.</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1418" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="000743B1" w:rsidRPr="00340B9A" w:rsidRDefault="000743B1" w:rsidP="00CE7E1F">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:ind w:left="167" w:firstLine="79"/>
+                            <w:jc w:val="right"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00340B9A">
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                            <w:lastRenderedPageBreak/>
+                            <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                            id="20db52aa-896f-4fdd-8ad0-aa8722cde39a" field="1918" action="0">
+                                <![CDATA[=]]></acat:condition>
+                        </w:r>
+                        <w:r w:rsidRPr="00340B9A">
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                            <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                        id="62db8c30-9977-4f99-a2f3-d4cc3a9f19ba" field="1918"/>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1417" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="000743B1" w:rsidRPr="008006B4" w:rsidRDefault="000743B1" w:rsidP="0090203A">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:ind w:left="167" w:firstLine="79"/>
+                            <w:jc w:val="right"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00340B9A">
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                            <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                            id="6f289d82-c9b4-4feb-a915-4567c89a0ad7" field="1918" action="0">
+                                <![CDATA[=]]></acat:condition>
+                        </w:r>
+                        <w:r>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                            <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                        id="ab3e027f-4590-4f8a-95d2-27715272d9f7" field="1918"/>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr type="content" w:rsidR="000743B1" w:rsidRPr="0006727E" w:rsidTr="00FC409D">
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="555" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="000743B1" w:rsidRPr="008006B4" w:rsidRDefault="000743B1" w:rsidP="007D640B">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:spacing w:line="276" w:lineRule="auto"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="851" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="000743B1" w:rsidRPr="008006B4" w:rsidRDefault="000743B1" w:rsidP="007D640B">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:spacing w:line="276" w:lineRule="auto"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="3260" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="000743B1" w:rsidRPr="003517C2" w:rsidRDefault="000743B1" w:rsidP="003517C2">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:spacing w:before="120" w:after="120"/>
+                            <w:ind w:left="142"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                        <w:r w:rsidRPr="000743B1">
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                            <w:t>Der Gesamtbetrag ist lt. AGB sofort fällig.</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1418" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="000743B1" w:rsidRPr="00340B9A" w:rsidRDefault="000743B1" w:rsidP="00CE7E1F">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:ind w:left="167" w:firstLine="79"/>
+                            <w:jc w:val="right"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00340B9A">
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                            <w:lastRenderedPageBreak/>
+                            <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                            id="20db52aa-896f-4fdd-8ad0-aa8722cde39a" field="1918" action="0">
+                                <![CDATA[=]]></acat:condition>
+                        </w:r>
+                        <w:r w:rsidRPr="00340B9A">
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                            <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                        id="62db8c30-9977-4f99-a2f3-d4cc3a9f19ba" field="1918"/>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1417" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                            <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                        </w:tcBorders>
+                    </w:tcPr>
+                    <w:p w:rsidR="000743B1" w:rsidRPr="008006B4" w:rsidRDefault="000743B1" w:rsidP="0090203A">
+                        <w:pPr>
+                            <w:pStyle w:val="TableParagraph"/>
+                            <w:ind w:left="167" w:firstLine="79"/>
+                            <w:jc w:val="right"/>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                        </w:pPr>
+                        <w:r w:rsidRPr="00340B9A">
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                            <acat:condition xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                            id="6f289d82-c9b4-4feb-a915-4567c89a0ad7" field="1918" action="0">
+                                <![CDATA[=]]></acat:condition>
+                        </w:r>
+                        <w:r>
+                            <w:rPr>
+                                <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                                <w:spacing w:val="-1"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="20"/>
+                                <w:lang w:val="de-DE"/>
+                            </w:rPr>
+                            <acat:field xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                                        id="ab3e027f-4590-4f8a-95d2-27715272d9f7" field="1918"/>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+
+        </w:tbl>
+    </w:body>
+</w:document>

@@ -4,6 +4,7 @@ namespace ACAT\Exception;
 
 use Exception;
 
-class PlaceholderException extends Exception {
+class PlaceholderException extends Exception
+{
 
 }
