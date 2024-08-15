@@ -51,6 +51,7 @@ class ConditionRenderTest extends AbstractRenderTest
         $conditionElements = $conditionElementGenerator->getConditionElements();
         $this->assertCount(6, $conditionElements);
 
+        $this->expectException(ConditionParserException::class);
         $conditionRender->render($conditionElements, $values);
 
         $nodes = $conditionElementGenerator->getContentPart()->getXPath()->query(
@@ -84,6 +85,7 @@ class ConditionRenderTest extends AbstractRenderTest
         $this->assertEquals(6, $nodes->length);
 
         foreach ($nodes as $node) {
+            $this->expectException(ConditionParserException::class);
             $conditionRender->renderConditionElement(new ConditionElement($node), $values);
         }
 

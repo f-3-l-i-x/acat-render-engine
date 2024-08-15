@@ -39,20 +39,15 @@ class NormalizerTest extends TestCase
         //create new instance
         $wordDocument = new WordDocument($currentDocument);
 
-        //check instance
-        $this->assertInstanceOf(WordDocument::class, $wordDocument);
-
         //normalizer
         $normalizer = new Normalizer();
-
-        //check instance
-        $this->assertInstanceOf(Normalizer::class, $normalizer);
 
         //open document
         $wordDocument->open();
 
         //get content parts
         foreach ($wordDocument->getContentParts() as $contentPart) {
+
             //check content part
             $this->assertInstanceOf(ContentPart::class, $contentPart);
 
@@ -81,7 +76,7 @@ class NormalizerTest extends TestCase
         $acatEndBlockNodes = [];
 
         foreach ($textNodes as $textNode) {
-            preg_match_all(ParserConstants::MARKER_REG_EX, $textNode->nodeValue, $matches, PREG_SET_ORDER, 0);
+            preg_match_all(ParserConstants::MARKER_REG_EX, $textNode->nodeValue, $matches, PREG_SET_ORDER);
             foreach ($matches as $match) {
                 try {
                     $aCatNodes[] = ACatPlaceholder::getPlaceholder($match[0]);

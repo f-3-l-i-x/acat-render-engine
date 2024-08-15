@@ -47,7 +47,7 @@ class ParserConstants
     /**
      *
      */
-    public const string MARKER_REG_EX = '/\${[a-zA-Z\d_\<>=.:\!äÄöÖüÜß&()\s]*}/iu';
+    public const string MARKER_REG_EX = '/\${[a-zA-Z\d_\-<>=.:\!äÄöÖüÜß&()\s]*}/iu';
     /**
      * @var array|string[]
      */
@@ -56,7 +56,7 @@ class ParserConstants
         'cx'    => 'https://schemas.microsoft.com/office/drawing/2014/chartex',
         'mc'    => 'https://schemas.openxmlformats.org/markup-compatibility/2006',
         'o'     => 'urn:schemas-microsoft-com:office:office',
-        'r'     => 'https://schemas.openxmlformats.org/officeDocument/2006/relationships',
+        'r'     => 'https://schemas.openxmlformats.org/officaeDocument/2006/relationships',
         'm'     => 'https://schemas.openxmlformats.org/officeDocument/2006/math',
         'v'     => 'urn:schemas-microsoft-com:vml',
         'w'     => 'https://schemas.openxmlformats.org/wordprocessingml/2006/main',

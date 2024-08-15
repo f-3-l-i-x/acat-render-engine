@@ -113,7 +113,7 @@ class ElementGeneratorTest extends TestCase
         $elementGenerator = $this->getElementGenerator();
         $textElements = $elementGenerator->getTextElements();
 
-        $this->assertCount(2, $textElements);
+        $this->assertCount(3, $textElements);
     }
 
     /**

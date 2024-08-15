@@ -126,10 +126,10 @@ class TagGeneratorTest extends TestCase
      */
     public function getTagWithPlaceHolderAtTheStartAndEnd() : void
     {
-        $testString = '${F:145} noch mehr Text ${T:0}';
+        $testString = '${F:145} noch mehr Text ${T:0} ${T:-}';
         $nodes = $this->getNodes($testString);
 
-        $this->assertCount(3, $nodes);
+        $this->assertCount(5, $nodes);
 
         $this->assertInstanceOf(FieldPlaceholder::class, $nodes[0]);
         $this->assertEquals('${F:145}', $nodes[0]->getNodeAsString());

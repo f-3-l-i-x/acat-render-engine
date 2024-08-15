@@ -37,7 +37,7 @@ class ACatPlaceholderTest extends TestCase
         $this->assertEquals('1234', $fieldNode->getFieldId());
         $this->assertNotNull($fieldNode->getXMLTagAsString());
         $this->assertIsString($fieldNode->getXMLTagAsString());
-        $this->assertStringContainsString('acat', $fieldNode->getXMLTagAsString('acat'));
+        $this->assertStringContainsString('acat', $fieldNode->getXMLTagAsString());
     }
 
     /**

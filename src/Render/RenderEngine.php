@@ -24,7 +24,7 @@ use ACAT\Exception\ConditionParserException;
 /**
  *
  */
-class RenderEngine
+final class RenderEngine
 {
 
     /**
@@ -87,7 +87,6 @@ class RenderEngine
         ConditionParserException |
         ElementException |
         RenderException |
-        TagGeneratorException |
         DOMException $e) {
             $this->logger?->error($e);
         }

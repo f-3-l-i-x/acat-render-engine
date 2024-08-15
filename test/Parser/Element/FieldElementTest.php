@@ -39,6 +39,7 @@ class FieldElementTest extends AbstractElementTest
      * @test
      *
      * @return void
+     * @throws ElementException
      */
     public function getElementFromFieldElement() : void
     {

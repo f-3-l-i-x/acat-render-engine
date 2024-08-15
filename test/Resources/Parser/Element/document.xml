@@ -141,6 +141,7 @@
                     <w:rFonts w:ascii="Trebuchet MS" w:hAnsi="Trebuchet MS"/>
                 </w:rPr>
                 <w:t>als Formatierung für das restliche Feld übernommen!</w:t>
+                <w:t>-</w:t>
             </w:r>
             <w:r>
                 <w:rPr>
@@ -456,6 +457,9 @@
                 <w:t xml:space="preserve"> </w:t>
                 <acat:text xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
                            id="78f402ae-16e6-4fc9-afa2-cca0f5475969" space="preserve">Hurray
+                </acat:text>
+                <acat:text xmlns:acat="https://schemas.acat.akademie.uni-bremen.de"
+                           id="78f402ae-16e6-4fc9-afa2-cca0f5475669" space="preserve">-
                 </acat:text>
                 <w:t xml:space="preserve">. Läuft, oder!? :-P</w:t>
             </w:r>

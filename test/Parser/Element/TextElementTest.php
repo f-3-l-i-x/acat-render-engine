@@ -25,7 +25,7 @@ class TextElementTest extends AbstractElementTest
         $fieldNodes = $wordContentPart->getXPath()->query('//' . ParserConstants::ACAT_TEXT_NODES);
 
         $this->assertInstanceOf(DOMNodeList::class, $fieldNodes);
-        $this->assertEquals(2, $fieldNodes->length);
+        $this->assertEquals(3, $fieldNodes->length);
 
         $fieldElement = new TextElement($fieldNodes->item(0));
         $nodeValue = $fieldNodes->item(0)->nodeValue;
@@ -48,7 +48,7 @@ class TextElementTest extends AbstractElementTest
         $fieldNodes = $wordContentPart->getXPath()->query('//' . ParserConstants::ACAT_TEXT_NODES);
 
         $this->assertInstanceOf(DOMNodeList::class, $fieldNodes);
-        $this->assertEquals(2, $fieldNodes->length);
+        $this->assertEquals(3, $fieldNodes->length);
 
         $fieldElement = new TextElement($fieldNodes->item(0));
         $this->assertInstanceOf(TextElement::class, $fieldElement);

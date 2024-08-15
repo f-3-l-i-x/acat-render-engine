@@ -15,47 +15,47 @@ class PasswordEncoder
     /**
      *
      */
-    public const ALGORITHM_MD2 = 'MD2';
+    public const string ALGORITHM_MD2 = 'MD2';
     /**
      *
      */
-    public const ALGORITHM_MD4 = 'MD4';
+    public const string ALGORITHM_MD4 = 'MD4';
     /**
      *
      */
-    public const ALGORITHM_MD5 = 'MD5';
+    public const string ALGORITHM_MD5 = 'MD5';
     /**
      *
      */
-    public const ALGORITHM_SHA_1 = 'SHA-1';
+    public const string ALGORITHM_SHA_1 = 'SHA-1';
     /**
      *
      */
-    public const ALGORITHM_SHA_256 = 'SHA-256';
+    public const string ALGORITHM_SHA_256 = 'SHA-256';
     /**
      *
      */
-    public const ALGORITHM_SHA_384 = 'SHA-384';
+    public const string ALGORITHM_SHA_384 = 'SHA-384';
     /**
      *
      */
-    public const ALGORITHM_SHA_512 = 'SHA-512';
+    public const string ALGORITHM_SHA_512 = 'SHA-512';
     /**
      *
      */
-    public const ALGORITHM_RIPEMD = 'RIPEMD';
+    public const string ALGORITHM_RIPEMD = 'RIPEMD';
     /**
      *
      */
-    public const ALGORITHM_RIPEMD_160 = 'RIPEMD-160';
+    public const string ALGORITHM_RIPEMD_160 = 'RIPEMD-160';
     /**
      *
      */
-    public const ALGORITHM_MAC = 'MAC';
+    public const string ALGORITHM_MAC = 'MAC';
     /**
      *
      */
-    public const ALGORITHM_HMAC = 'HMAC';
+    public const string ALGORITHM_HMAC = 'HMAC';
 
     /**
      * @var array[]
