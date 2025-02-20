@@ -121,7 +121,7 @@ class ChildBlockElement extends Element
      * @return ChildBlockElement
      * @throws ElementException
      */
-    public function getClonedChildBlockElement(DOMNode $contextNode = null) : ChildBlockElement
+    public function getClonedChildBlockElement(?DOMNode $contextNode = null) : ChildBlockElement
     {
         $clonedElement = $this->element->cloneNode(true);
         if (!DOMUtils::isRemoved($this->element) && $contextNode) {

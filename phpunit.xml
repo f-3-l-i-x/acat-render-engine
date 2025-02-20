@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
-         bootstrap="test/bootstrap.php" colors="true" convertErrorsToExceptions="true"
+         bootstrap="vendor/autoload.php" colors="true" convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          beStrictAboutTestsThatDoNotTestAnything="true"
@@ -11,7 +11,7 @@
     </include>
   </coverage>
   <testsuites>
-    <testsuite name="Render">
+    <testsuite name="Render-Engine">
       <directory>./test/</directory>
     </testsuite>
   </testsuites>

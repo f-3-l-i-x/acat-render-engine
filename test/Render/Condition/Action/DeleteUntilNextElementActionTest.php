@@ -6,6 +6,7 @@ use DOMNodeList;
 use ACAT\Parser\ParserConstants;
 use ACAT\Exception\RenderException;
 use ACAT\Exception\ElementException;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Render\Condition\ConditionRender;
 use ACAT\Exception\ConditionParserException;
 
@@ -16,13 +17,12 @@ class DeleteUntilNextElementActionTest extends AbstractConditionActionTest
 {
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ConditionParserException
      * @throws ElementException
      * @throws RenderException
+     * @return void
      */
+    #[Test]
     public function renderCondition() : void
     {
         $values['V_TITLE'] = null;

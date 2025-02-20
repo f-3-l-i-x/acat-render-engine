@@ -3,6 +3,7 @@
 namespace Tests\Render;
 
 use Monolog\Logger;
+use Psr\Log\LogLevel;
 use Psr\Log\LoggerInterface;
 use PHPUnit\Framework\TestCase;
 use Monolog\Handler\StreamHandler;
@@ -10,6 +11,7 @@ use Monolog\Processor\UidProcessor;
 use ACAT\Exception\ElementException;
 use Monolog\Formatter\LineFormatter;
 use ACAT\Document\Word\ContentPart;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Parser\Element\ElementGenerator;
 
 /**
@@ -29,10 +31,10 @@ class AbstractRenderTest extends TestCase
     }
 
     /**
-     * @test
      *
      * @return ContentPart
      */
+    #[Test]
     public function getWordContentPart() : ContentPart
     {
         $testXMLFile = __DIR__ . '/../Resources/Render/Element/document.xml';
@@ -126,7 +128,7 @@ class AbstractRenderTest extends TestCase
     {
         $name = 'acat-render-engine';
         $path = __DIR__ . '/../logs/acat-render-engine.log';
-        $level = Logger::DEBUG;
+        $level = LogLevel::DEBUG;
 
         $logger = new Logger($name);
 

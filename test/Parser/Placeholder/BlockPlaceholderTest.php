@@ -6,6 +6,7 @@ use DOMNode;
 use DOMDocument;
 use DOMException;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Exception\PlaceholderException;
 use ACAT\Parser\Placeholder\EndBlockPlaceholder;
 use ACAT\Parser\Placeholder\StartBlockPlaceholder;
@@ -14,12 +15,11 @@ class BlockPlaceholderTest extends TestCase
 {
 
     /**
-     * @test
-     *
-     * @return void
-     * @throws PlaceholderException
      * @throws DOMException
+     * @throws PlaceholderException
+     * @return void
      */
+    #[Test]
     public function aStartBlockNodeCanBeCreated() : void
     {
         $startBlock = new StartBlockPlaceholder();

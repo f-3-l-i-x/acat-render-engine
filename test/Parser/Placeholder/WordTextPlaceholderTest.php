@@ -6,15 +6,17 @@ use DOMNode;
 use DOMDocument;
 use DOMException;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Parser\Placeholder\WordTextPlaceholder;
 
 class WordTextPlaceholderTest extends TestCase
 {
 
     /**
-     * @test
      * @throws DOMException
+     * @return void
      */
+    #[Test]
     public function aNodeCanBeCreated() : void
     {
         $xmlOutput = '<w:t xml:space="preserve">ff</w:t>';

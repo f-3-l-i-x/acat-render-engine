@@ -45,7 +45,7 @@ final class RecordStructure
      * @param LoggerInterface|null $logger
      */
     #[Pure]
-    public function __construct(WordDocument $document, LoggerInterface $logger = null)
+    public function __construct(WordDocument $document, ?LoggerInterface $logger = null)
     {
         $this->logger = $logger;
         $this->document = $document;
@@ -136,15 +136,13 @@ final class RecordStructure
      */
     private function getBlockStructure() : array
     {
-        $blockStructure = [];
-        foreach ($this->elementGenerator->getBlocks() as $key => $block) {
-            $blockStructure[$key] = [
+        return array_map(function ($block) {
+            return [
                 'fields'     => $this->parseStructure($block->getFieldElements()),
                 'conditions' => $this->parseConditionElements($block->getConditionElements()),
                 'views'      => $this->parseStructure($block->getViewElements())
             ];
-        }
-        return $blockStructure;
+        }, $this->elementGenerator->getBlocks());
     }
 
     /**

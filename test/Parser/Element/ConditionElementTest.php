@@ -5,6 +5,7 @@ namespace Tests\Parser\Element;
 use DOMNodeList;
 use ACAT\Parser\ParserConstants;
 use ACAT\Exception\ElementException;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Exception\PlaceholderException;
 use ACAT\Parser\Element\ConditionElement;
 
@@ -15,11 +16,11 @@ class ConditionElementTest extends AbstractElementTest
 {
 
     /**
-     * @test
      *
-     * @return void
      * @throws ElementException
+     *@return void
      */
+    #[Test]
     public function aConditionElementCanBeCreated() : void
     {
         $wordContentPart = $this->getWordContentPart();
@@ -36,11 +37,11 @@ class ConditionElementTest extends AbstractElementTest
     }
 
     /**
-     * @test
      *
-     * @return void
      * @throws ElementException
+     *@return void
      */
+    #[Test]
     public function aConditionElementHasAnAction() : void
     {
         $wordContentPart = $this->getWordContentPart();
@@ -57,11 +58,11 @@ class ConditionElementTest extends AbstractElementTest
     }
 
     /**
-     * @test
      *
-     * @return void
      * @throws ElementException
+     *@return void
      */
+    #[Test]
     public function aConditionWithActionThrowsException() : void
     {
         $this->expectException(ElementException::class);
@@ -80,12 +81,12 @@ class ConditionElementTest extends AbstractElementTest
     }
 
     /**
-     * @test
      *
-     * @return void
      * @throws ElementException
      * @throws PlaceholderException
+     *@return void
      */
+    #[Test]
     public function aConditionWithExpressionThrowsException() : void
     {
         $this->expectException(ElementException::class);
@@ -109,13 +110,10 @@ class ConditionElementTest extends AbstractElementTest
     }
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ElementException
-     * @throws PlaceholderException
+     * @return void
      */
-    public function aConditionElementHasAnExpression() : void
+    #[Test] public function aConditionElementHasAnExpression() : void
     {
         $expression = null;
 

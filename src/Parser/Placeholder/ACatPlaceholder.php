@@ -4,7 +4,6 @@ namespace ACAT\Parser\Placeholder;
 
 use DOMNode;
 use DOMDocument;
-use ACAT\Utils\StringUtils;
 use Symfony\Component\Uid\Uuid;
 use ACAT\Exception\PlaceholderException;
 
@@ -41,15 +40,15 @@ abstract class ACatPlaceholder
     {
         $placeHolderStr = str_replace(['$', '{', '}'], '', $placeHolderStr);
 
-        if (StringUtils::startsWith($placeHolderStr, 'F')) {
+        if (str_starts_with($placeHolderStr, 'F')) {
             $placeHolderObj = self::createFieldPlaceholder($placeHolderStr);
-        } elseif (StringUtils::startsWith($placeHolderStr, 'C')) {
+        } elseif (str_starts_with($placeHolderStr, 'C')) {
             $placeHolderObj = self::createConditionPlaceholder($placeHolderStr);
-        } elseif (StringUtils::startsWith($placeHolderStr, 'T')) {
+        } elseif (str_starts_with($placeHolderStr, 'T')) {
             $placeHolderObj = self::createTextPlaceholder($placeHolderStr);
-        } elseif (StringUtils::startsWith($placeHolderStr, 'B')) {
+        } elseif (str_starts_with($placeHolderStr, 'B')) {
             $placeHolderObj = self::createBlockPlaceholder($placeHolderStr);
-        } elseif (StringUtils::startsWith($placeHolderStr, 'V')) {
+        } elseif (str_starts_with($placeHolderStr, 'V')) {
             $placeHolderObj = self::createViewPlaceHolder($placeHolderStr);
         } else {
             throw new PlaceholderException($placeHolderStr . ' is unsupported');

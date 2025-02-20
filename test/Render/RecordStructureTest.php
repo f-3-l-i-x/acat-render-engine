@@ -4,6 +4,9 @@ namespace Tests\Render;
 
 use JetBrains\PhpStorm\ArrayShape;
 
+/**
+ *
+ */
 class RecordStructureTest extends AbstractRenderTest
 {
 

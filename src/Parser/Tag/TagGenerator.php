@@ -31,7 +31,7 @@ class TagGenerator
      * @param ContentPart $contentPart
      * @param LoggerInterface|null $logger
      */
-    public function __construct(ContentPart $contentPart, LoggerInterface $logger = null)
+    public function __construct(ContentPart $contentPart, ?LoggerInterface $logger = null)
     {
         $this->logger = $logger;
         $this->contentPart = $contentPart;

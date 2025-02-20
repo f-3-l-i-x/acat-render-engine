@@ -64,7 +64,7 @@ class ElementGenerator
      * @param LoggerInterface|null $logger
      * @throws ElementException
      */
-    public function __construct(ContentPart $contentPart, LoggerInterface $logger = null)
+    public function __construct(ContentPart $contentPart, ?LoggerInterface $logger = null)
     {
         $this->logger = $logger;
         $this->contentPart = $contentPart;

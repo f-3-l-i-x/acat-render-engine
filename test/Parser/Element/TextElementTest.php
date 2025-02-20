@@ -6,6 +6,7 @@ use DOMNodeList;
 use ACAT\Parser\ParserConstants;
 use ACAT\Exception\ElementException;
 use ACAT\Parser\Element\TextElement;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  *
@@ -14,11 +15,10 @@ class TextElementTest extends AbstractElementTest
 {
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ElementException
+     * @return void
      */
+    #[Test]
     public function aTextElementCanBeCreated() : void
     {
         $wordContentPart = $this->getWordContentPart();
@@ -35,11 +35,11 @@ class TextElementTest extends AbstractElementTest
     }
 
     /**
-     * @test
      *
-     * @return void
      * @throws ElementException
+     *@return void
      */
+    #[Test]
     public function aTextElementFieldIdThrowsAppException() : void
     {
         $this->expectException(ElementException::class);

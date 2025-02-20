@@ -5,16 +5,20 @@ namespace Tests\Document\Word;
 use PHPUnit\Framework\TestCase;
 use ACAT\Document\Word\WordDocument;
 use ACAT\Exception\DocumentException;
+use PHPUnit\Framework\Attributes\Test;
 
+/**
+ *
+ */
 class WordTest extends TestCase
 {
 
     /**
-     * @test
      *
-     * @return void
      * @throws DocumentException
+     *@return void
      */
+    #[Test]
     public function createWordDocument() : void
     {
         $path = __DIR__ . '/../../Resources/Document/Word/TEST.docx';
@@ -24,12 +28,11 @@ class WordTest extends TestCase
     }
 
     /**
-     * @test
      *
-     * @return void
      * @throws DocumentException
+     *@return void
      */
-    public function invalidWordDocument() : void
+    #[Test] public function invalidWordDocument() : void
     {
         $path = __DIR__ . '/../../Resources/Document/Word/invalid_word_document';
         $wordDocument = new WordDocument($path);

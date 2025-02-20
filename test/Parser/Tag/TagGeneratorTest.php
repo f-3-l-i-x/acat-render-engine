@@ -10,7 +10,7 @@ use ACAT\Document\Word\ContentPart;
 use ACAT\Document\Word\WordDocument;
 use ACAT\Exception\DocumentException;
 use ACAT\Parser\Normalizer\Normalizer;
-use ACAT\Exception\TagGeneratorException;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Parser\Placeholder\TextPlaceholder;
 use ACAT\Parser\Placeholder\BlockPlaceholder;
 use ACAT\Parser\Placeholder\FieldPlaceholder;
@@ -23,9 +23,9 @@ class TagGeneratorTest extends TestCase
 {
 
     /**
-     * @test
-     * @throws TagGeneratorException
+     * @return void
      */
+    #[Test]
     public function getTagWithOnePlaceHolder() : void
     {
         $testString = '${B:0}';
@@ -49,9 +49,9 @@ class TagGeneratorTest extends TestCase
     }
 
     /**
-     * @test
-     * @throws TagGeneratorException
+     * @return void
      */
+    #[Test]
     public function getTagsWithPlaceHolderAtTheEnd() : void
     {
         $testString = 'noch mehr Text ${F:145} ';
@@ -70,9 +70,9 @@ class TagGeneratorTest extends TestCase
     }
 
     /**
-     * @test
-     * @throws TagGeneratorException
+     * @return void
      */
+    #[Test]
     public function getTagsWithPlaceHolderAtTheStart() : void
     {
         $testString = '${F:145} noch mehr Text';
@@ -88,9 +88,9 @@ class TagGeneratorTest extends TestCase
     }
 
     /**
-     * @test
-     * @throws TagGeneratorException
+     * @return void
      */
+    #[Test]
     public function getTagsWithOnlyPlaceHolders() : void
     {
         $testString = '${F:145} ${F:146} ${F:147} ${F:148}';
@@ -121,9 +121,9 @@ class TagGeneratorTest extends TestCase
     }
 
     /**
-     * @test
-     * @throws TagGeneratorException
+     * @return void
      */
+    #[Test]
     public function getTagWithPlaceHolderAtTheStartAndEnd() : void
     {
         $testString = '${F:145} noch mehr Text ${T:0} ${T:-}';
@@ -142,9 +142,9 @@ class TagGeneratorTest extends TestCase
     }
 
     /**
-     * @test
-     * @throws TagGeneratorException
+     * @return void
      */
+    #[Test]
     public function getTagWithOnePlaceHolderAndText() : void
     {
         $testString = 'Ich bin ein Text ${F:145} noch mehr Text';
@@ -163,9 +163,9 @@ class TagGeneratorTest extends TestCase
     }
 
     /**
-     * @test
-     * @throws TagGeneratorException
+     * @return void
      */
+    #[Test]
     public function getTagWithOnePlaceHolderInTheMiddleAndAtTheEnd() : void
     {
         $testString = 'Ich bin ein Text ${F:145} noch mehr Text ${T:0}';
@@ -187,11 +187,10 @@ class TagGeneratorTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @return void
      * @throws DocumentException
+     * @return void
      */
+    #[Test]
     public function createTags() : void
     {
         $currentDocument = __DIR__ . '/../../Resources/Parser/Tag/tag_generator_test_document_lck.docx';

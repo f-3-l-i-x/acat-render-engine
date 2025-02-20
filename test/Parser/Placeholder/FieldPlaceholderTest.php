@@ -6,16 +6,17 @@ use DOMNode;
 use DOMDocument;
 use DOMException;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Parser\Placeholder\FieldPlaceholder;
 
 class FieldPlaceholderTest extends TestCase
 {
 
     /**
-     * @test
-     *
      * @throws DOMException
+     * @return void
      */
+    #[Test]
     public function aFieldNodeCanBeCreated() : void
     {
         $fieldNode = new FieldPlaceholder('12');

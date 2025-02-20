@@ -9,6 +9,7 @@ use ACAT\Document\Word\ContentPart;
 use ACAT\Document\Word\WordDocument;
 use ACAT\Exception\DocumentException;
 use ACAT\Parser\Normalizer\Normalizer;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Exception\PlaceholderException;
 use ACAT\Parser\Placeholder\ACatPlaceholder;
 use ACAT\Parser\Placeholder\TextPlaceholder;
@@ -24,11 +25,11 @@ class NormalizerTest extends TestCase
 {
 
     /**
-     * @test
      *
-     * @return void
      * @throws DocumentException
+     *@return void
      */
+    #[Test]
     public function normalizeWordDocument() : void
     {
         $currentDocument = __DIR__ . '/../../Resources/Parser/Normalizer/normalizer_test_document_lck.docx';

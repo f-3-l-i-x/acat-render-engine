@@ -6,6 +6,7 @@ use DOMNode;
 use DOMDocument;
 use DOMException;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Document\Word\DocumentProtection;
 use ACAT\Parser\Placeholder\WordDocumentProtectionPlaceholder;
 
@@ -13,9 +14,10 @@ class WordDocumentProtectionPlaceholderTest extends TestCase
 {
 
     /**
-     * @test
      * @throws DOMException
+     * @return void
      */
+    #[Test]
     public function aWordDocumentProtectionPlaceholderCanBeCreated() : void
     {
         $documentProtection = new DocumentProtection();

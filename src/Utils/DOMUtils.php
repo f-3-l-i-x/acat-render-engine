@@ -15,7 +15,7 @@ class DOMUtils
      */
     public static function getParentNode(
         DOMNode $node,
-        string $parentNodeName = null,
+        ?string $parentNodeName = null,
         string $rootNode = 'w:document'
     ) : ?DOMNode {
         if (!$parentNodeName) {

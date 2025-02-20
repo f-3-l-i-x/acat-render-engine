@@ -7,6 +7,7 @@ use ACAT\Parser\ParserConstants;
 use ACAT\Exception\RenderException;
 use ACAT\Exception\ElementException;
 use Tests\Render\AbstractRenderTest;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Parser\Element\ConditionElement;
 use ACAT\Render\Condition\ConditionRender;
 use ACAT\Exception\ConditionParserException;
@@ -18,8 +19,9 @@ class ConditionRenderTest extends AbstractRenderTest
 {
 
     /**
-     * @test
+     * @return void
      */
+    #[Test]
     public function aConditionRenderCanBeCreated() : void
     {
         $conditionRender = new ConditionRender();
@@ -27,13 +29,12 @@ class ConditionRenderTest extends AbstractRenderTest
     }
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ConditionParserException
      * @throws ElementException
      * @throws RenderException
+     * @return void
      */
+    #[Test]
     public function renderConditions() : void
     {
         $values['151'] = 2;
@@ -63,13 +64,12 @@ class ConditionRenderTest extends AbstractRenderTest
     }
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ConditionParserException
      * @throws ElementException
      * @throws RenderException
+     * @return void
      */
+    #[Test]
     public function renderCondition() : void
     {
         $values['151'] = 2;

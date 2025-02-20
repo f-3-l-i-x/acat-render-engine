@@ -7,6 +7,7 @@ use ACAT\Exception\RenderException;
 use ACAT\Exception\ElementException;
 use Tests\Render\AbstractRenderTest;
 use ACAT\Parser\Element\TableRowBlock;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Render\Block\TableRowBlockRender;
 use ACAT\Exception\ConditionParserException;
 
@@ -17,11 +18,10 @@ class TableRowBlockRenderTest extends AbstractRenderTest
 {
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ElementException
+     * @return void
      */
+    #[Test]
     public function aTableRowBlockRenderCanBeCreated() : void
     {
         $wordTableRowElementGenerator = $this->getWordTableRowElementGenerator();
@@ -35,14 +35,13 @@ class TableRowBlockRenderTest extends AbstractRenderTest
     }
 
     /**
-     * @test
-     *
-     * @return void
-     * @throws ElementException
      * @throws ConditionParserException
-     * @throws RenderException
      * @throws DOMException
+     * @throws ElementException
+     * @throws RenderException
+     * @return void
      */
+    #[Test]
     public function renderTableRowBlock() : void
     {
         $wordTableRowElementGenerator = $this->getWordTableRowElementGenerator();
@@ -122,14 +121,13 @@ class TableRowBlockRenderTest extends AbstractRenderTest
     }
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ConditionParserException
      * @throws DOMException
      * @throws ElementException
      * @throws RenderException
+     * @return void
      */
+    #[Test]
     public function renderTableRowInCorrectSequence() : void
     {
         $expectedSequence = ['b_content', 'b_content', 'content', 'content'];

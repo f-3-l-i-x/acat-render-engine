@@ -52,7 +52,7 @@ class WordDocument
      * @throws DocumentException
      * @throws Exception
      */
-    public function protect(string $password = null) : void
+    public function protect(?string $password = null) : void
     {
         $settingsContentPart = $this->getContentParts()['word/settings.xml'];
 

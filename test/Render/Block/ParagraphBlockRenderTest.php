@@ -3,11 +3,10 @@
 namespace Tests\Render\Block;
 
 use DOMException;
-use ACAT\Utils\StringUtils;
-use JetBrains\PhpStorm\ArrayShape;
 use ACAT\Exception\RenderException;
 use ACAT\Exception\ElementException;
 use Tests\Render\AbstractRenderTest;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Parser\Element\ParagraphBlock;
 use ACAT\Render\Block\ParagraphBlockRender;
 use ACAT\Exception\ConditionParserException;
@@ -19,11 +18,10 @@ class ParagraphBlockRenderTest extends AbstractRenderTest
 {
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ElementException
+     * @return void
      */
+    #[Test]
     public function aParagraphBlockRenderCanBeCreated() : void
     {
         $wordElementPElementGenerator = $this->getWordParagraphElementGenerator();
@@ -37,14 +35,14 @@ class ParagraphBlockRenderTest extends AbstractRenderTest
     }
 
     /**
-     * @test
      *
-     * @return void
      * @throws ElementException
      * @throws RenderException
      * @throws ConditionParserException
      * @throws DOMException
+     *@return void
      */
+    #[Test]
     public function renderParagraphBlock() : void
     {
         $wordElementPElementGenerator = $this->getWordParagraphElementGenerator();
@@ -74,7 +72,6 @@ class ParagraphBlockRenderTest extends AbstractRenderTest
     /**
      * @return array
      */
-    #[ArrayShape(['fields' => "array", 'blocks' => "\array[][]"])]
     private function getBlockValues() : array
     {
         return [
@@ -257,7 +254,6 @@ class ParagraphBlockRenderTest extends AbstractRenderTest
     }
 
     /**
-     * @test
      *
      * @return void
      * @throws ConditionParserException
@@ -265,6 +261,7 @@ class ParagraphBlockRenderTest extends AbstractRenderTest
      * @throws ElementException
      * @throws RenderException
      */
+    #[Test]
     public function renderParagraphBlockInCorrectSequence() : void
     {
         $values = $this->getBlockValues();
@@ -287,7 +284,7 @@ class ParagraphBlockRenderTest extends AbstractRenderTest
         /* check correct sequence */
         for ($i = 0; $i < $contentElements->length; $i++) {
             $this->assertTrue(
-                StringUtils::contains(
+                str_contains(
                     trim($contentElements->item($i)->nodeValue),
                     $values['blocks'][0]['fields'][$i][1786]
                 )

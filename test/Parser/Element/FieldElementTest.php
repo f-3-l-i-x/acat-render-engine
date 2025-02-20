@@ -7,6 +7,7 @@ use DOMNodeList;
 use ACAT\Parser\ParserConstants;
 use ACAT\Exception\ElementException;
 use ACAT\Parser\Element\FieldElement;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  *
@@ -15,11 +16,10 @@ class FieldElementTest extends AbstractElementTest
 {
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ElementException
+     * @return void
      */
+    #[Test]
     public function aFieldElementCanBeCreated() : void
     {
         $wordContentPart = $this->getWordContentPart();
@@ -36,11 +36,11 @@ class FieldElementTest extends AbstractElementTest
     }
 
     /**
-     * @test
      *
-     * @return void
      * @throws ElementException
+     *@return void
      */
+    #[Test]
     public function getElementFromFieldElement() : void
     {
         $wordContentPart = $this->getWordContentPart();
@@ -54,11 +54,10 @@ class FieldElementTest extends AbstractElementTest
     }
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ElementException
+     * @return void
      */
+    #[Test]
     public function aFieldElementWithoutFieldIdThrowsAnException() : void
     {
         $this->expectException(ElementException::class);

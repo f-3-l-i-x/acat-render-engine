@@ -15,7 +15,6 @@ use ACAT\Exception\ElementException;
 use ACAT\Render\Element\FieldRender;
 use ACAT\Exception\DocumentException;
 use ACAT\Parser\Normalizer\Normalizer;
-use ACAT\Exception\TagGeneratorException;
 use ACAT\Parser\Element\ElementGenerator;
 use ACAT\Render\Condition\ConditionRender;
 use ACAT\Render\Element\ViewElementRender;
@@ -68,7 +67,7 @@ final class RenderEngine
      * @param array $values
      * @return void
      */
-    public function render(WordDocument $wordDocument = null, array $values = []) : void
+    public function render(?WordDocument $wordDocument = null, array $values = []) : void
     {
         try {
             $wordDocument->open();

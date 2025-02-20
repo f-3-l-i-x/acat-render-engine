@@ -10,6 +10,7 @@ use ACAT\Render\Element\TextRender;
 use ACAT\Exception\ElementException;
 use ACAT\Parser\Element\TextElement;
 use Tests\Render\AbstractRenderTest;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  *
@@ -18,10 +19,9 @@ class TextRenderTest extends AbstractRenderTest
 {
 
     /**
-     * @test
-     *
      * @return void
      */
+    #[Test]
     public function aTextRenderCanBeCreated() : void
     {
         $textRender = new TextRender();
@@ -29,11 +29,11 @@ class TextRenderTest extends AbstractRenderTest
     }
 
     /**
-     * @test
-     *
+     * @throws ElementException
+     * @throws RenderException
      * @return void
-     * @throws ElementException|RenderException
      */
+    #[Test]
     public function textFieldsCanBeRendered() : void
     {
         $wordElementGenerator = $this->getWordElementGenerator();
@@ -51,11 +51,11 @@ class TextRenderTest extends AbstractRenderTest
     }
 
     /**
-     * @test
-     *
+     * @throws DOMException
+     * @throws ElementException
      * @return void
-     * @throws ElementException|DOMException
      */
+    #[Test]
     public function aFieldCanBeRendered() : void
     {
         $wordElementGenerator = $this->getWordElementGenerator();

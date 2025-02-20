@@ -6,6 +6,7 @@ use DOMNode;
 use DOMDocument;
 use DOMException;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Exception\PlaceholderException;
 use ACAT\Parser\Placeholder\ConditionPlaceholder;
 
@@ -13,9 +14,11 @@ class ConditionPlaceholderTest extends TestCase
 {
 
     /**
-     * @test
-     * @throws PlaceholderException|DOMException
+     * @throws DOMException
+     * @throws PlaceholderException
+     * @return void
      */
+    #[Test]
     public function aConditionNodeCanBeCreated() : void
     {
         $conditionNode = new ConditionPlaceholder(1, 2, '<>2');
@@ -45,11 +48,10 @@ class ConditionPlaceholderTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @return void
      * @throws PlaceholderException
+     * @return void
      */
+    #[Test]
     public function aConditionNodeCanBeCreateWithWrongAction() : void
     {
         $this->expectException(PlaceholderException::class);
@@ -57,11 +59,10 @@ class ConditionPlaceholderTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @return void
      * @throws PlaceholderException
+     * @return void
      */
+    #[Test]
     public function aConditionNodeCanNotBeCreateWithWrongExpression() : void
     {
         $this->expectException(PlaceholderException::class);

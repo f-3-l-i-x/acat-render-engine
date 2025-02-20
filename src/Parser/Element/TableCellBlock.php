@@ -4,6 +4,7 @@ namespace ACAT\Parser\Element;
 
 
 use DOMNode;
+use DOMNodeList;
 
 /**
  *
@@ -13,9 +14,10 @@ class TableCellBlock extends BlockElement
 
     /**
      * @return DOMNode
+     * @todo
      */
     public function getContextNode() : DOMNode
     {
-        // TODO: Implement getContextNode() method.
+        return new DOMNode();
     }
 }

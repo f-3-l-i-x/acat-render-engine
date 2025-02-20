@@ -3,7 +3,6 @@
 namespace ACAT\Render\Condition\Action;
 
 use DateTime;
-use ACAT\Utils\StringUtils;
 use ACAT\Exception\ElementException;
 use ACAT\Parser\Element\ConditionElement;
 use ACAT\Exception\ConditionParserException;
@@ -47,7 +46,7 @@ class ConditionParser
         $operator = $termValues['operator'];
         $compareValue = $termValues['value'];
 
-        if ($compareValue && StringUtils::startsWith($compareValue, "FIELD_COMPARE_")) {
+        if ($compareValue && str_starts_with($compareValue, "FIELD_COMPARE_")) {
             $compareFieldId = str_replace('FIELD_COMPARE_', '', $compareValue);
             if ($compareFieldId && array_key_exists($compareFieldId, $values)) {
                 $compareValue = $values[$compareFieldId];

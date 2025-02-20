@@ -6,15 +6,17 @@ use DOMNode;
 use DOMDocument;
 use DOMException;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Parser\Placeholder\TextPlaceholder;
 
 class TextPlaceholderTest extends TestCase
 {
 
     /**
-     * @test
      * @throws DOMException
+     * @return void
      */
+    #[Test]
     public function aTextNodeCanBeCreated() : void
     {
         $text = 'Ich bin der krasse Text';

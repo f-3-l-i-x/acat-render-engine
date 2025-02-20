@@ -10,6 +10,7 @@ use ACAT\Exception\ElementException;
 use ACAT\Render\Element\FieldRender;
 use Tests\Render\AbstractRenderTest;
 use ACAT\Parser\Element\FieldElement;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  *
@@ -18,10 +19,10 @@ class FieldRenderTest extends AbstractRenderTest
 {
 
     /**
-     * @test
      *
      * @return void
      */
+    #[Test]
     public function aFieldRenderCanBeCreated() : void
     {
         $fieldRender = new FieldRender();
@@ -29,13 +30,13 @@ class FieldRenderTest extends AbstractRenderTest
     }
 
     /**
-     * @test
      *
-     * @return void
      * @throws DOMException
      * @throws ElementException
      * @throws RenderException
+     *@return void
      */
+    #[Test]
     public function fieldsCanBeRendered() : void
     {
         $values = $this->getValues();
@@ -54,13 +55,13 @@ class FieldRenderTest extends AbstractRenderTest
     }
 
     /**
-     * @test
      *
-     * @return void
      * @throws ElementException
      * @throws RenderException
      * @throws DOMException
+     *@return void
      */
+    #[Test]
     public function aFieldCanBeRendered() : void
     {
         $values = $this->getValues();

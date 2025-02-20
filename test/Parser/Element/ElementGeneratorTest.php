@@ -10,6 +10,7 @@ use ACAT\Document\Word\ContentPart;
 use ACAT\Exception\ElementException;
 use ACAT\Parser\Element\FieldElement;
 use ACAT\Parser\Element\TableRowBlock;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Parser\Element\ParagraphBlock;
 use ACAT\Parser\Element\TableCellBlock;
 use ACAT\Parser\Element\ElementGenerator;
@@ -21,11 +22,11 @@ class ElementGeneratorTest extends TestCase
 {
 
     /**
-     * @test
      *
-     * @return void
      * @throws ElementException
+     *@return void
      */
+    #[Test]
     public function getTextBlock() : void
     {
         $elementGenerator = $this->getElementGenerator();
@@ -89,11 +90,11 @@ class ElementGeneratorTest extends TestCase
     }
 
     /**
-     * @test
      *
-     * @return void
      * @throws ElementException
+     *@return void
      */
+    #[Test]
     public function getFieldElements() : void
     {
         $elementGenerator = $this->getElementGenerator();
@@ -103,11 +104,10 @@ class ElementGeneratorTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ElementException
+     * @return void
      */
+    #[Test]
     public function getTextElements() : void
     {
         $elementGenerator = $this->getElementGenerator();
@@ -117,11 +117,10 @@ class ElementGeneratorTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ElementException
+     * @return void
      */
+    #[Test]
     public function getConditionElements() : void
     {
         $elementGenerator = $this->getElementGenerator();
@@ -131,11 +130,10 @@ class ElementGeneratorTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ElementException
+     * @return void
      */
+    #[Test]
     public function getTableRowBlock() : void
     {
         $elementGenerator = $this->getElementGenerator();
@@ -157,11 +155,10 @@ class ElementGeneratorTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @return void
      * @throws ElementException
+     * @return void
      */
+    #[Test]
     public function getAllBlocks() : void
     {
         $elementGenerator = $this->getElementGenerator();

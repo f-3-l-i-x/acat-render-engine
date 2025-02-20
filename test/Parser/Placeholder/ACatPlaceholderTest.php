@@ -6,6 +6,7 @@ use DOMNode;
 use DOMDocument;
 use DOMException;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use ACAT\Exception\PlaceholderException;
 use ACAT\Parser\Placeholder\ACatPlaceholder;
 use ACAT\Parser\Placeholder\TextPlaceholder;
@@ -21,11 +22,11 @@ class ACatPlaceholderTest extends TestCase
 {
 
     /**
-     * @test
      *
-     * @return void
      * @throws PlaceholderException
+     *@return void
      */
+    #[Test]
     public function getFieldPlaceholder() : void
     {
         $fieldNodeString = "\${F:1234}";
@@ -41,9 +42,9 @@ class ACatPlaceholderTest extends TestCase
     }
 
     /**
-     * @test
      * @throws PlaceholderException|DOMException
      */
+    #[Test]
     public function getTextPlaceholder() : void
     {
         $text = 'Muh Mäh';
@@ -70,10 +71,10 @@ class ACatPlaceholderTest extends TestCase
     }
 
     /**
-     * @test
      *
      * @throws PlaceholderException
      */
+    #[Test]
     public function getConditionPlaceholder() : void
     {
         $conditionNodeString = "\${C:567:<>:1}";
@@ -99,10 +100,11 @@ class ACatPlaceholderTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @throws PlaceholderException|DOMException
+     * @throws DOMException
+     * @throws PlaceholderException
+     * @return void
      */
+    #[Test]
     public function getStartBlockPlaceholder() : void
     {
         $startBlockNodeString = "\${B:0}";
@@ -126,11 +128,11 @@ class ACatPlaceholderTest extends TestCase
     }
 
     /**
-     * @test
      *
      * @throws PlaceholderException
      * @throws DOMException
      */
+    #[Test]
     public function getEndBlockPlaceholder() : void
     {
         $endBlockNodeString = "\${B:1}";
@@ -153,9 +155,7 @@ class ACatPlaceholderTest extends TestCase
         $this->assertEquals($expectedXmlString, $domDocument->saveXML($node));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function aBlockPlaceholderWithAUnsupportedTypeCanNotBeCreated() : void
     {
         $this->expectException(PlaceholderException::class);
@@ -164,9 +164,7 @@ class ACatPlaceholderTest extends TestCase
         ACatPlaceholder::getPlaceholder($blockNodeString);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function aPlaceholderWithMalformedStringCanNotBeCreated() : void
     {
         $this->expectException(PlaceholderException::class);
@@ -175,9 +173,7 @@ class ACatPlaceholderTest extends TestCase
         ACatPlaceholder::getPlaceholder($fieldNodeString);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function aPlaceholderWithUnsupportedTypeCanNoBeCreated() : void
     {
         $this->expectException(PlaceholderException::class);
