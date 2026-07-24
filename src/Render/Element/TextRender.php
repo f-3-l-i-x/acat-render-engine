@@ -26,7 +26,7 @@ class TextRender extends Render
             try {
                 $this->renderTextElement($textElement);
             } catch (DOMException $e) {
-                throw new RenderException($e);
+                throw new RenderException($e->getMessage(), $e->getCode(), $e);
             }
         }
     }

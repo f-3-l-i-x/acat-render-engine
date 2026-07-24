@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  *
  */
-class TextElementTest extends AbstractElementTest
+class TextElementTest extends AbstractElementTestCase
 {
 
     /**

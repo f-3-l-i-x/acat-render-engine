@@ -13,7 +13,7 @@ use ACAT\Exception\ConditionParserException;
 /**
  *
  */
-class DeleteUntilNextElementActionTest extends AbstractConditionActionTest
+class DeleteUntilNextElementActionTest extends AbstractConditionActionTestCase
 {
 
     /**

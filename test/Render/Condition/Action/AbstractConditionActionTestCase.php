@@ -10,7 +10,7 @@ use ACAT\Parser\Element\ElementGenerator;
 /**
  *
  */
-abstract class AbstractConditionActionTest extends TestCase
+abstract class AbstractConditionActionTestCase extends TestCase
 {
 
     /**

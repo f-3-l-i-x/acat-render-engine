@@ -54,7 +54,7 @@ class ElementGeneratorTest extends TestCase
                 'd9134945-880b-4f5d-ab1d-74830f028bbf',
                 $textBlock->getChildren()[1]->getElement()->getAttribute('id')
             );
-            $this->assertEquals('157', $textBlock->getChildren()[1]->getElement()->getAttribute('field'));
+            $this->assertEquals('102', $textBlock->getChildren()[1]->getElement()->getAttribute('field'));
 
             //third children
             $this->assertEquals('w:t', $textBlock->getChildren()[2]->getElement()->tagName);
@@ -66,7 +66,7 @@ class ElementGeneratorTest extends TestCase
             $fieldElement = $fieldNodes[0];
 
             $this->assertInstanceOf(FieldElement::class, $fieldElement);
-            $this->assertEquals('157', $fieldElement->getFieldId());
+            $this->assertEquals('102', $fieldElement->getFieldId());
             $this->assertEquals('d9134945-880b-4f5d-ab1d-74830f028bbf', $fieldElement->getId());
         }
     }

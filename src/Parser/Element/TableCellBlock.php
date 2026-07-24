@@ -4,7 +4,7 @@ namespace ACAT\Parser\Element;
 
 
 use DOMNode;
-use DOMNodeList;
+use ACAT\Utils\DOMUtils;
 
 /**
  *
@@ -14,10 +14,9 @@ class TableCellBlock extends BlockElement
 
     /**
      * @return DOMNode
-     * @todo
      */
     public function getContextNode() : DOMNode
     {
-        return new DOMNode();
+        return DOMUtils::getParentNode($this->getEnd(), 'w:tc');
     }
 }

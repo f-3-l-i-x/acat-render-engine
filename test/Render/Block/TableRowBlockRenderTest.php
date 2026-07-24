@@ -77,45 +77,45 @@ class TableRowBlockRenderTest extends AbstractRenderTest
      */
     private function getBlockValues() : array
     {
-        $values['fields']["rechnung_id"] = 100002;
-        $values['fields']["1757"] = null;
-        $values['fields']["1744"] = "Frau";
-        $values['fields']["1752"] = null;
-        $values['fields']["1745"] = "Erika";
-        $values['fields']["1747"] = "Mustermann";
-        $values['fields']["1748"] = "Musterstraße 1";
-        $values['fields']["1749"] = "12345";
-        $values['fields']["1750"] = "Musterstadt";
-        $values['fields']["1858"] = null;
-        $values['fields']["1860"] = null;
-        $values['fields']["1862"] = null;
-        $values['fields']["1863"] = null;
-        $values['fields']["1760"] = null;
-        $values['fields']["1761"] = null;
-        $values['fields']["1762"] = null;
-        $values['fields']["1741"] = null;
-        $values['fields']["1742"] = null;
-        $values['fields']["1768"] = null;
-        $values['fields']["1765"] = "Beispielkurs 2";
-        $values['fields']["1921"] = null;
-        $values['fields']["1771"] = 45000;
-        $values['fields']["1918"] = 1822;
-        $values['fields']["1769"] = "2020-10-01";
-        $values['fields']["1770"] = "2021-03-31";
-        $values['fields']["1772"] = 20047;
-        $values['fields']["1780"] = "0";
-        $values['fields']["1922"] = null;
-        $values['fields']["1783"] = "1";
-        $values['fields']["1676"] = "PL - 00002";
-        $values['fields']["68"] = 90000;
+        $values['fields']["invoice_id"] = 100002;
+        $values['fields']["111"] = null;
+        $values['fields']["104"] = "Frau";
+        $values['fields']["110"] = null;
+        $values['fields']["105"] = "Erika";
+        $values['fields']["106"] = "Musterfrau";
+        $values['fields']["107"] = "Beispielweg 1";
+        $values['fields']["108"] = "54321";
+        $values['fields']["109"] = "Musterstadt";
+        $values['fields']["115"] = null;
+        $values['fields']["116"] = null;
+        $values['fields']["117"] = null;
+        $values['fields']["118"] = null;
+        $values['fields']["112"] = null;
+        $values['fields']["113"] = null;
+        $values['fields']["114"] = null;
+        $values['fields']["203"] = null;
+        $values['fields']["204"] = null;
+        $values['fields']["206"] = null;
+        $values['fields']["205"] = "Beispielkurs 2";
+        $values['fields']["219"] = null;
+        $values['fields']["209"] = 45000;
+        $values['fields']["218"] = 1822;
+        $values['fields']["207"] = "2020-10-01";
+        $values['fields']["208"] = "2021-03-31";
+        $values['fields']["210"] = 20047;
+        $values['fields']["211"] = "0";
+        $values['fields']["220"] = null;
+        $values['fields']["212"] = "1";
+        $values['fields']["202"] = "PL - 00002";
+        $values['fields']["201"] = 90000;
 
-        $values['blocks'][0]['fields'][0]["1909"] = "Kammercard";
-        $values['blocks'][0]['fields'][0]["1910"] = "1000000";
-        $values['blocks'][0]['fields'][0]["1914"] = 2250;
+        $values['blocks'][0]['fields'][0]["215"] = "Musterkarte";
+        $values['blocks'][0]['fields'][0]["216"] = "1000000";
+        $values['blocks'][0]['fields'][0]["217"] = 2250;
 
-        $values['blocks'][0]['fields'][1]["1909"] = "Kammercard";
-        $values['blocks'][0]['fields'][1]["1910"] = "1000000";
-        $values['blocks'][0]['fields'][1]["1914"] = 2250;
+        $values['blocks'][0]['fields'][1]["215"] = "Musterkarte";
+        $values['blocks'][0]['fields'][1]["216"] = "1000000";
+        $values['blocks'][0]['fields'][1]["217"] = 2250;
 
         return $values;
     }

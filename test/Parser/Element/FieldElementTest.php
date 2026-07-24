@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\Test;
 /**
  *
  */
-class FieldElementTest extends AbstractElementTest
+class FieldElementTest extends AbstractElementTestCase
 {
 
     /**

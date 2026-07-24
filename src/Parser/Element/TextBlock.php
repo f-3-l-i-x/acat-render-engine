@@ -12,11 +12,10 @@ class TextBlock extends BlockElement
 
     /**
      * @return DOMNode
-     * @todo
      */
     public function getContextNode() : DOMNode
     {
-        return new DOMNode();
+        return $this->getEnd();
     }
 
 }

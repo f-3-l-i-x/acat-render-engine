@@ -7,4 +7,10 @@
 # If the vendor directory isn't being commited the composer.lock file should also be ignored
 composer.lock
 /.phpunit.result.cache
+/.phpunit.cache/
 /test/Private/
+/test/logs/
+.DS_Store
+*_lck.docx
+*_lck.html
+phpunit.phar

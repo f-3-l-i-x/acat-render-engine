@@ -66,6 +66,11 @@ final class RenderEngine
      * @param WordDocument|null $wordDocument
      * @param array $values
      * @return void
+     * @throws ConditionParserException
+     * @throws DOMException
+     * @throws DocumentException
+     * @throws ElementException
+     * @throws RenderException
      */
     public function render(?WordDocument $wordDocument = null, array $values = []) : void
     {
@@ -78,7 +83,9 @@ final class RenderEngine
             }
 
             foreach ($wordDocument->getContentParts() as $contentPart) {
-                $this->renderContentPart($contentPart);
+                if ($this->isRenderableContentPart($contentPart)) {
+                    $this->renderContentPart($contentPart);
+                }
             }
 
             $wordDocument->close(true);
@@ -87,7 +94,8 @@ final class RenderEngine
         ElementException |
         RenderException |
         DOMException $e) {
-            $this->logger?->error($e);
+            $this->logger?->error($e->getMessage(), ['exception' => $e]);
+            throw $e;
         }
     }
 
@@ -218,6 +226,18 @@ final class RenderEngine
             $blockRender = new BlockRender($this->logger);
             $blockRender->render($blockElements, $this->values);
         }
+    }
+
+    /**
+     * Only the document body and its headers/footers can contain placeholders;
+     * other parts (styles, fonts, theme, document properties, ...) are skipped.
+     *
+     * @param ContentPart $contentPart
+     * @return bool
+     */
+    private function isRenderableContentPart(ContentPart $contentPart) : bool
+    {
+        return (bool) preg_match('/^word\/(document|header\d*|footer\d*)\.xml$/', $contentPart->getPath());
     }
 
 }

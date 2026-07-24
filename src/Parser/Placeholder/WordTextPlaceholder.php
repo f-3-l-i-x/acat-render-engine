@@ -15,7 +15,7 @@ class WordTextPlaceholder extends ACatPlaceholder
     /**
      * @var string
      */
-    protected string $namespace = 'https://schemas.openxmlformats.org/wordprocessingml/2006/main';
+    protected string $namespace = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 
     /**
      * @var string|null

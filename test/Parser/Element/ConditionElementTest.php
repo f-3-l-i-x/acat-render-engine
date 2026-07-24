@@ -12,7 +12,7 @@ use ACAT\Parser\Element\ConditionElement;
 /**
  *
  */
-class ConditionElementTest extends AbstractElementTest
+class ConditionElementTest extends AbstractElementTestCase
 {
 
     /**

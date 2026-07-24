@@ -8,7 +8,7 @@ use ACAT\Document\Word\ContentPart;
 /**
  *
  */
-abstract class AbstractElementTest extends TestCase
+abstract class AbstractElementTestCase extends TestCase
 {
 
     /**

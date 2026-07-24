@@ -154,12 +154,12 @@ class AbstractRenderTest extends TestCase
      */
     protected function getValues() : array
     {
-        $values['156'] = 156;
+        $values['101'] = 101;
         $values['1121'] = 1121;
-        $values['1744'] = 1744;
-        $values['1745'] = 1745;
-        $values['1747'] = 1747;
-        $values['1748'] = 1748;
+        $values['104'] = 104;
+        $values['105'] = 105;
+        $values['106'] = 106;
+        $values['107'] = 107;
 
         return $values;
     }
