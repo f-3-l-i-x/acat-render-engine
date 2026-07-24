@@ -169,4 +169,5 @@ vendor/bin/phpunit
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE) — free to use, modify and distribute, provided the copyright notice
+(Ronny Krämer, Akademie für Weiterbildung, Universität Bremen) stays in every copy.
