@@ -6,6 +6,7 @@ use JetBrains\PhpStorm\Pure;
 use Psr\Log\LoggerInterface;
 use ACAT\Parser\Tag\TagGenerator;
 use JetBrains\PhpStorm\ArrayShape;
+use ACAT\Parser\ParserConstants;
 use ACAT\Document\Word\ContentPart;
 use ACAT\Exception\ElementException;
 use ACAT\Document\Word\WordDocument;
@@ -97,6 +98,44 @@ final class RecordStructure
         }
 
         return $recordStructure;
+    }
+
+    /**
+     * Checks every content part for "${B:0}"/"${B:1}" markers that could not be
+     * paired into a start/end block (e.g. one of them was accidentally deleted
+     * or duplicated while editing the template in Word). An unpaired marker is
+     * never rendered or cleaned up - it silently stays in the output as a raw
+     * XML element - so this is meant to be checked before rendering.
+     *
+     * @return array<string, string[]> Problem descriptions keyed by content part
+     *                                  path; empty if the document is valid.
+     * @throws DocumentException
+     * @throws ElementException
+     * @throws TagGeneratorException
+     */
+    public function validate() : array
+    {
+        $problems = [];
+
+        foreach ($this->document->getContentParts() as $contentPart) {
+            $tagGenerator = new TagGenerator($contentPart, $this->logger);
+            $elementGenerator = new ElementGenerator($contentPart, $this->logger);
+
+            $this->normalizer->normalize($contentPart);
+            $tagGenerator->generateTags();
+
+            $markerCount = $contentPart->getXPath()->query('//' . ParserConstants::ACAT_BLOCK_NODE)->length;
+            $pairedMarkerCount = count($elementGenerator->getBlocks()) * 2;
+
+            if ($markerCount !== $pairedMarkerCount) {
+                $problems[$contentPart->getPath()][] = sprintf(
+                    '%d block marker(s) could not be paired into a start/end block',
+                    $markerCount - $pairedMarkerCount
+                );
+            }
+        }
+
+        return $problems;
     }
 
     /**

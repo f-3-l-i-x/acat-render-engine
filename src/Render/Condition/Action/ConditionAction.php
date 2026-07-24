@@ -27,6 +27,17 @@ abstract class ConditionAction
     }
 
     /**
+     * @var array|string[]
+     */
+    private static array $actions = [
+        '0' => DeleteParagraphAction::class,
+        '1' => DeleteRemainingElementsAction::class,
+        '2' => DeleteNextElementAction::class,
+        '3' => DeleteRestAction::class,
+        '4' => DeleteUntilNextElementAction::class,
+    ];
+
+    /**
      * @param ConditionElement $conditionElement
      * @return ConditionAction
      * @throws RenderException
@@ -34,21 +45,13 @@ abstract class ConditionAction
      */
     public static function getAction(ConditionElement $conditionElement) : ConditionAction
     {
-        if ($conditionElement->getAction() == '0') {
-            $action = new DeleteParagraphAction($conditionElement);
-        } elseif ($conditionElement->getAction() == '1') {
-            $action = new DeleteRemainingElementsAction($conditionElement);
-        } elseif ($conditionElement->getAction() == '2') {
-            $action = new DeleteNextElementAction($conditionElement);
-        } elseif ($conditionElement->getAction() == '3') {
-            $action = new DeleteRestAction($conditionElement);
-        } elseif ($conditionElement->getAction() == '4') {
-            $action = new DeleteUntilNextElementAction($conditionElement);
-        } else {
+        $actionClass = self::$actions[$conditionElement->getAction()] ?? null;
+
+        if (!$actionClass) {
             throw new RenderException('unsupported action');
         }
 
-        return $action;
+        return new $actionClass($conditionElement);
     }
 
     /**

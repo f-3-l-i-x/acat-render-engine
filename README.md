@@ -145,6 +145,16 @@ $recordStructure = $structure->getRecordStructure();
 // ['word/document.xml' => ['views' => [...], 'fields' => [...], 'blocks' => [...], 'conditions' => [...]]]
 ```
 
+`validate()` checks the same document for `${B:0}`/`${B:1}` markers that could not be paired into a
+block — e.g. one of them was accidentally deleted or duplicated while editing the template. An
+unpaired marker is never rendered or cleaned up; it silently stays in the output as a raw XML
+element, so this is meant to be checked before rendering:
+
+```php
+$problems = $structure->validate();
+// [] if the template is fine, otherwise e.g. ['word/document.xml' => ['1 block marker(s) could not be paired into a start/end block']]
+```
+
 ## Password-protecting a document
 
 `WordDocument::protect(?string $password = null)` marks the document read-only using Word's own

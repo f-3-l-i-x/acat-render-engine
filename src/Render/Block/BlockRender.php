@@ -134,6 +134,16 @@ class BlockRender extends Render
     }
 
     /**
+     * @var array|string[]
+     */
+    private static array $blockRenders = [
+        TextBlock::class      => TextBlockRender::class,
+        ParagraphBlock::class => ParagraphBlockRender::class,
+        TableCellBlock::class => TableCellBlockRender::class,
+        TableRowBlock::class  => TableRowBlockRender::class,
+    ];
+
+    /**
      * @param BlockElement $blockElement
      * @param array $values
      * @return BlockRender
@@ -141,17 +151,13 @@ class BlockRender extends Render
      */
     public function getBlockRender(BlockElement $blockElement, array $values) : BlockRender
     {
-        if ($blockElement instanceof TextBlock) {
-            return new TextBlockRender($blockElement, $values);
-        } elseif ($blockElement instanceof ParagraphBlock) {
-            return new ParagraphBlockRender($blockElement, $values);
-        } elseif ($blockElement instanceof TableCellBlock) {
-            return new TableCellBlockRender($blockElement, $values);
-        } elseif ($blockElement instanceof TableRowBlock) {
-            return new TableRowBlockRender($blockElement, $values);
-        } else {
+        $blockRenderClass = self::$blockRenders[get_class($blockElement)] ?? null;
+
+        if (!$blockRenderClass) {
             throw new RenderException('unknown block render');
         }
+
+        return new $blockRenderClass($blockElement, $values);
     }
 
     /**

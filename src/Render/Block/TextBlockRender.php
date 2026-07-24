@@ -26,6 +26,8 @@ class TextBlockRender extends BlockRender
      */
     public function cleanUpBlock() : void
     {
+        parent::cleanUpBlock();
+
         $parentEndNode = $this->blockElement->getEnd()->parentNode;
         $parentStartNode = $this->blockElement->getStart()->parentNode;
 

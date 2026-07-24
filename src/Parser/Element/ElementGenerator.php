@@ -57,7 +57,12 @@ class ElementGenerator
     /**
      * @var array|string[]
      */
-    protected array $blockTypes = ['w:t', 'w:p', 'w:tc', 'w:tr'];
+    protected array $blockTypes = [
+        'w:t'  => TextBlock::class,
+        'w:p'  => ParagraphBlock::class,
+        'w:tc' => TableCellBlock::class,
+        'w:tr' => TableRowBlock::class,
+    ];
 
     /**
      * @param ContentPart $contentPart
@@ -92,7 +97,7 @@ class ElementGenerator
         }
 
         foreach ($this->getStartBlockNodes() as $startNode) {
-            foreach ($this->blockTypes as $blockType) {
+            foreach ($this->blockTypes as $blockType => $blockClass) {
                 $block = $this->getBlock($startNode, $blockType);
                 if ($block) {
                     $this->blocks[] = $block;
@@ -144,13 +149,13 @@ class ElementGenerator
                 $endBlockNode = $this->getEndBlockNode($sibling);
                 if ($endBlockNode) {
                     if ($endBlockNode->getAttribute('type') == 'end') {
-                        $documentBlock = match ($blockType) {
-                            'w:t'   => new TextBlock($contextNode, $endBlockNode),
-                            'w:p'   => new ParagraphBlock($contextNode, $endBlockNode),
-                            'w:tc'  => new TableCellBlock($contextNode, $endBlockNode),
-                            'w:tr'  => new TableRowBlock($contextNode, $endBlockNode),
-                            default => throw new ElementException($blockType . ' is not supported'),
-                        };
+                        $blockClass = $this->blockTypes[$blockType] ?? null;
+
+                        if (!$blockClass) {
+                            throw new ElementException($blockType . ' is not supported');
+                        }
+
+                        $documentBlock = new $blockClass($contextNode, $endBlockNode);
                         $documentBlock->setChildren($children);
                         break;
                     } else {

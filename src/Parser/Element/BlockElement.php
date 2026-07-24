@@ -119,23 +119,19 @@ abstract class BlockElement
 
     /**
      * @return array
+     * @throws ElementException
      */
     public function getFieldIds() : array
     {
         if (empty($this->fieldIds)) {
-            try {
-                foreach ($this->getFieldElements() as $fieldElement) {
-                    $this->fieldIds['fields'][] = $fieldElement->getFieldId();
-                }
-                foreach ($this->getConditionElements() as $conditionElement) {
-                    $this->fieldIds['fields'][] = $conditionElement->getFieldId();
-                }
-                foreach ($this->getViewElements() as $viewElement) {
-                    $this->fieldIds['views'][] = $viewElement->getFieldId();
-                }
-            } //@todo logging or throwing?
-            catch (ElementException $e) {
-                //Logging::getFormLogger()->warn($e);
+            foreach ($this->getFieldElements() as $fieldElement) {
+                $this->fieldIds['fields'][] = $fieldElement->getFieldId();
+            }
+            foreach ($this->getConditionElements() as $conditionElement) {
+                $this->fieldIds['fields'][] = $conditionElement->getFieldId();
+            }
+            foreach ($this->getViewElements() as $viewElement) {
+                $this->fieldIds['views'][] = $viewElement->getFieldId();
             }
             foreach ($this->fieldIds as $key => $value) {
                 $this->fieldIds[$key] = array_unique($value, SORT_NUMERIC);
@@ -195,24 +191,19 @@ abstract class BlockElement
 
     /**
      * @return array
-     * @throws Exception
+     * @throws ElementException
      */
     public function getElementIds() : array
     {
         if (empty($this->ids)) {
-            try {
-                foreach ($this->getFieldElements() as $fieldElement) {
-                    $this->ids[] = $fieldElement->getId();
-                }
-                foreach ($this->getConditionElements() as $conditionElement) {
-                    $this->ids[] = $conditionElement->getId();
-                }
-                foreach ($this->getViewElements() as $viewElement) {
-                    $this->ids[] = $viewElement->getId();
-                }
-            } catch (ElementException $e) {
-                //@todo handle excpetion
-                //Logging::getFormLogger()->warn($e);
+            foreach ($this->getFieldElements() as $fieldElement) {
+                $this->ids[] = $fieldElement->getId();
+            }
+            foreach ($this->getConditionElements() as $conditionElement) {
+                $this->ids[] = $conditionElement->getId();
+            }
+            foreach ($this->getViewElements() as $viewElement) {
+                $this->ids[] = $viewElement->getId();
             }
         }
 

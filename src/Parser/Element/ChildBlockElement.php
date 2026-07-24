@@ -60,12 +60,13 @@ class ChildBlockElement extends Element
         }
 
         if ($this->element->nodeName == $elementType) {
-            $contextNode = $this->element->parentNode;
-        } else {
-            $contextNode = $this->element;
+            // the child itself is the element being looked for (e.g. a text-level
+            // block whose repeated content is a bare acat:field) -> match only
+            // itself, not sibling elements under the same parent
+            return $this->getXpath()->query('self::' . $elementType, $this->element);
         }
 
-        return $this->getXpath()->query('.//' . $elementType, $contextNode);
+        return $this->getXpath()->query('.//' . $elementType, $this->element);
     }
 
     /**
