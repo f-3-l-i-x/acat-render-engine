@@ -28,6 +28,6 @@ class SettingsContentPart extends ContentPart
             throw new DocumentException($this->path . ' has no root node');
         }
 
-        $nodes->item(0)->appendChild($wordDocumentProtectionPlaceHolder->getDOMNode($this->domDocument));
+        $nodes->item(0)->appendChild($wordDocumentProtectionPlaceHolder->getDOMNode($this->getDomDocument()));
     }
 }

@@ -12,9 +12,41 @@ class DocumentProtection
 {
 
     /**
+     *
+     */
+    public const string EDIT_NONE = 'none';
+    /**
+     *
+     */
+    public const string EDIT_READ_ONLY = 'readOnly';
+    /**
+     *
+     */
+    public const string EDIT_COMMENTS = 'comments';
+    /**
+     *
+     */
+    public const string EDIT_FORMS = 'forms';
+    /**
+     *
+     */
+    public const string EDIT_TRACKED_CHANGES = 'trackedChanges';
+
+    /**
+     * @var string[]
+     */
+    private const array EDIT_MODES = [
+        self::EDIT_NONE,
+        self::EDIT_READ_ONLY,
+        self::EDIT_COMMENTS,
+        self::EDIT_FORMS,
+        self::EDIT_TRACKED_CHANGES,
+    ];
+
+    /**
      * @var string|null
      */
-    private ?string $editing = "readOnly";
+    private ?string $editing = self::EDIT_READ_ONLY;
 
     /**
      * @var string|null
@@ -59,7 +91,24 @@ class DocumentProtection
     }
 
     /**
+     * @param string $editing
+     * @return void
+     * @throws DocumentException
+     */
+    public function setEditing(string $editing) : void
+    {
+        if (!in_array($editing, self::EDIT_MODES, true)) {
+            throw new DocumentException(
+                "unsupported edit mode '$editing', expected one of: " . implode(', ', self::EDIT_MODES)
+            );
+        }
+
+        $this->editing = $editing;
+    }
+
+    /**
      * @return string
+     * @throws DocumentException
      */
     public function getPassword() : string
     {
@@ -67,7 +116,7 @@ class DocumentProtection
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSalt() : string
     {
@@ -78,11 +127,11 @@ class DocumentProtection
     }
 
     /**
-     * @param $salt
+     * @param string|null $salt
      * @return void
      * @throws DocumentException
      */
-    public function setSalt($salt) : void
+    public function setSalt(?string $salt) : void
     {
         if ($salt !== null && strlen($salt) !== 16) {
             throw new DocumentException('salt has to be of exactly 16 bytes length');
@@ -117,18 +166,28 @@ class DocumentProtection
 
     /**
      * @param string $algorithm
+     * @return void
+     * @throws DocumentException
      */
     public function setAlgorithm(string $algorithm) : void
     {
+        if (!in_array($algorithm, PasswordEncoder::getAlgorithmNames(), true)) {
+            throw new DocumentException(
+                "unsupported algorithm '$algorithm', expected one of: "
+                . implode(', ', PasswordEncoder::getAlgorithmNames())
+            );
+        }
+
         $this->algorithm = $algorithm;
     }
 
     /**
      * @return string
+     * @throws DocumentException
      */
     public function getAlgorithmId() : string
     {
-        return PasswordEncoder::getAlgorithmId($this->algorithm);
+        return (string) PasswordEncoder::getAlgorithmId($this->algorithm);
     }
 
 }

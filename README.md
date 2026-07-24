@@ -160,6 +160,13 @@ $problems = $structure->validate();
 `WordDocument::protect(?string $password = null)` marks the document read-only using Word's own
 document-protection mechanism (a random password is generated if none is given).
 
+**This is not encryption and not access control.** It is the same "Restrict Editing" feature Word
+itself offers — a UI-level restriction that Word enforces while editing, not a way to keep the
+document's contents confidential. Anyone with the file can read it normally, and the restriction is
+trivially removed by deleting the `w:documentProtection` element from `word/settings.xml` or by
+using any of the widely available password-removal tools. Use it to discourage accidental edits,
+not to protect sensitive content.
+
 ## Testing
 
 ```bash

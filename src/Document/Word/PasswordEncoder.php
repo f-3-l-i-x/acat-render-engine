@@ -3,6 +3,7 @@
 namespace ACAT\Document\Word;
 
 use JetBrains\PhpStorm\Pure;
+use ACAT\Exception\DocumentException;
 
 use const STR_PAD_LEFT;
 
@@ -66,7 +67,7 @@ class PasswordEncoder
         self::ALGORITHM_MD5        => [3, 'md5'],
         self::ALGORITHM_SHA_1      => [4, 'sha1'],
         self::ALGORITHM_MAC        => [5, ''], // 'mac' -> not possible with hash()
-        self::ALGORITHM_RIPEMD     => [6, 'ripemd'],
+        self::ALGORITHM_RIPEMD     => [6, 'ripemd128'],
         self::ALGORITHM_RIPEMD_160 => [7, 'ripemd160'],
         self::ALGORITHM_HMAC       => [9, ''], //'hmac' -> not possible with hash()
         self::ALGORITHM_SHA_256    => [12, 'sha256'],
@@ -122,58 +123,60 @@ class PasswordEncoder
     private static int $passwordMaxLength = 15;
 
     /**
-     * @param $password
+     * @param string $password
      * @param string $algorithmName
-     * @param null $salt
+     * @param string|null $salt
      * @param int $spinCount
      * @return string
+     * @throws DocumentException
      */
     public static function hashPassword(
-        $password,
+        string $password,
         string $algorithmName = self::ALGORITHM_SHA_1,
-        $salt = null,
+        ?string $salt = null,
         int $spinCount = 10000
     ) : string {
         $origEncoding = mb_internal_encoding();
         mb_internal_encoding('UTF-8');
 
-        $password = mb_substr($password, 0, min(self::$passwordMaxLength, mb_strlen($password)));
+        try {
+            $password = mb_substr($password, 0, min(self::$passwordMaxLength, mb_strlen($password)));
 
-        //   Get the single-byte values by iterating through the Unicode characters of the truncated password.
-        //   For each character, if the low byte is not equal to 0, take it. Otherwise, take the high byte.
-        $passUtf8 = mb_convert_encoding($password, 'UCS-2LE', 'UTF-8');
-        $byteChars = [];
+            //   Get the single-byte values by iterating through the Unicode characters of the truncated password.
+            //   For each character, if the low byte is not equal to 0, take it. Otherwise, take the high byte.
+            $passUtf8 = mb_convert_encoding($password, 'UCS-2LE', 'UTF-8');
+            $byteChars = [];
 
-        for ($i = 0; $i < mb_strlen($password); $i++) {
-            $byteChars[$i] = ord(substr($passUtf8, $i * 2, 1));
+            for ($i = 0; $i < mb_strlen($password); $i++) {
+                $byteChars[$i] = ord(substr($passUtf8, $i * 2, 1));
 
-            if ($byteChars[$i] == 0) {
-                $byteChars[$i] = ord(substr($passUtf8, $i * 2 + 1, 1));
+                if ($byteChars[$i] == 0) {
+                    $byteChars[$i] = ord(substr($passUtf8, $i * 2 + 1, 1));
+                }
             }
+
+            // build low-order word and hig-order word and combine them
+            $combinedKey = self::buildCombinedKey($byteChars);
+            // build reversed hexadecimal string
+            $hex = str_pad(strtoupper(dechex($combinedKey & 0xFFFFFFFF)), 8, '0', STR_PAD_LEFT);
+            $reversedHex = $hex[6] . $hex[7] . $hex[4] . $hex[5] . $hex[2] . $hex[3] . $hex[0] . $hex[1];
+
+            $generatedKey = mb_convert_encoding($reversedHex, 'UCS-2LE', 'UTF-8');
+
+            // Implementation Notes List:
+            //   Word requires that the initial hash of the password with the salt not be considered in the count.
+            //   The initial hash of salt + key is not included in the iteration count.
+            $algorithm = self::getAlgorithm($algorithmName);
+            $generatedKey = hash($algorithm, $salt . $generatedKey, true);
+
+            for ($i = 0; $i < $spinCount; $i++) {
+                $generatedKey = hash($algorithm, $generatedKey . pack('CCCC', $i, $i >> 8, $i >> 16, $i >> 24), true);
+            }
+
+            return base64_encode($generatedKey);
+        } finally {
+            mb_internal_encoding($origEncoding);
         }
-
-        // build low-order word and hig-order word and combine them
-        $combinedKey = self::buildCombinedKey($byteChars);
-        // build reversed hexadecimal string
-        $hex = str_pad(strtoupper(dechex($combinedKey & 0xFFFFFFFF)), 8, '0', STR_PAD_LEFT);
-        $reversedHex = $hex[6] . $hex[7] . $hex[4] . $hex[5] . $hex[2] . $hex[3] . $hex[0] . $hex[1];
-
-        $generatedKey = mb_convert_encoding($reversedHex, 'UCS-2LE', 'UTF-8');
-
-        // Implementation Notes List:
-        //   Word requires that the initial hash of the password with the salt not be considered in the count.
-        //   The initial hash of salt + key is not included in the iteration count.
-        $algorithm = self::getAlgorithm($algorithmName);
-        $generatedKey = hash($algorithm, $salt . $generatedKey, true);
-
-        for ($i = 0; $i < $spinCount; $i++) {
-            $generatedKey = hash($algorithm, $generatedKey . pack('CCCC', $i, $i >> 8, $i >> 16, $i >> 24), true);
-        }
-        $generatedKey = base64_encode($generatedKey);
-
-        mb_internal_encoding($origEncoding);
-
-        return $generatedKey;
     }
 
     /**
@@ -207,10 +210,10 @@ class PasswordEncoder
     }
 
     /**
-     * @param $value
+     * @param int $value
      * @return int
      */
-    private static function int32($value) : int
+    private static function int32(int $value) : int
     {
         $value = ($value & 0xFFFFFFFF);
 
@@ -224,9 +227,17 @@ class PasswordEncoder
     /**
      * @param string $algorithmName
      * @return string
+     * @throws DocumentException
      */
     private static function getAlgorithm(string $algorithmName) : string
     {
+        if (!array_key_exists($algorithmName, self::$algorithmMapping)) {
+            throw new DocumentException(
+                "unsupported algorithm '$algorithmName', expected one of: "
+                . implode(', ', self::getAlgorithmNames())
+            );
+        }
+
         $algorithm = self::$algorithmMapping[$algorithmName][1];
         if ($algorithm == '') {
             $algorithm = 'sha1';
@@ -236,11 +247,27 @@ class PasswordEncoder
     }
 
     /**
-     * @param $algorithmName
-     * @return mixed
+     * @param string $algorithmName
+     * @return int
+     * @throws DocumentException
      */
-    public static function getAlgorithmId($algorithmName) : mixed
+    public static function getAlgorithmId(string $algorithmName) : int
     {
+        if (!array_key_exists($algorithmName, self::$algorithmMapping)) {
+            throw new DocumentException(
+                "unsupported algorithm '$algorithmName', expected one of: "
+                . implode(', ', self::getAlgorithmNames())
+            );
+        }
+
         return self::$algorithmMapping[$algorithmName][0];
+    }
+
+    /**
+     * @return array|string[]
+     */
+    public static function getAlgorithmNames() : array
+    {
+        return array_keys(self::$algorithmMapping);
     }
 }

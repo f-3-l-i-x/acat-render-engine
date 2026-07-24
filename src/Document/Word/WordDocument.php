@@ -54,7 +54,7 @@ class WordDocument
      */
     public function protect(?string $password = null) : void
     {
-        $settingsContentPart = $this->getContentParts()['word/settings.xml'];
+        $settingsContentPart = $this->getContentParts()['word/settings.xml'] ?? null;
 
         if (!$settingsContentPart) {
             throw new DocumentException($this->path . ' has no settings');
@@ -121,11 +121,20 @@ class WordDocument
     /**
      * @param string $content
      * @return DOMDocument
+     * @throws DocumentException
      */
     private function getDomDocument(string $content) : DOMDocument
     {
         $domDocument = new DOMDocument('1.0', 'utf-8');
-        $domDocument->loadXML($content);
+
+        $previousSetting = libxml_use_internal_errors(true);
+        $parsed = $domDocument->loadXML($content);
+        libxml_clear_errors();
+        libxml_use_internal_errors($previousSetting);
+
+        if (!$parsed) {
+            throw new DocumentException('could not parse XML content of document ' . $this->path);
+        }
 
         return $domDocument;
     }
@@ -140,7 +149,14 @@ class WordDocument
         if (!$this->zipArchive) {
             throw new DocumentException('document ' . $this->path . ' is not open');
         }
-        return $this->zipArchive->getFromName($file);
+
+        $content = $this->zipArchive->getFromName($file);
+
+        if ($content === false) {
+            throw new DocumentException('could not read ' . $file . ' from document ' . $this->path);
+        }
+
+        return $content;
     }
 
     /**

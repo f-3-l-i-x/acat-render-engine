@@ -5,6 +5,7 @@ namespace ACAT\Document\Word;
 use DOMXPath;
 use DOMDocument;
 use ACAT\Parser\ParserConstants;
+use ACAT\Exception\DocumentException;
 
 /**
  *
@@ -45,6 +46,7 @@ class ContentPart
 
     /**
      * @return DOMXPath
+     * @throws DocumentException
      */
     public function getXPath() : DOMXPath
     {
@@ -59,12 +61,23 @@ class ContentPart
 
     /**
      * @return DOMDocument
+     * @throws DocumentException
      */
     public function getDomDocument() : DOMDocument
     {
         if (!$this->domDocument) {
-            $this->domDocument = new DOMDocument('1.0', 'utf-8');
-            $this->domDocument->loadXML($this->content);
+            $domDocument = new DOMDocument('1.0', 'utf-8');
+
+            $previousSetting = libxml_use_internal_errors(true);
+            $parsed = $domDocument->loadXML($this->content);
+            libxml_clear_errors();
+            libxml_use_internal_errors($previousSetting);
+
+            if (!$parsed) {
+                throw new DocumentException('could not parse XML content of ' . ($this->path ?: 'content part'));
+            }
+
+            $this->domDocument = $domDocument;
         }
         return $this->domDocument;
     }
