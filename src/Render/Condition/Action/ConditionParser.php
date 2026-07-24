@@ -46,7 +46,7 @@ class ConditionParser
         $operator = $termValues['operator'];
         $compareValue = $termValues['value'];
 
-        if ($compareValue && str_starts_with($compareValue, "FIELD_COMPARE_")) {
+        if ($compareValue !== null && str_starts_with($compareValue, "FIELD_COMPARE_")) {
             $compareFieldId = str_replace('FIELD_COMPARE_', '', $compareValue);
             if ($compareFieldId && array_key_exists($compareFieldId, $values)) {
                 $compareValue = $values[$compareFieldId];
@@ -59,34 +59,34 @@ class ConditionParser
         $compareValue = $this->castData($compareValue);
 
         if ($operator === '<>') {
-            if (!$compareValue) {
+            if ($compareValue === null) {
                 $termExpression = !empty($fieldValue);
             } else {
                 $termExpression = ($compareValue <> $fieldValue);
             }
         } elseif ($operator === '=') {
-            if (!$compareValue) {
+            if ($compareValue === null) {
                 $termExpression = empty($fieldValue);
             } else {
                 $termExpression = ($compareValue == $fieldValue);
             }
         } elseif ($operator === '<') {
-            if (!$compareValue) {
+            if ($compareValue === null) {
                 $compareValue = 0;
             }
             $termExpression = ($fieldValue < $compareValue);
         } elseif ($operator === '>') {
-            if (!$compareValue) {
+            if ($compareValue === null) {
                 $compareValue = 0;
             }
             $termExpression = ($fieldValue > $compareValue);
         } elseif ($operator === '>=') {
-            if (!$compareValue) {
+            if ($compareValue === null) {
                 $compareValue = 0;
             }
             $termExpression = ($fieldValue >= $compareValue);
         } elseif ($operator === '<=') {
-            if (!$compareValue) {
+            if ($compareValue === null) {
                 $compareValue = 0;
             }
             $termExpression = ($fieldValue <= $compareValue);
@@ -109,7 +109,7 @@ class ConditionParser
         if (in_array($operator, $this->operators)) {
             $term['operator'] = $operator;
             $value = trim(str_replace($operator, '', $condition));
-            if (empty($value)) {
+            if ($value === '') {
                 $term['value'] = null;
             } else {
                 $term['value'] = $value;
@@ -146,6 +146,15 @@ class ConditionParser
     private function castData(?string $value) : ?string
     {
         if (!$value || !str_contains($value, '.')) {
+            return $value;
+        }
+
+        $parts = explode('.', $value);
+
+        // createFromFormat() silently normalizes out-of-range values (e.g. 31.02.2024
+        // becomes 02.03.2024) instead of rejecting them, so the calendar validity is
+        // checked explicitly before trusting the parsed result.
+        if (count($parts) !== 3 || !checkdate((int) $parts[1], (int) $parts[0], (int) $parts[2])) {
             return $value;
         }
 
