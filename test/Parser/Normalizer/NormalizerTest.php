@@ -120,4 +120,67 @@ class NormalizerTest extends TestCase
         $this->assertCount(6, $acatEndBlockNodes);
     }
 
+    /**
+     * An unrelated "$" (e.g. a currency amount) that is never followed by its own "}"
+     * must not be merged with whatever "}" happens to appear later in the document -
+     * doing so would delete every node in between and glue their text together.
+     *
+     * @throws DocumentException
+     */
+    #[Test]
+    public function anUnrelatedDollarSignDoesNotCorruptLaterParagraphs() : void
+    {
+        $xml = '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+            <w:body>
+                <w:p><w:r><w:t>Kosten: </w:t></w:r><w:r><w:t>$50</w:t></w:r></w:p>
+                <w:p><w:r><w:t>Ein normaler Absatz ohne Platzhalter.</w:t></w:r></w:p>
+                <w:p><w:r><w:t>Noch ein Absatz mit array(1,2,3}</w:t></w:r></w:p>
+                <w:p><w:r><w:t>Und hier geht es normal weiter.</w:t></w:r></w:p>
+            </w:body>
+        </w:document>';
+
+        $contentPart = new ContentPart($xml);
+        (new Normalizer())->normalize($contentPart);
+
+        $paragraphs = $contentPart->getXPath()->query('//w:p');
+        $this->assertCount(4, $paragraphs);
+
+        $textNodes = $contentPart->getXPath()->query('//w:t');
+        $values = array_map(fn($node) => $node->nodeValue, iterator_to_array($textNodes));
+
+        $this->assertContains('Ein normaler Absatz ohne Platzhalter.', $values);
+        $this->assertContains('Und hier geht es normal weiter.', $values);
+    }
+
+    /**
+     * A placeholder split across several differently-formatted runs (as Word does
+     * whenever the marker text has mixed formatting) must still be reassembled into
+     * a single text node.
+     *
+     * @throws DocumentException
+     */
+    #[Test]
+    public function aMarkerSplitAcrossMultipleRunsIsReassembled() : void
+    {
+        $xml = '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+            <w:body>
+                <w:p>
+                    <w:r><w:t>${</w:t></w:r>
+                    <w:r><w:t>F</w:t></w:r>
+                    <w:r><w:t>:</w:t></w:r>
+                    <w:r><w:t>11</w:t></w:r>
+                    <w:r><w:t>2</w:t></w:r>
+                    <w:r><w:t>1}</w:t></w:r>
+                </w:p>
+            </w:body>
+        </w:document>';
+
+        $contentPart = new ContentPart($xml);
+        (new Normalizer())->normalize($contentPart);
+
+        $textNodes = $contentPart->getXPath()->query('//w:t');
+        $this->assertCount(1, $textNodes);
+        $this->assertSame('${F:1121}', $textNodes->item(0)->nodeValue);
+    }
+
 }
