@@ -9,7 +9,6 @@ use ACAT\Exception\PlaceholderException;
  */
 class EndBlockPlaceholder extends BlockPlaceholder
 {
-
     /**
      * @throws PlaceholderException
      */
@@ -17,5 +16,4 @@ class EndBlockPlaceholder extends BlockPlaceholder
     {
         parent::__construct(1);
     }
-
 }

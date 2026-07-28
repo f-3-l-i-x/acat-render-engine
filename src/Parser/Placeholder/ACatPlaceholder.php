@@ -12,7 +12,6 @@ use ACAT\Exception\PlaceholderException;
  */
 abstract class ACatPlaceholder
 {
-
     /**
      * @var string
      */
@@ -36,7 +35,7 @@ abstract class ACatPlaceholder
      * @return ACatPlaceholder
      * @throws PlaceholderException
      */
-    public static function getPlaceholder(string $placeHolderStr) : ACatPlaceholder
+    public static function getPlaceholder(string $placeHolderStr): ACatPlaceholder
     {
         $placeHolderStr = str_replace(['$', '{', '}'], '', $placeHolderStr);
 
@@ -62,7 +61,7 @@ abstract class ACatPlaceholder
      * @return FieldPlaceholder
      * @throws PlaceholderException
      */
-    private static function createFieldPlaceholder(string $placeholderStr) : FieldPlaceholder
+    private static function createFieldPlaceholder(string $placeholderStr): FieldPlaceholder
     {
         $params = explode(':', $placeholderStr);
         if (!$params || count($params) <> 2) {
@@ -76,7 +75,7 @@ abstract class ACatPlaceholder
      * @return ConditionPlaceholder
      * @throws PlaceholderException
      */
-    private static function createConditionPlaceholder(string $placeholderStr) : ConditionPlaceholder
+    private static function createConditionPlaceholder(string $placeholderStr): ConditionPlaceholder
     {
         $params = explode(':', $placeholderStr);
         if (count($params) != 4) {
@@ -90,7 +89,7 @@ abstract class ACatPlaceholder
      * @return TextPlaceholder
      * @throws PlaceholderException
      */
-    private static function createTextPlaceholder(string $placeholderStr) : TextPlaceholder
+    private static function createTextPlaceholder(string $placeholderStr): TextPlaceholder
     {
         $params = explode(':', $placeholderStr);
         if (!$params || count($params) <> 2) {
@@ -104,7 +103,7 @@ abstract class ACatPlaceholder
      * @return BlockPlaceholder
      * @throws PlaceholderException
      */
-    private static function createBlockPlaceholder(string $placeholderStr) : BlockPlaceholder
+    private static function createBlockPlaceholder(string $placeholderStr): BlockPlaceholder
     {
         $params = explode(':', $placeholderStr);
 
@@ -126,7 +125,7 @@ abstract class ACatPlaceholder
      * @return ViewPlaceholder
      * @throws PlaceholderException
      */
-    private static function createViewPlaceHolder(string $placeholderStr) : ViewPlaceholder
+    private static function createViewPlaceHolder(string $placeholderStr): ViewPlaceholder
     {
         $params = explode(':', $placeholderStr);
         if (!$params || count($params) <> 2) {
@@ -138,7 +137,7 @@ abstract class ACatPlaceholder
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -146,22 +145,21 @@ abstract class ACatPlaceholder
     /**
      * @return string
      */
-    abstract public function getXMLTagAsString() : string;
+    abstract public function getXMLTagAsString(): string;
 
     /**
      * @param DOMDocument $domDocument
      * @return DOMNode
      */
-    abstract public function getDOMNode(DOMDocument $domDocument) : DOMNode;
+    abstract public function getDOMNode(DOMDocument $domDocument): DOMNode;
 
     /**
      * @return int
      */
-    abstract public function length() : int;
+    abstract public function length(): int;
 
     /**
      * @return string
      */
-    abstract public function getNodeAsString() : string;
-
+    abstract public function getNodeAsString(): string;
 }

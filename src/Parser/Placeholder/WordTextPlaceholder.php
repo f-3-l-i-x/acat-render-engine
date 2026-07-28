@@ -11,7 +11,6 @@ use DOMException;
  */
 class WordTextPlaceholder extends ACatPlaceholder
 {
-
     /**
      * @var string
      */
@@ -35,7 +34,7 @@ class WordTextPlaceholder extends ACatPlaceholder
     /**
      * @return string|null
      */
-    public function getText() : ?string
+    public function getText(): ?string
     {
         return $this->text;
     }
@@ -43,7 +42,7 @@ class WordTextPlaceholder extends ACatPlaceholder
     /**
      * @return string
      */
-    public function getXMLTagAsString() : string
+    public function getXMLTagAsString(): string
     {
         return '<w:t xml:space="preserve">' . $this->text . '</w:t>';
     }
@@ -53,7 +52,7 @@ class WordTextPlaceholder extends ACatPlaceholder
      * @return DOMNode
      * @throws DOMException
      */
-    public function getDOMNode(DOMDocument $domDocument) : DOMNode
+    public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         if ($this->text == null) {
             $this->text = "";
@@ -74,7 +73,7 @@ class WordTextPlaceholder extends ACatPlaceholder
     /**
      * @return int
      */
-    public function length() : int
+    public function length(): int
     {
         return strlen($this->getNodeAsString());
     }
@@ -82,7 +81,7 @@ class WordTextPlaceholder extends ACatPlaceholder
     /**
      * @return string
      */
-    public function getNodeAsString() : string
+    public function getNodeAsString(): string
     {
         return $this->text;
     }

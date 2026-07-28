@@ -12,7 +12,6 @@ use ACAT\Exception\PlaceholderException;
  */
 abstract class BlockPlaceholder extends ACatPlaceholder
 {
-
     /**
      * @var int
      */
@@ -36,7 +35,7 @@ abstract class BlockPlaceholder extends ACatPlaceholder
      * @return string
      * @throws PlaceholderException
      */
-    public function getXMLTagAsString() : string
+    public function getXMLTagAsString(): string
     {
         return '<acat:block type="' . $this->getType() . '" />';
     }
@@ -45,7 +44,7 @@ abstract class BlockPlaceholder extends ACatPlaceholder
      * @return string
      * @throws PlaceholderException
      */
-    public function getType() : string
+    public function getType(): string
     {
         if ($this->isStart()) {
             return "start";
@@ -58,7 +57,7 @@ abstract class BlockPlaceholder extends ACatPlaceholder
     /**
      * @return bool
      */
-    public function isStart() : bool
+    public function isStart(): bool
     {
         return $this->type == 0;
     }
@@ -66,7 +65,7 @@ abstract class BlockPlaceholder extends ACatPlaceholder
     /**
      * @return bool
      */
-    public function isEnd() : bool
+    public function isEnd(): bool
     {
         return $this->type == 1;
     }
@@ -77,7 +76,7 @@ abstract class BlockPlaceholder extends ACatPlaceholder
      * @throws PlaceholderException
      * @throws DOMException
      */
-    public function getDOMNode(DOMDocument $domDocument) : DOMNode
+    public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         $elementNode = $domDocument->createElementNS($this->namespace, 'acat:block');
 
@@ -96,7 +95,7 @@ abstract class BlockPlaceholder extends ACatPlaceholder
     /**
      * @return int
      */
-    public function length() : int
+    public function length(): int
     {
         return strlen($this->getNodeAsString());
     }
@@ -104,7 +103,7 @@ abstract class BlockPlaceholder extends ACatPlaceholder
     /**
      * @return string
      */
-    public function getNodeAsString() : string
+    public function getNodeAsString(): string
     {
         return '${B:' . $this->type . '}';
     }
