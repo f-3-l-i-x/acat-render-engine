@@ -43,21 +43,14 @@ abstract class ACatPlaceholder
     {
         $placeHolderStr = str_replace(['$', '{', '}'], '', $placeHolderStr);
 
-        if (str_starts_with($placeHolderStr, 'F')) {
-            $placeHolderObj = self::createFieldPlaceholder($placeHolderStr);
-        } elseif (str_starts_with($placeHolderStr, 'C')) {
-            $placeHolderObj = self::createConditionPlaceholder($placeHolderStr);
-        } elseif (str_starts_with($placeHolderStr, 'T')) {
-            $placeHolderObj = self::createTextPlaceholder($placeHolderStr);
-        } elseif (str_starts_with($placeHolderStr, 'B')) {
-            $placeHolderObj = self::createBlockPlaceholder($placeHolderStr);
-        } elseif (str_starts_with($placeHolderStr, 'V')) {
-            $placeHolderObj = self::createViewPlaceHolder($placeHolderStr);
-        } else {
-            throw new PlaceholderException($placeHolderStr . ' is unsupported');
-        }
-
-        return $placeHolderObj;
+        return match (true) {
+            str_starts_with($placeHolderStr, 'F') => self::createFieldPlaceholder($placeHolderStr),
+            str_starts_with($placeHolderStr, 'C') => self::createConditionPlaceholder($placeHolderStr),
+            str_starts_with($placeHolderStr, 'T') => self::createTextPlaceholder($placeHolderStr),
+            str_starts_with($placeHolderStr, 'B') => self::createBlockPlaceholder($placeHolderStr),
+            str_starts_with($placeHolderStr, 'V') => self::createViewPlaceHolder($placeHolderStr),
+            default => throw new PlaceholderException($placeHolderStr . ' is unsupported'),
+        };
     }
 
     /**
@@ -125,13 +118,11 @@ abstract class ACatPlaceholder
             throw new PlaceholderException($placeholderStr . ' is malformed');
         }
 
-        if ($params[1] == 0) {
-            return new StartBlockPlaceholder();
-        } elseif ($params[1] == 1) {
-            return new EndBlockPlaceholder();
-        } else {
-            throw new PlaceholderException('block type ' . $params[1] . ' is not supported');
-        }
+        return match ($params[1]) {
+            '0' => new StartBlockPlaceholder(),
+            '1' => new EndBlockPlaceholder(),
+            default => throw new PlaceholderException('block type ' . $params[1] . ' is not supported'),
+        };
     }
 
     /**

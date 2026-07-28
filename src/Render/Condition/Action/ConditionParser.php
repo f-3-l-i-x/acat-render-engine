@@ -12,7 +12,6 @@ use ACAT\Exception\ConditionParserException;
  */
 class ConditionParser
 {
-
     /**
      * @var array|string[]
      */
@@ -30,7 +29,7 @@ class ConditionParser
      * @throws ConditionParserException
      * @throws ElementException
      */
-    public function evaluateCondition(ConditionElement $conditionElement, array $values) : bool
+    public function evaluateCondition(ConditionElement $conditionElement, array $values): bool
     {
         $fieldValue = null;
         $termValues = $this->getCompareValue($conditionElement->getExpression());
@@ -58,50 +57,22 @@ class ConditionParser
         $fieldValue = $this->castData($fieldValue);
         $compareValue = $this->castData($compareValue);
 
-        if ($operator === '<>') {
-            if ($compareValue === null) {
-                $termExpression = !empty($fieldValue);
-            } else {
-                $termExpression = ($compareValue <> $fieldValue);
-            }
-        } elseif ($operator === '=') {
-            if ($compareValue === null) {
-                $termExpression = empty($fieldValue);
-            } else {
-                $termExpression = ($compareValue == $fieldValue);
-            }
-        } elseif ($operator === '<') {
-            if ($compareValue === null) {
-                $compareValue = 0;
-            }
-            $termExpression = ($fieldValue < $compareValue);
-        } elseif ($operator === '>') {
-            if ($compareValue === null) {
-                $compareValue = 0;
-            }
-            $termExpression = ($fieldValue > $compareValue);
-        } elseif ($operator === '>=') {
-            if ($compareValue === null) {
-                $compareValue = 0;
-            }
-            $termExpression = ($fieldValue >= $compareValue);
-        } elseif ($operator === '<=') {
-            if ($compareValue === null) {
-                $compareValue = 0;
-            }
-            $termExpression = ($fieldValue <= $compareValue);
-        } else {
-            throw new ConditionParserException('unknown operator ' . $conditionElement->getExpression());
-        }
-
-        return $termExpression;
+        return match ($operator) {
+            '<>' => $compareValue === null ? !empty($fieldValue) : ($compareValue <> $fieldValue),
+            '=' => $compareValue === null ? empty($fieldValue) : ($compareValue == $fieldValue),
+            '<' => $fieldValue < ($compareValue ?? 0),
+            '>' => $fieldValue > ($compareValue ?? 0),
+            '>=' => $fieldValue >= ($compareValue ?? 0),
+            '<=' => $fieldValue <= ($compareValue ?? 0),
+            default => throw new ConditionParserException('unknown operator ' . $conditionElement->getExpression()),
+        };
     }
 
     /**
      * @param string $condition
      * @return array
      */
-    public function getCompareValue(string $condition) : array
+    public function getCompareValue(string $condition): array
     {
         $term = [];
         $operator = $this->getOperator($condition);
@@ -123,7 +94,7 @@ class ConditionParser
      * @param string $value
      * @return string|null
      */
-    private function getOperator(string $value) : ?string
+    private function getOperator(string $value): ?string
     {
         $operator = null;
 
@@ -143,7 +114,7 @@ class ConditionParser
      * @param string|null $value
      * @return string|null
      */
-    private function castData(?string $value) : ?string
+    private function castData(?string $value): ?string
     {
         if (!$value || !str_contains($value, '.')) {
             return $value;
@@ -166,5 +137,4 @@ class ConditionParser
 
         return $value;
     }
-
 }

@@ -12,18 +12,12 @@ use DOMException;
 class TextPlaceholder extends ACatPlaceholder
 {
     /**
-     * @var string|null
-     */
-    private ?string $text;
-
-    /**
      * Creates a text placeholder with the given static text.
      *
      * @param string|null $text
      */
-    public function __construct(?string $text)
+    public function __construct(private ?string $text)
     {
-        $this->text = $text;
         parent::__construct();
     }
 

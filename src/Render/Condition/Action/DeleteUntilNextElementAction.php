@@ -2,7 +2,6 @@
 
 namespace ACAT\Render\Condition\Action;
 
-
 use ACAT\Utils\DOMUtils;
 use ACAT\Exception\RenderException;
 
@@ -11,7 +10,6 @@ use ACAT\Exception\RenderException;
  */
 class DeleteUntilNextElementAction extends ConditionAction
 {
-
     /**
      * @var array|string[]
      */
@@ -21,7 +19,7 @@ class DeleteUntilNextElementAction extends ConditionAction
      * @return void
      * @throws RenderException
      */
-    public function execute() : void
+    public function execute(): void
     {
         foreach ($this->getNodesToDelete() as $nodeToDelete) {
             $nodeToDelete->parentNode->removeChild($nodeToDelete);
@@ -32,7 +30,7 @@ class DeleteUntilNextElementAction extends ConditionAction
      * @return array
      * @throws RenderException
      */
-    private function getNodesToDelete() : array
+    private function getNodesToDelete(): array
     {
         $count = 0;
         $found = false;

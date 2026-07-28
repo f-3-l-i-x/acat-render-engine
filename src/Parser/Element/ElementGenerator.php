@@ -18,17 +18,6 @@ use ACAT\Document\Word\ContentPart;
  */
 class ElementGenerator
 {
-
-    /**
-     * @var LoggerInterface|null
-     */
-    private ?LoggerInterface $logger;
-
-    /**
-     * @var ContentPart
-     */
-    private ContentPart $contentPart;
-
     /**
      * @var array
      */
@@ -69,11 +58,8 @@ class ElementGenerator
      * @param LoggerInterface|null $logger
      * @throws ElementException
      */
-    public function __construct(ContentPart $contentPart, ?LoggerInterface $logger = null)
+    public function __construct(private ContentPart $contentPart, private ?LoggerInterface $logger = null)
     {
-        $this->logger = $logger;
-        $this->contentPart = $contentPart;
-
         $this->generateElements();
     }
 
@@ -81,7 +67,7 @@ class ElementGenerator
      * @return void
      * @throws ElementException
      */
-    public function generateElements() : void
+    public function generateElements(): void
     {
         $this->blocks = $this->getBlocks();
     }
@@ -90,7 +76,7 @@ class ElementGenerator
      * @return array
      * @throws ElementException
      */
-    public function getBlocks() : array
+    public function getBlocks(): array
     {
         if (!empty($this->blocks)) {
             return $this->blocks;
@@ -101,15 +87,13 @@ class ElementGenerator
                 $block = $this->getBlock($startNode, $blockType);
                 if ($block) {
                     $this->blocks[] = $block;
-                    if ($block instanceof TextBlock) {
-                        $this->textBlocks[] = $block;
-                    } elseif ($block instanceof ParagraphBlock) {
-                        $this->paragraphBlocks[] = $block;
-                    } elseif ($block instanceof TableCellBlock) {
-                        $this->tableCellBlocks[] = $block;
-                    } elseif ($block instanceof TableRowBlock) {
-                        $this->tableRowBlocks[] = $block;
-                    }
+                    match (true) {
+                        $block instanceof TextBlock => $this->textBlocks[] = $block,
+                        $block instanceof ParagraphBlock => $this->paragraphBlocks[] = $block,
+                        $block instanceof TableCellBlock => $this->tableCellBlocks[] = $block,
+                        $block instanceof TableRowBlock => $this->tableRowBlocks[] = $block,
+                        default => null,
+                    };
                     break;
                 }
             }
@@ -121,7 +105,7 @@ class ElementGenerator
     /**
      * @return DOMNodeList
      */
-    protected function getStartBlockNodes() : DOMNodeList
+    protected function getStartBlockNodes(): DOMNodeList
     {
         return $this->contentPart->getXPath()->query("//acat:block[@type='start']");
     }
@@ -133,7 +117,7 @@ class ElementGenerator
      * @throws ElementException
      * @throws Exception
      */
-    protected function getBlock(DOMNode $contextNode, string $blockType) : ?BlockElement
+    protected function getBlock(DOMNode $contextNode, string $blockType): ?BlockElement
     {
         $children = [];
         $documentBlock = null;
@@ -189,7 +173,7 @@ class ElementGenerator
      * @param DOMNode $contextNode
      * @return DOMNodeList
      */
-    protected function getSiblings(DOMNode $contextNode) : DOMNodeList
+    protected function getSiblings(DOMNode $contextNode): DOMNodeList
     {
         return $this->contentPart->getXPath()->query("following-sibling::*", $contextNode);
     }
@@ -198,7 +182,7 @@ class ElementGenerator
      * @param DOMNode $contextNode
      * @return DOMNode|null
      */
-    protected function getEndBlockNode(DOMNode $contextNode) : ?DOMElement
+    protected function getEndBlockNode(DOMNode $contextNode): ?DOMElement
     {
         if ($contextNode->nodeName == 'acat:block') {
             return $contextNode;
@@ -219,22 +203,20 @@ class ElementGenerator
      * @return array
      * @throws ElementException
      */
-    protected function getElements(string $elementType, array $children) : array
+    protected function getElements(string $elementType, array $children): array
     {
         $elements = [];
 
         foreach ($children as $child) {
-            if ($elementType == ParserConstants::ACAT_TEXT_NODES) {
-                $elements = array_merge($elements, $child->getTextElements());
-            } elseif ($elementType == ParserConstants::ACAT_FIELD_NODE) {
-                $elements = array_merge($elements, $child->getFieldElements());
-            } elseif ($elementType == ParserConstants::ACAT_CONDITION_NODE) {
-                $elements = array_merge($elements, $child->getConditionElements());
-            } elseif ($elementType == ParserConstants::ACAT_VIEW_NODE) {
-                $elements = array_merge($elements, $child->getViewElements());
-            } else {
-                throw new ElementException('type ' . $elementType . 'is not known');
-            }
+            $childElements = match ($elementType) {
+                ParserConstants::ACAT_TEXT_NODES => $child->getTextElements(),
+                ParserConstants::ACAT_FIELD_NODE => $child->getFieldElements(),
+                ParserConstants::ACAT_CONDITION_NODE => $child->getConditionElements(),
+                ParserConstants::ACAT_VIEW_NODE => $child->getViewElements(),
+                default => throw new ElementException('type ' . $elementType . 'is not known'),
+            };
+
+            $elements = array_merge($elements, $childElements);
         }
 
         return $elements;
@@ -244,7 +226,7 @@ class ElementGenerator
      * @return array
      * @throws ElementException
      */
-    public function getTextElements() : array
+    public function getTextElements(): array
     {
         $this->log(LogLevel::INFO, 'looking for text elements in ' . $this->contentPart->getPath());
 
@@ -288,7 +270,7 @@ class ElementGenerator
      * @param string $message
      * @return void
      */
-    protected function log(string $level, string $message) : void
+    protected function log(string $level, string $message): void
     {
         $this->logger?->log($level, $message);
     }
@@ -296,7 +278,7 @@ class ElementGenerator
     /**
      * @return ContentPart
      */
-    public function getContentPart() : ContentPart
+    public function getContentPart(): ContentPart
     {
         return $this->contentPart;
     }
@@ -305,7 +287,7 @@ class ElementGenerator
      * @return array
      * @throws ElementException
      */
-    public function getFieldElements() : array
+    public function getFieldElements(): array
     {
         return $this->getContentElements();
     }
@@ -315,7 +297,7 @@ class ElementGenerator
      * @return array
      * @throws ElementException
      */
-    public function getContentElements(string $nodeType = ParserConstants::ACAT_FIELD_NODE) : array
+    public function getContentElements(string $nodeType = ParserConstants::ACAT_FIELD_NODE): array
     {
         $this->log(LogLevel::INFO, 'looking for content elements in ' . $this->contentPart->getPath());
 
@@ -357,7 +339,7 @@ class ElementGenerator
      * @return array
      * @throws ElementException
      */
-    public function getConditionElements() : array
+    public function getConditionElements(): array
     {
         $found = false;
         $conditionElements = [];
@@ -388,7 +370,7 @@ class ElementGenerator
      * @return array
      * @throws ElementException
      */
-    public function getViewElements() : array
+    public function getViewElements(): array
     {
         return $this->getContentElements(ParserConstants::ACAT_VIEW_NODE);
     }
@@ -396,7 +378,7 @@ class ElementGenerator
     /**
      * @return array
      */
-    public function getTextBlocks() : array
+    public function getTextBlocks(): array
     {
         return $this->textBlocks;
     }
@@ -404,9 +386,8 @@ class ElementGenerator
     /**
      * @return array
      */
-    public function getTableRowBlocks() : array
+    public function getTableRowBlocks(): array
     {
         return $this->tableRowBlocks;
     }
-
 }

@@ -10,7 +10,6 @@ use ACAT\Exception\RenderException;
  */
 class DeleteNextElementAction extends ConditionAction
 {
-
     /**
      * @var string
      */
@@ -20,7 +19,7 @@ class DeleteNextElementAction extends ConditionAction
      * @return void
      * @throws RenderException
      */
-    public function execute() : void
+    public function execute(): void
     {
         $nodeToDelete = null;
 

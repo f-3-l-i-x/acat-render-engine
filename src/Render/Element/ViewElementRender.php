@@ -16,7 +16,6 @@ use ACAT\Parser\Placeholder\LineBreakPlaceholder;
  */
 class ViewElementRender extends Render
 {
-
     /**
      * @param array $elements
      * @param array|null $values
@@ -24,7 +23,7 @@ class ViewElementRender extends Render
      * @throws DOMException
      * @throws ElementException
      */
-    public function render(array $elements, ?array $values = []) : void
+    public function render(array $elements, ?array $values = []): void
     {
         if (!$values) {
             $values = [];
@@ -42,7 +41,7 @@ class ViewElementRender extends Render
      * @throws ElementException
      * @throws DOMException
      */
-    private function renderViewElement(ViewElement $viewElement, array $values) : void
+    private function renderViewElement(ViewElement $viewElement, array $values): void
     {
         $viewId = $viewElement->getFieldId();
 
@@ -79,7 +78,7 @@ class ViewElementRender extends Render
     /**
      * @return LineBreakPlaceholder
      */
-    private function createLineBreakNode() : LineBreakPlaceholder
+    private function createLineBreakNode(): LineBreakPlaceholder
     {
         return new LineBreakPlaceholder();
     }
@@ -88,7 +87,7 @@ class ViewElementRender extends Render
      * @param string $text
      * @return WordTextPlaceholder
      */
-    private function createWordTextPlaceholder(string $text) : WordTextPlaceholder
+    private function createWordTextPlaceholder(string $text): WordTextPlaceholder
     {
         return new WordTextPlaceholder($text);
     }

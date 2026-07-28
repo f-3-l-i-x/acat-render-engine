@@ -6,5 +6,4 @@ use Exception;
 
 class ElementException extends Exception
 {
-
 }

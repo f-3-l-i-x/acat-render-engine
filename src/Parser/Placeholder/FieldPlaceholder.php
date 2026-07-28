@@ -12,19 +12,13 @@ use DOMException;
 class FieldPlaceholder extends ACatPlaceholder
 {
     /**
-     * @var string
-     */
-    protected string $fieldId;
-
-    /**
      * Creates a field placeholder for the given field id.
      *
      * @param string $fieldId
      */
-    public function __construct(string $fieldId)
+    public function __construct(protected string $fieldId)
     {
         parent::__construct();
-        $this->fieldId = $fieldId;
     }
 
     /**

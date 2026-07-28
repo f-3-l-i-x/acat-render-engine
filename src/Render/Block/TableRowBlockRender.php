@@ -10,22 +10,19 @@ use ACAT\Parser\Element\BlockElement;
  */
 class TableRowBlockRender extends BlockRender
 {
-
     /**
      * @param BlockElement $blockElement
      * @param array $values
      */
-    public function __construct(BlockElement $blockElement, array $values)
+    public function __construct(protected BlockElement $blockElement, protected array $values)
     {
         parent::__construct();
-        $this->values = $values;
-        $this->blockElement = $blockElement;
     }
 
     /**
      *
      */
-    public function cleanUpBlock() : void
+    public function cleanUpBlock(): void
     {
         parent::cleanUpBlock();
 

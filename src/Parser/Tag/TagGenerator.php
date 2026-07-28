@@ -17,24 +17,12 @@ use ACAT\Parser\Placeholder\WordTextPlaceholder;
  */
 class TagGenerator
 {
-
-    /**
-     * @var ContentPart
-     */
-    protected ContentPart $contentPart;
-    /**
-     * @var LoggerInterface|null
-     */
-    private ?LoggerInterface $logger;
-
     /**
      * @param ContentPart $contentPart
      * @param LoggerInterface|null $logger
      */
-    public function __construct(ContentPart $contentPart, ?LoggerInterface $logger = null)
+    public function __construct(protected ContentPart $contentPart, private ?LoggerInterface $logger = null)
     {
-        $this->logger = $logger;
-        $this->contentPart = $contentPart;
     }
 
     /**
@@ -42,7 +30,7 @@ class TagGenerator
      * @param string $nodeValue
      * @return array
      */
-    public function getTags(array $matches, string $nodeValue) : array
+    public function getTags(array $matches, string $nodeValue): array
     {
         $nodes = [];
         $currentIndex = 0;
@@ -95,7 +83,7 @@ class TagGenerator
      * @param string $message
      * @return void
      */
-    protected function log(string $level, string $message) : void
+    protected function log(string $level, string $message): void
     {
         $this->logger?->log($level, $message);
     }
@@ -103,7 +91,7 @@ class TagGenerator
     /**
      * @return void
      */
-    public function generateTags() : void
+    public function generateTags(): void
     {
         $this->log(LogLevel::INFO, 'starting tag generator for content part ' . $this->contentPart->getPath());
 
@@ -126,7 +114,7 @@ class TagGenerator
     /**
      * @return DOMNodeList
      */
-    protected function getTextNodes() : DOMNodeList
+    protected function getTextNodes(): DOMNodeList
     {
         return $this->contentPart->getXPath()->query(ParserConstants::WORD_TEXT_NODES);
     }
@@ -135,7 +123,7 @@ class TagGenerator
      * @param array $nodes
      * @param DOMNode $textNode
      */
-    private function insertNodes(array $nodes, DOMNode $textNode) : void
+    private function insertNodes(array $nodes, DOMNode $textNode): void
     {
         $this->log(LogLevel::INFO, 'inserting tags in content part');
 
@@ -150,5 +138,4 @@ class TagGenerator
 
         $textNode->parentNode->removeChild($textNode);
     }
-
 }

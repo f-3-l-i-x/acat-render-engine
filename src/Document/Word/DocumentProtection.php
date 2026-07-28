@@ -10,7 +10,6 @@ use ACAT\Exception\DocumentException;
  */
 class DocumentProtection
 {
-
     /**
      *
      */
@@ -49,11 +48,6 @@ class DocumentProtection
     private ?string $editing = self::EDIT_READ_ONLY;
 
     /**
-     * @var string|null
-     */
-    private ?string $password;
-
-    /**
      * @var int
      */
     private int $spinCount = 100000;
@@ -72,20 +66,17 @@ class DocumentProtection
      * @param string|null $password
      * @throws Exception
      */
-    public function __construct(?string $password = null)
+    public function __construct(private ?string $password = null)
     {
-        if (!$password) {
-            $randomBytes = random_bytes(32);
-            $password = bin2hex($randomBytes);
+        if (!$this->password) {
+            $this->password = bin2hex(random_bytes(32));
         }
-
-        $this->password = $password;
     }
 
     /**
      * @return string|null
      */
-    public function getEditing() : ?string
+    public function getEditing(): ?string
     {
         return $this->editing;
     }
@@ -95,7 +86,7 @@ class DocumentProtection
      * @return void
      * @throws DocumentException
      */
-    public function setEditing(string $editing) : void
+    public function setEditing(string $editing): void
     {
         if (!in_array($editing, self::EDIT_MODES, true)) {
             throw new DocumentException(
@@ -110,7 +101,7 @@ class DocumentProtection
      * @return string
      * @throws DocumentException
      */
-    public function getPassword() : string
+    public function getPassword(): string
     {
         return PasswordEncoder::hashPassword($this->password, $this->algorithm, $this->getSalt(), $this->spinCount);
     }
@@ -118,7 +109,7 @@ class DocumentProtection
     /**
      * @return string
      */
-    public function getSalt() : string
+    public function getSalt(): string
     {
         if (empty($this->salt)) {
             $this->salt = openssl_random_pseudo_bytes(16);
@@ -131,7 +122,7 @@ class DocumentProtection
      * @return void
      * @throws DocumentException
      */
-    public function setSalt(?string $salt) : void
+    public function setSalt(?string $salt): void
     {
         if ($salt !== null && strlen($salt) !== 16) {
             throw new DocumentException('salt has to be of exactly 16 bytes length');
@@ -143,7 +134,7 @@ class DocumentProtection
     /**
      * @return int
      */
-    public function getSpinCount() : int
+    public function getSpinCount(): int
     {
         return $this->spinCount;
     }
@@ -151,7 +142,7 @@ class DocumentProtection
     /**
      * @param int $spinCount
      */
-    public function setSpinCount(int $spinCount) : void
+    public function setSpinCount(int $spinCount): void
     {
         $this->spinCount = $spinCount;
     }
@@ -159,7 +150,7 @@ class DocumentProtection
     /**
      * @return string
      */
-    public function getAlgorithm() : string
+    public function getAlgorithm(): string
     {
         return $this->algorithm;
     }
@@ -169,7 +160,7 @@ class DocumentProtection
      * @return void
      * @throws DocumentException
      */
-    public function setAlgorithm(string $algorithm) : void
+    public function setAlgorithm(string $algorithm): void
     {
         if (!in_array($algorithm, PasswordEncoder::getAlgorithmNames(), true)) {
             throw new DocumentException(
@@ -185,9 +176,8 @@ class DocumentProtection
      * @return string
      * @throws DocumentException
      */
-    public function getAlgorithmId() : string
+    public function getAlgorithmId(): string
     {
         return (string) PasswordEncoder::getAlgorithmId($this->algorithm);
     }
-
 }

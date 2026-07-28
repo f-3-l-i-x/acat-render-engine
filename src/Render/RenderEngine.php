@@ -1,6 +1,5 @@
 <?php
 
-
 namespace ACAT\Render;
 
 use DOMException;
@@ -25,12 +24,6 @@ use ACAT\Exception\ConditionParserException;
  */
 final class RenderEngine
 {
-
-    /**
-     * @var LoggerInterface|null
-     */
-    private ?LoggerInterface $logger;
-
     /**
      * @var array
      */
@@ -57,9 +50,8 @@ final class RenderEngine
     /**
      * @param LoggerInterface|null $logger
      */
-    public function __construct(?LoggerInterface $logger = null)
+    public function __construct(private readonly ?LoggerInterface $logger = null)
     {
-        $this->logger = $logger;
     }
 
     /**
@@ -72,7 +64,7 @@ final class RenderEngine
      * @throws ElementException
      * @throws RenderException
      */
-    public function render(?WordDocument $wordDocument = null, array $values = []) : void
+    public function render(?WordDocument $wordDocument = null, array $values = []): void
     {
         try {
             $wordDocument->open();
@@ -89,11 +81,13 @@ final class RenderEngine
             }
 
             $wordDocument->close(true);
-        } catch (DocumentException |
-        ConditionParserException |
-        ElementException |
-        RenderException |
-        DOMException $e) {
+        } catch (
+            DocumentException |
+            ConditionParserException |
+            ElementException |
+            RenderException |
+            DOMException $e
+        ) {
             $this->logger?->error($e->getMessage(), ['exception' => $e]);
             throw $e;
         }
@@ -107,7 +101,7 @@ final class RenderEngine
      * @throws ElementException
      * @throws RenderException
      */
-    public function renderContentPart(ContentPart $contentPart) : void
+    public function renderContentPart(ContentPart $contentPart): void
     {
         if (array_key_exists($contentPart->getPath(), $this->documentValues)) {
             $this->values = $this->documentValues[$contentPart->getPath()];
@@ -146,7 +140,7 @@ final class RenderEngine
      * @throws RenderException
      * @throws ConditionParserException
      */
-    public function renderConditionElements() : void
+    public function renderConditionElements(): void
     {
         $views = [];
         $fields = [];
@@ -171,7 +165,7 @@ final class RenderEngine
      * @throws RenderException
      * @throws DOMException
      */
-    public function renderFieldElements() : void
+    public function renderFieldElements(): void
     {
         $fieldRender = new FieldRender();
         $fieldElements = $this->elementGenerator->getFieldElements();
@@ -186,7 +180,7 @@ final class RenderEngine
      * @throws ElementException
      * @throws RenderException
      */
-    public function renderTextElements() : void
+    public function renderTextElements(): void
     {
         $textRender = new TextRender();
         $textElements = $this->elementGenerator->getTextElements();
@@ -201,7 +195,7 @@ final class RenderEngine
      * @throws DOMException
      * @throws ElementException
      */
-    public function renderViewElements() : void
+    public function renderViewElements(): void
     {
         $viewElementRender = new ViewElementRender($this->logger);
         $viewElements = $this->elementGenerator->getViewElements();
@@ -218,7 +212,7 @@ final class RenderEngine
      * @throws ElementException
      * @throws RenderException
      */
-    public function renderBlocks() : void
+    public function renderBlocks(): void
     {
         $blockElements = $this->elementGenerator->getBlocks();
 
@@ -235,9 +229,8 @@ final class RenderEngine
      * @param ContentPart $contentPart
      * @return bool
      */
-    private function isRenderableContentPart(ContentPart $contentPart) : bool
+    private function isRenderableContentPart(ContentPart $contentPart): bool
     {
         return (bool) preg_match('/^word\/(document|header\d*|footer\d*)\.xml$/', $contentPart->getPath());
     }
-
 }

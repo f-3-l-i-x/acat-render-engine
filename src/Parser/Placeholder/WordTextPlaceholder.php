@@ -17,19 +17,13 @@ class WordTextPlaceholder extends ACatPlaceholder
     protected string $namespace = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 
     /**
-     * @var string|null
-     */
-    private ?string $text;
-
-    /**
      * Creates a placeholder wrapping a plain "w:t" text run.
      *
      * @param string|null $text
      */
-    public function __construct(?string $text)
+    public function __construct(private ?string $text)
     {
         parent::__construct();
-        $this->text = $text;
     }
 
     /**

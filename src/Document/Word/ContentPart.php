@@ -12,17 +12,6 @@ use ACAT\Exception\DocumentException;
  */
 class ContentPart
 {
-
-    /**
-     * @var string
-     */
-    protected string $path;
-
-    /**
-     * @var string
-     */
-    protected string $content;
-
     /**
      * @var array|string[]
      */
@@ -38,17 +27,15 @@ class ContentPart
      */
     protected ?DOMDocument $domDocument = null;
 
-    public function __construct(string $content, string $path = "")
+    public function __construct(protected string $content, protected string $path = "")
     {
-        $this->path = $path;
-        $this->content = $content;
     }
 
     /**
      * @return DOMXPath
      * @throws DocumentException
      */
-    public function getXPath() : DOMXPath
+    public function getXPath(): DOMXPath
     {
         if (!$this->domXpath) {
             $this->domXpath = new DOMXPath($this->getDomDocument());
@@ -63,7 +50,7 @@ class ContentPart
      * @return DOMDocument
      * @throws DocumentException
      */
-    public function getDomDocument() : DOMDocument
+    public function getDomDocument(): DOMDocument
     {
         if (!$this->domDocument) {
             $domDocument = new DOMDocument('1.0', 'utf-8');
@@ -85,7 +72,7 @@ class ContentPart
     /**
      * @return string
      */
-    public function getPath() : string
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -93,7 +80,7 @@ class ContentPart
     /**
      * @return array
      */
-    public function getNamespaces() : array
+    public function getNamespaces(): array
     {
         return ParserConstants::$wordNamespaces;
     }
@@ -101,7 +88,7 @@ class ContentPart
     /**
      * @return array
      */
-    public function getHierarchy() : array
+    public function getHierarchy(): array
     {
         return $this->hierarchy;
     }
@@ -109,9 +96,8 @@ class ContentPart
     /**
      * @return string
      */
-    public function getContent() : string
+    public function getContent(): string
     {
         return $this->getDomDocument()->saveXML();
     }
-
 }

@@ -11,18 +11,11 @@ use Psr\Log\LoggerInterface;
  */
 abstract class Render
 {
-
-    /**
-     * @var LoggerInterface|null
-     */
-    private ?LoggerInterface $logger;
-
     /**
      * @param LoggerInterface|null $logger
      */
-    public function __construct(?LoggerInterface $logger = null)
+    public function __construct(private readonly ?LoggerInterface $logger = null)
     {
-        $this->logger = $logger;
     }
 
     /**
@@ -30,7 +23,7 @@ abstract class Render
      * @param DOMElement $wordTextNode
      * @return void
      */
-    public function appendRenderedNode(DOMElement $element, DOMElement $wordTextNode) : void
+    public function appendRenderedNode(DOMElement $element, DOMElement $wordTextNode): void
     {
         if (!DOMUtils::isRemoved($element)) {
             $element->parentNode->insertBefore($wordTextNode, $element);
@@ -40,7 +33,7 @@ abstract class Render
     /**
      * @param DOMElement $element
      */
-    public function deleteNode(DOMElement $element) : void
+    public function deleteNode(DOMElement $element): void
     {
         if (!DOMUtils::isRemoved($element)) {
             $element->parentNode->removeChild($element);
@@ -52,16 +45,15 @@ abstract class Render
      * @param array $values
      * @return void
      */
-    abstract public function render(array $elements, array $values = []) : void;
+    abstract public function render(array $elements, array $values = []): void;
 
     /**
      * @param string $level
      * @param string $message
      * @return void
      */
-    protected function log(string $level, string $message) : void
+    protected function log(string $level, string $message): void
     {
         $this->logger?->log($level, $message);
     }
-
 }

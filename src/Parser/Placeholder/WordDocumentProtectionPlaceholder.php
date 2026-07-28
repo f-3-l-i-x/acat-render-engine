@@ -13,19 +13,13 @@ use ACAT\Document\Word\DocumentProtection;
 class WordDocumentProtectionPlaceholder extends ACatPlaceholder
 {
     /**
-     * @var DocumentProtection
-     */
-    private DocumentProtection $documentProtection;
-
-    /**
      * Creates a placeholder for the given document protection settings.
      *
      * @param DocumentProtection $documentProtection
      */
-    public function __construct(DocumentProtection $documentProtection)
+    public function __construct(private DocumentProtection $documentProtection)
     {
         parent::__construct();
-        $this->documentProtection = $documentProtection;
     }
 
     /**

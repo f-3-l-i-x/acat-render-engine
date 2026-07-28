@@ -42,12 +42,12 @@ class ConditionPlaceholder extends ACatPlaceholder
      * Creates a condition placeholder for the given field, action and
      * expression.
      *
-     * @param $fieldId
-     * @param $action
-     * @param $expression
+     * @param string $fieldId
+     * @param string $action
+     * @param string $expression
      * @throws PlaceholderException
      */
-    public function __construct($fieldId, $action, $expression)
+    public function __construct(string $fieldId, string $action, string $expression)
     {
         if (empty($fieldId) || empty($expression)) {
             throw new PlaceholderException("invalid condition node $fieldId $action $expression");

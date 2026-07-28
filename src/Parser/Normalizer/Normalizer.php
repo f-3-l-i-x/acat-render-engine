@@ -31,18 +31,12 @@ class Normalizer
     private ContentPart $contentPart;
 
     /**
-     * @var LoggerInterface|null
-     */
-    private ?LoggerInterface $logger;
-
-    /**
      * Creates a normalizer, optionally logging its processing steps.
      *
      * @param   LoggerInterface|null  $logger
      */
-    public function __construct(?LoggerInterface $logger = null)
+    public function __construct(private readonly ?LoggerInterface $logger = null)
     {
-        $this->logger = $logger;
     }
 
     /**

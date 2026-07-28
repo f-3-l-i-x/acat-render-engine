@@ -1,6 +1,5 @@
 <?php
 
-
 namespace ACAT\Document\Word;
 
 use DOMException;
@@ -12,14 +11,13 @@ use ACAT\Parser\Placeholder\WordDocumentProtectionPlaceholder;
  */
 class SettingsContentPart extends ContentPart
 {
-
     /**
      * @param DocumentProtection $documentProtection
      * @return void
      * @throws DocumentException
      * @throws DOMException
      */
-    public function protect(DocumentProtection $documentProtection) : void
+    public function protect(DocumentProtection $documentProtection): void
     {
         $wordDocumentProtectionPlaceHolder = new WordDocumentProtectionPlaceholder($documentProtection);
         $nodes = $this->getXPath()->query('//w:settings');

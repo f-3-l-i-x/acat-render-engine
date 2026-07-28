@@ -14,7 +14,6 @@ use ACAT\Parser\Placeholder\WordTextPlaceholder;
  */
 class FieldRender extends Render
 {
-
     /**
      * @param array $elements
      * @param array $values
@@ -23,7 +22,7 @@ class FieldRender extends Render
      * @throws ElementException
      * @throws RenderException
      */
-    public function render(array $elements, array $values = []) : void
+    public function render(array $elements, array $values = []): void
     {
         foreach ($elements as $fieldElement) {
             $this->renderFieldElement($fieldElement, $values);
@@ -37,7 +36,7 @@ class FieldRender extends Render
      * @throws RenderException
      * @throws ElementException|DOMException
      */
-    public function renderFieldElement(FieldElement $fieldElement, array $values) : void
+    public function renderFieldElement(FieldElement $fieldElement, array $values): void
     {
         $fieldId = $fieldElement->getFieldId();
 
@@ -55,5 +54,4 @@ class FieldRender extends Render
 
         $fieldElement->delete();
     }
-
 }

@@ -9,22 +9,19 @@ use ACAT\Parser\Element\BlockElement;
  */
 class TextBlockRender extends BlockRender
 {
-
     /**
      * @param BlockElement $blockElement
      * @param array $values
      */
-    public function __construct(BlockElement $blockElement, array $values)
+    public function __construct(protected BlockElement $blockElement, protected array $values)
     {
         parent::__construct();
-        $this->values = $values;
-        $this->blockElement = $blockElement;
     }
 
     /**
      *
      */
-    public function cleanUpBlock() : void
+    public function cleanUpBlock(): void
     {
         parent::cleanUpBlock();
 
@@ -34,5 +31,4 @@ class TextBlockRender extends BlockRender
         $parentStartNode?->removeChild($this->blockElement->getStart());
         $parentEndNode?->removeChild($this->blockElement->getEnd());
     }
-
 }

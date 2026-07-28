@@ -10,12 +10,11 @@ use ACAT\Exception\RenderException;
  */
 class DeleteRestAction extends ConditionAction
 {
-
     /**
      * @return void
      * @throws RenderException
      */
-    public function execute() : void
+    public function execute(): void
     {
         $parentRunNode = DOMUtils::getParentNode($this->conditionElement->getElement(), 'w:r');
 

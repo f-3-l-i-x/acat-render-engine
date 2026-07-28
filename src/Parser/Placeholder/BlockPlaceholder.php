@@ -13,23 +13,17 @@ use ACAT\Exception\PlaceholderException;
 abstract class BlockPlaceholder extends ACatPlaceholder
 {
     /**
-     * @var int
-     */
-    private int $type = 0;
-
-    /**
      * Creates a block placeholder of the given type (0 = start, 1 = end).
      *
      * @param int $type
      * @throws PlaceholderException
      */
-    public function __construct(int $type)
+    public function __construct(private int $type)
     {
-        if ($type < 0 || $type > 1) {
+        if ($this->type < 0 || $this->type > 1) {
             throw new PlaceholderException('unsupported block type');
         }
 
-        $this->type = $type;
         parent::__construct();
     }
 
@@ -53,12 +47,11 @@ abstract class BlockPlaceholder extends ACatPlaceholder
      */
     public function getType(): string
     {
-        if ($this->isStart()) {
-            return "start";
-        } elseif ($this->isEnd()) {
-            return "end";
-        }
-        throw new PlaceholderException("unsupported block type");
+        return match (true) {
+            $this->isStart() => "start",
+            $this->isEnd() => "end",
+            default => throw new PlaceholderException("unsupported block type"),
+        };
     }
 
     /**

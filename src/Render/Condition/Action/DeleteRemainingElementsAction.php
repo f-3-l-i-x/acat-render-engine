@@ -9,12 +9,11 @@ use ACAT\Exception\RenderException;
  */
 class DeleteRemainingElementsAction extends ConditionAction
 {
-
     /**
      * @return void
      * @throws RenderException
      */
-    public function execute() : void
+    public function execute(): void
     {
         $nodes = $this->conditionElement->getXpath()
                                         ->query(

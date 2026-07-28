@@ -11,21 +11,22 @@ use ACAT\Exception\RenderException;
  */
 class DeleteParagraphAction extends ConditionAction
 {
-
     /**
      * @return void
      * @throws RenderException
      */
-    public function execute() : void
+    public function execute(): void
     {
         $paragraph = DOMUtils::getParentNode($this->conditionElement->getElement(), 'w:p');
 
         if ($paragraph && !DOMUtils::isRemoved($paragraph)) {
-            if ((int)$this->conditionElement->getXPath()
+            if (
+                (int)$this->conditionElement->getXPath()
                                             ->evaluate(
                                                 'count(.//w:p)',
                                                 $paragraph->parentNode
-                                            ) == 1 && $paragraph->parentNode->nodeName == 'w:tc') {
+                                            ) == 1 && $paragraph->parentNode->nodeName == 'w:tc'
+            ) {
                 $this->deleteParagraphInaCell($paragraph);
             } else {
                 $deletedNode = $paragraph->parentNode->removeChild($paragraph);
@@ -40,7 +41,7 @@ class DeleteParagraphAction extends ConditionAction
      * @param DOMNode $paragraphNode
      * @see http://officeopenxml.com/WPtableCell.php
      */
-    public function deleteParagraphInaCell(DOMNode $paragraphNode) : void
+    public function deleteParagraphInaCell(DOMNode $paragraphNode): void
     {
         if ($paragraphNode->nodeName == 'w:p') {
             while ($paragraphNode->hasChildNodes()) {
@@ -48,5 +49,4 @@ class DeleteParagraphAction extends ConditionAction
             }
         }
     }
-
 }

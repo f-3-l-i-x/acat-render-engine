@@ -14,12 +14,6 @@ use ACAT\Exception\ElementException;
  */
 abstract class Element
 {
-
-    /**
-     * @var bool
-     */
-    protected bool $blockElement;
-
     /**
      * @var DOMDocument
      */
@@ -31,20 +25,12 @@ abstract class Element
     protected ?DOMXPath $domXPath = null;
 
     /**
-     * @var DOMElement
-     */
-    protected DOMElement $element;
-
-    /**
      * @param DOMElement $element
      * @param bool $blockElement
      * @throws ElementException
      */
-    public function __construct(DOMElement $element, bool $blockElement = false)
+    public function __construct(protected DOMElement $element, protected bool $blockElement = false)
     {
-        $this->element = $element;
-        $this->blockElement = $blockElement;
-
         if (!$element->ownerDocument) {
             throw new ElementException("node doesn't have a owner document");
         }
@@ -55,7 +41,7 @@ abstract class Element
     /**
      * @return DOMElement
      */
-    public function getElement() : DOMElement
+    public function getElement(): DOMElement
     {
         return $this->element;
     }
@@ -63,7 +49,7 @@ abstract class Element
     /**
      * @return DOMDocument|null
      */
-    public function getDomDocument() : ?DOMDocument
+    public function getDomDocument(): ?DOMDocument
     {
         return $this->domDocument;
     }
@@ -71,7 +57,7 @@ abstract class Element
     /**
      * @return DOMXPath
      */
-    public function getXpath() : DOMXPath
+    public function getXpath(): DOMXPath
     {
         if (!$this->domXPath) {
             $this->domXPath = new DOMXPath($this->domDocument);
@@ -86,7 +72,7 @@ abstract class Element
      * @return string
      * @throws ElementException
      */
-    public function getFieldId() : string
+    public function getFieldId(): string
     {
         $fieldId = $this->getAttributeValue('field');
         if (empty($fieldId)) {
@@ -99,7 +85,7 @@ abstract class Element
      * @param string $attribute
      * @return string|null
      */
-    protected function getAttributeValue(string $attribute) : ?string
+    protected function getAttributeValue(string $attribute): ?string
     {
         if ($this->element->hasAttribute($attribute)) {
             return $this->element->getAttribute($attribute);
@@ -111,7 +97,7 @@ abstract class Element
      * @return string
      * @throws ElementException
      */
-    public function getId() : string
+    public function getId(): string
     {
         $id = $this->getAttributeValue('id');
         if (empty($id)) {
@@ -123,7 +109,7 @@ abstract class Element
     /**
      *
      */
-    public function delete() : void
+    public function delete(): void
     {
         if (!DOMUtils::isRemoved($this->element)) {
             $this->element->parentNode->removeChild($this->element);
@@ -133,9 +119,8 @@ abstract class Element
     /**
      * @return string
      */
-    public function getType() : string
+    public function getType(): string
     {
         return "";
     }
-
 }

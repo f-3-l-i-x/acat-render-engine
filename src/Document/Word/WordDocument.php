@@ -13,12 +13,6 @@ use ACAT\Exception\DocumentException;
  */
 class WordDocument
 {
-
-    /**
-     * @var string
-     */
-    protected string $path;
-
     /**
      *
      */
@@ -38,12 +32,11 @@ class WordDocument
      * @param string $path
      * @throws DocumentException
      */
-    public function __construct(string $path)
+    public function __construct(protected string $path)
     {
         if (!is_readable($path) || filesize($path) == 0) {
             throw new DocumentException($path . ' is not readable');
         }
-        $this->path = $path;
     }
 
     /**
@@ -52,7 +45,7 @@ class WordDocument
      * @throws DocumentException
      * @throws Exception
      */
-    public function protect(?string $password = null) : void
+    public function protect(?string $password = null): void
     {
         $settingsContentPart = $this->getContentParts()['word/settings.xml'] ?? null;
 
@@ -67,7 +60,7 @@ class WordDocument
      * @return array
      * @throws DocumentException
      */
-    public function getContentParts() : array
+    public function getContentParts(): array
     {
         if (!$this->zipArchive) {
             $this->open();
@@ -106,7 +99,7 @@ class WordDocument
      * @return void
      * @throws DocumentException
      */
-    public function open() : void
+    public function open(): void
     {
         if (!$this->zipArchive) {
             $zipArchive = new ZipArchive();
@@ -123,7 +116,7 @@ class WordDocument
      * @return DOMDocument
      * @throws DocumentException
      */
-    private function getDomDocument(string $content) : DOMDocument
+    private function getDomDocument(string $content): DOMDocument
     {
         $domDocument = new DOMDocument('1.0', 'utf-8');
 
@@ -144,7 +137,7 @@ class WordDocument
      * @return string
      * @throws DocumentException
      */
-    private function readFromFile(string $file) : string
+    private function readFromFile(string $file): string
     {
         if (!$this->zipArchive) {
             throw new DocumentException('document ' . $this->path . ' is not open');
@@ -176,7 +169,7 @@ class WordDocument
      * @return void
      * @throws DocumentException
      */
-    public function close(bool $save = false) : void
+    public function close(bool $save = false): void
     {
         if ($save) {
             $this->save();
@@ -194,7 +187,7 @@ class WordDocument
      * @return void
      * @throws DocumentException
      */
-    public function save() : void
+    public function save(): void
     {
         if (!$this->zipArchive) {
             throw new DocumentException('document is not open');

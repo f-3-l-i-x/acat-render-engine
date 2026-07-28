@@ -4,7 +4,6 @@ namespace ACAT\Parser\Element;
 
 use DOMNode;
 use Exception;
-use DOMElement;
 use ACAT\Exception\ElementException;
 
 /**
@@ -12,17 +11,6 @@ use ACAT\Exception\ElementException;
  */
 abstract class BlockElement
 {
-
-    /**
-     * @var DOMElement|DOMNode
-     */
-    protected DOMElement | DOMNode $end;
-
-    /**
-     * @var DOMElement|DOMNode
-     */
-    protected DOMElement | DOMNode $start;
-
     /**
      * @var array
      */
@@ -62,16 +50,14 @@ abstract class BlockElement
      * @param DOMNode $start
      * @param DOMNode $end
      */
-    public function __construct(DOMNode $start, DOMNode $end)
+    public function __construct(protected DOMNode $start, protected DOMNode $end)
     {
-        $this->end = $end;
-        $this->start = $start;
     }
 
     /**
      * @return DOMNode
      */
-    public function getEnd() : DOMNode
+    public function getEnd(): DOMNode
     {
         return $this->end;
     }
@@ -79,7 +65,7 @@ abstract class BlockElement
     /**
      * @param DOMNode $end
      */
-    public function setEnd(DOMNode $end) : void
+    public function setEnd(DOMNode $end): void
     {
         $this->end = $end;
     }
@@ -87,7 +73,7 @@ abstract class BlockElement
     /**
      * @return DOMNode
      */
-    public function getStart() : DOMNode
+    public function getStart(): DOMNode
     {
         return $this->start;
     }
@@ -95,7 +81,7 @@ abstract class BlockElement
     /**
      * @param DOMNode $start
      */
-    public function setStart(DOMNode $start) : void
+    public function setStart(DOMNode $start): void
     {
         $this->start = $start;
     }
@@ -103,7 +89,7 @@ abstract class BlockElement
     /**
      * @return array
      */
-    public function getChildren() : array
+    public function getChildren(): array
     {
         return $this->children;
     }
@@ -112,7 +98,7 @@ abstract class BlockElement
      * @param array $children
      * @throws Exception
      */
-    public function setChildren(array $children) : void
+    public function setChildren(array $children): void
     {
         $this->children = $children;
     }
@@ -121,7 +107,7 @@ abstract class BlockElement
      * @return array
      * @throws ElementException
      */
-    public function getFieldIds() : array
+    public function getFieldIds(): array
     {
         if (empty($this->fieldIds)) {
             foreach ($this->getFieldElements() as $fieldElement) {
@@ -144,7 +130,7 @@ abstract class BlockElement
     /**
      * @return array
      */
-    public function getFieldElements() : array
+    public function getFieldElements(): array
     {
         return $this->fieldElements;
     }
@@ -152,7 +138,7 @@ abstract class BlockElement
     /**
      * @param array $fieldElements
      */
-    public function setFieldElements(array $fieldElements) : void
+    public function setFieldElements(array $fieldElements): void
     {
         $this->fieldElements = $fieldElements;
     }
@@ -160,7 +146,7 @@ abstract class BlockElement
     /**
      * @return array
      */
-    public function getConditionElements() : array
+    public function getConditionElements(): array
     {
         return $this->conditionElements;
     }
@@ -168,7 +154,7 @@ abstract class BlockElement
     /**
      * @param array $conditionElements
      */
-    public function setConditionElements(array $conditionElements) : void
+    public function setConditionElements(array $conditionElements): void
     {
         $this->conditionElements = $conditionElements;
     }
@@ -176,7 +162,7 @@ abstract class BlockElement
     /**
      * @return array
      */
-    public function getViewElements() : array
+    public function getViewElements(): array
     {
         return $this->viewElements;
     }
@@ -184,7 +170,7 @@ abstract class BlockElement
     /**
      * @param array $viewElements
      */
-    public function setViewElements(array $viewElements) : void
+    public function setViewElements(array $viewElements): void
     {
         $this->viewElements = $viewElements;
     }
@@ -193,7 +179,7 @@ abstract class BlockElement
      * @return array
      * @throws ElementException
      */
-    public function getElementIds() : array
+    public function getElementIds(): array
     {
         if (empty($this->ids)) {
             foreach ($this->getFieldElements() as $fieldElement) {
@@ -213,7 +199,7 @@ abstract class BlockElement
     /**
      * @return array
      */
-    public function getTextElements() : array
+    public function getTextElements(): array
     {
         return $this->textElements;
     }
@@ -221,7 +207,7 @@ abstract class BlockElement
     /**
      * @param array $textElements
      */
-    public function setTextElements(array $textElements) : void
+    public function setTextElements(array $textElements): void
     {
         $this->textElements = $textElements;
     }
@@ -229,7 +215,7 @@ abstract class BlockElement
     /**
      * @return string
      */
-    public function getStartId() : string
+    public function getStartId(): string
     {
         return $this->start->getAttribute('id');
     }
@@ -237,7 +223,7 @@ abstract class BlockElement
     /**
      * @return string
      */
-    public function getEndId() : string
+    public function getEndId(): string
     {
         return $this->end->getAttribute('id');
     }
@@ -245,6 +231,5 @@ abstract class BlockElement
     /**
      * @return DOMNode
      */
-    abstract public function getContextNode() : DOMNode;
-
+    abstract public function getContextNode(): DOMNode;
 }

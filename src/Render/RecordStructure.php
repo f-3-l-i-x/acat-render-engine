@@ -20,17 +20,6 @@ use ACAT\Parser\Element\ElementGenerator;
  */
 final class RecordStructure
 {
-
-    /**
-     * @var LoggerInterface|null
-     */
-    private ?LoggerInterface $logger;
-
-    /**
-     * @var WordDocument
-     */
-    private WordDocument $document;
-
     /**
      * @var Normalizer
      */
@@ -46,10 +35,10 @@ final class RecordStructure
      * @param LoggerInterface|null $logger
      */
     #[Pure]
-    public function __construct(WordDocument $document, ?LoggerInterface $logger = null)
-    {
-        $this->logger = $logger;
-        $this->document = $document;
+    public function __construct(
+        private readonly WordDocument $document,
+        private readonly ?LoggerInterface $logger = null
+    ) {
         $this->normalizer = new Normalizer($this->logger);
     }
 
@@ -59,7 +48,7 @@ final class RecordStructure
      * @throws TagGeneratorException
      * @throws DocumentException
      */
-    public function getRecordStructure() : array
+    public function getRecordStructure(): array
     {
         $recordStructure = [];
         foreach ($this->document->getContentParts() as $contentPart) {
@@ -73,7 +62,7 @@ final class RecordStructure
      * @return array
      * @throws ElementException
      */
-    public function getContentPartRecordStructure(ContentPart $contentPart) : array
+    public function getContentPartRecordStructure(ContentPart $contentPart): array
     {
         $recordStructure = [];
 
@@ -89,10 +78,12 @@ final class RecordStructure
         $recordStructure['conditions'] = $this->getConditionStructure();
 
         foreach ($recordStructure['conditions'] as $condition) {
-            if (str_starts_with($condition['field'], 'V') && !in_array(
+            if (
+                str_starts_with($condition['field'], 'V') && !in_array(
                     $condition['field'],
                     $recordStructure['views']
-                )) {
+                )
+            ) {
                 $recordStructure['views'][] = $condition['field'];
             }
         }
@@ -113,7 +104,7 @@ final class RecordStructure
      * @throws ElementException
      * @throws TagGeneratorException
      */
-    public function validate() : array
+    public function validate(): array
     {
         $problems = [];
 
@@ -142,7 +133,7 @@ final class RecordStructure
      * @return array
      * @throws ElementException
      */
-    private function getViewStructure() : array
+    private function getViewStructure(): array
     {
         return $this->parseStructure($this->elementGenerator->getViewElements());
     }
@@ -151,7 +142,7 @@ final class RecordStructure
      * @param array $elements
      * @return array
      */
-    private function parseStructure(array $elements) : array
+    private function parseStructure(array $elements): array
     {
         $structure = [];
         foreach ($elements as $fieldElement) {
@@ -164,7 +155,7 @@ final class RecordStructure
      * @return array
      * @throws ElementException
      */
-    private function getFieldStructure() : array
+    private function getFieldStructure(): array
     {
         return $this->parseStructure($this->elementGenerator->getFieldElements());
     }
@@ -173,7 +164,7 @@ final class RecordStructure
      * @return array
      * @throws ElementException
      */
-    private function getBlockStructure() : array
+    private function getBlockStructure(): array
     {
         return array_map(function ($block) {
             return [
@@ -189,7 +180,7 @@ final class RecordStructure
      * @return array
      */
     #[ArrayShape(['field' => "", 'operator' => "", 'action' => ""])]
-    private function parseConditionElements(array $conditionElements) : array
+    private function parseConditionElements(array $conditionElements): array
     {
         $structure = [];
         foreach ($conditionElements as $conditionElement) {
@@ -206,7 +197,7 @@ final class RecordStructure
      * @return array
      * @throws ElementException
      */
-    private function getConditionStructure() : array
+    private function getConditionStructure(): array
     {
         return $this->parseConditionElements($this->elementGenerator->getConditionElements());
     }

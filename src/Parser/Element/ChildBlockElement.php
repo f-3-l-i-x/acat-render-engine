@@ -13,12 +13,11 @@ use ACAT\Exception\ElementException;
  */
 class ChildBlockElement extends Element
 {
-
     /**
      * @return string
      * @throws ElementException
      */
-    public function getFieldId() : string
+    public function getFieldId(): string
     {
         throw new ElementException('not implemented');
     }
@@ -28,7 +27,7 @@ class ChildBlockElement extends Element
      * @return string|null
      * @throws ElementException
      */
-    public function getAttributeValue(string $attribute) : ?string
+    public function getAttributeValue(string $attribute): ?string
     {
         throw new ElementException('not implemented');
     }
@@ -37,7 +36,7 @@ class ChildBlockElement extends Element
      * @return array
      * @throws ElementException
      */
-    public function getViewElements() : array
+    public function getViewElements(): array
     {
         $viewElements = [];
         $viewNodes = $this->getElements(ParserConstants::ACAT_VIEW_NODE);
@@ -53,7 +52,7 @@ class ChildBlockElement extends Element
      * @param string $elementType
      * @return DOMNodeList
      */
-    private function getElements(string $elementType) : DOMNodeList
+    private function getElements(string $elementType): DOMNodeList
     {
         if (DOMUtils::isRemoved($this->element)) {
             return new DOMNodeList();
@@ -73,7 +72,7 @@ class ChildBlockElement extends Element
      * @return array
      * @throws ElementException
      */
-    public function getTextElements() : array
+    public function getTextElements(): array
     {
         $textElements = [];
         $textNodes = $this->getElements(ParserConstants::ACAT_TEXT_NODES);
@@ -89,7 +88,7 @@ class ChildBlockElement extends Element
      * @return array
      * @throws ElementException
      */
-    public function getFieldElements() : array
+    public function getFieldElements(): array
     {
         $fieldElements = [];
         $fieldNodes = $this->getElements(ParserConstants::ACAT_FIELD_NODE);
@@ -105,7 +104,7 @@ class ChildBlockElement extends Element
      * @return array
      * @throws ElementException
      */
-    public function getConditionElements() : array
+    public function getConditionElements(): array
     {
         $conditionElements = [];
         $conditionNodes = $this->getElements(ParserConstants::ACAT_CONDITION_NODE);
@@ -122,7 +121,7 @@ class ChildBlockElement extends Element
      * @return ChildBlockElement
      * @throws ElementException
      */
-    public function getClonedChildBlockElement(?DOMNode $contextNode = null) : ChildBlockElement
+    public function getClonedChildBlockElement(?DOMNode $contextNode = null): ChildBlockElement
     {
         $clonedElement = $this->element->cloneNode(true);
         if (!DOMUtils::isRemoved($this->element) && $contextNode) {
@@ -130,5 +129,4 @@ class ChildBlockElement extends Element
         }
         return new ChildBlockElement($clonedElement);
     }
-
 }

@@ -11,19 +11,12 @@ use ACAT\Parser\Element\ConditionElement;
  */
 abstract class ConditionAction
 {
-
-    /**
-     * @var ConditionElement
-     */
-    protected ConditionElement $conditionElement;
-
     /**
      * ConditionAction constructor.
      * @param ConditionElement $conditionElement
      */
-    public function __construct(ConditionElement $conditionElement)
+    public function __construct(protected ConditionElement $conditionElement)
     {
-        $this->conditionElement = $conditionElement;
     }
 
     /**
@@ -43,7 +36,7 @@ abstract class ConditionAction
      * @throws RenderException
      * @throws ElementException
      */
-    public static function getAction(ConditionElement $conditionElement) : ConditionAction
+    public static function getAction(ConditionElement $conditionElement): ConditionAction
     {
         $actionClass = self::$actions[$conditionElement->getAction()] ?? null;
 
@@ -57,6 +50,5 @@ abstract class ConditionAction
     /**
      *
      */
-    abstract public function execute() : void;
-
+    abstract public function execute(): void;
 }

@@ -12,7 +12,6 @@ use const STR_PAD_LEFT;
  */
 class PasswordEncoder
 {
-
     /**
      *
      */
@@ -135,7 +134,7 @@ class PasswordEncoder
         string $algorithmName = self::ALGORITHM_SHA_1,
         ?string $salt = null,
         int $spinCount = 10000
-    ) : string {
+    ): string {
         $origEncoding = mb_internal_encoding();
         mb_internal_encoding('UTF-8');
 
@@ -184,7 +183,7 @@ class PasswordEncoder
      * @return int
      */
     #[Pure(true)]
-    private static function buildCombinedKey(array $byteChars) : int
+    private static function buildCombinedKey(array $byteChars): int
     {
         $byteCharsLength = count($byteChars);
         $highOrderWord = self::$initialCodeArray[$byteCharsLength - 1];
@@ -204,7 +203,8 @@ class PasswordEncoder
             $lowOrderWord = (((($lowOrderWord >> 14) & 0x0001) | (($lowOrderWord << 1) & 0x7FFF)) ^ $byteChars[$i]);
         }
 
-        $lowOrderWord = (((($lowOrderWord >> 14) & 0x0001) | (($lowOrderWord << 1) & 0x7FFF)) ^ $byteCharsLength ^ 0xCE4B);
+        $lowOrderWord = (((($lowOrderWord >> 14) & 0x0001) | (($lowOrderWord << 1) & 0x7FFF))
+            ^ $byteCharsLength ^ 0xCE4B);
 
         return self::int32(($highOrderWord << 16) + $lowOrderWord);
     }
@@ -213,7 +213,7 @@ class PasswordEncoder
      * @param int $value
      * @return int
      */
-    private static function int32(int $value) : int
+    private static function int32(int $value): int
     {
         $value = ($value & 0xFFFFFFFF);
 
@@ -229,7 +229,7 @@ class PasswordEncoder
      * @return string
      * @throws DocumentException
      */
-    private static function getAlgorithm(string $algorithmName) : string
+    private static function getAlgorithm(string $algorithmName): string
     {
         if (!array_key_exists($algorithmName, self::$algorithmMapping)) {
             throw new DocumentException(
@@ -251,7 +251,7 @@ class PasswordEncoder
      * @return int
      * @throws DocumentException
      */
-    public static function getAlgorithmId(string $algorithmName) : int
+    public static function getAlgorithmId(string $algorithmName): int
     {
         if (!array_key_exists($algorithmName, self::$algorithmMapping)) {
             throw new DocumentException(
@@ -266,7 +266,7 @@ class PasswordEncoder
     /**
      * @return array|string[]
      */
-    public static function getAlgorithmNames() : array
+    public static function getAlgorithmNames(): array
     {
         return array_keys(self::$algorithmMapping);
     }

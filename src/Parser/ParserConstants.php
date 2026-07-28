@@ -7,7 +7,6 @@ namespace ACAT\Parser;
  */
 class ParserConstants
 {
-
     /**
      *
      */
@@ -73,5 +72,4 @@ class ParserConstants
         'a'     => 'http://schemas.openxmlformats.org/drawingml/2006/main',
         'acat'  => 'https://schemas.acat.akademie.uni-bremen.de'
     ];
-
 }

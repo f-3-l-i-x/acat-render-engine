@@ -22,7 +22,6 @@ use ACAT\Exception\ConditionParserException;
  */
 class BlockRender extends Render
 {
-
     /**
      * @var BlockElement
      */
@@ -40,7 +39,7 @@ class BlockRender extends Render
      * @throws RenderException
      * @throws ConditionParserException
      */
-    private function renderBlock() : void
+    private function renderBlock(): void
     {
         $textRender = new TextRender();
         $fieldRender = new FieldRender();
@@ -72,10 +71,12 @@ class BlockRender extends Render
                     /* render view elements */
                     $viewElements = $clonedChildElement->getViewElements();
 
-                    if (array_key_exists('views', $this->values) && array_key_exists(
+                    if (
+                        array_key_exists('views', $this->values) && array_key_exists(
                             $blockNo,
                             $this->values['views']
-                        )) {
+                        )
+                    ) {
                         $viewValues = $this->values['views'][$blockNo];
                     } else {
                         $viewValues = [];
@@ -96,7 +97,7 @@ class BlockRender extends Render
      * @throws ElementException
      * @throws RenderException
      */
-    public function render(array $elements, array $values = []) : void
+    public function render(array $elements, array $values = []): void
     {
         foreach ($elements as $key => $blockElement) {
             $blockValues = $this->getValues($key, $values);
@@ -112,7 +113,7 @@ class BlockRender extends Render
      * @param $values
      * @return array
      */
-    private function getValues($blockKey, $values) : array
+    private function getValues($blockKey, $values): array
     {
         if (array_key_exists('blocks', $values) && array_key_exists($blockKey, $values['blocks'])) {
             $blockValues = $values['blocks'][$blockKey];
@@ -149,7 +150,7 @@ class BlockRender extends Render
      * @return BlockRender
      * @throws RenderException
      */
-    public function getBlockRender(BlockElement $blockElement, array $values) : BlockRender
+    public function getBlockRender(BlockElement $blockElement, array $values): BlockRender
     {
         $blockRenderClass = self::$blockRenders[get_class($blockElement)] ?? null;
 
@@ -163,7 +164,7 @@ class BlockRender extends Render
     /**
      *
      */
-    public function cleanUpBlock() : void
+    public function cleanUpBlock(): void
     {
         foreach ($this->blockElement->getChildren() as $child) {
             foreach ($child->getTextElements() as $textElement) {
@@ -178,5 +179,4 @@ class BlockRender extends Render
             $child->delete();
         }
     }
-
 }

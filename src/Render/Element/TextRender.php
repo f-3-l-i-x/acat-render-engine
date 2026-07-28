@@ -13,14 +13,13 @@ use ACAT\Parser\Placeholder\WordTextPlaceholder;
  */
 class TextRender extends Render
 {
-
     /**
      * @param array $elements
      * @param array $values
      * @return void
      * @throws RenderException
      */
-    public function render(array $elements, array $values = []) : void
+    public function render(array $elements, array $values = []): void
     {
         foreach ($elements as $textElement) {
             try {
@@ -36,7 +35,7 @@ class TextRender extends Render
      * @return void
      * @throws DOMException
      */
-    public function renderTextElement(TextElement $textElement) : void
+    public function renderTextElement(TextElement $textElement): void
     {
         $wordTextNode = new WordTextPlaceholder($textElement->getText());
 
@@ -46,5 +45,4 @@ class TextRender extends Render
         );
         $this->deleteNode($textElement->getElement());
     }
-
 }

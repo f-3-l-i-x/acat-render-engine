@@ -6,7 +6,6 @@ use DOMNode;
 
 class DOMUtils
 {
-
     /**
      * @param DOMNode $node
      * @param string|null $parentNodeName
@@ -17,7 +16,7 @@ class DOMUtils
         DOMNode $node,
         ?string $parentNodeName = null,
         string $rootNode = 'w:document'
-    ) : ?DOMNode {
+    ): ?DOMNode {
         if (!$parentNodeName) {
             return $node->parentNode;
         }
@@ -37,9 +36,8 @@ class DOMUtils
      * @param DOMNode $node
      * @return bool
      */
-    public static function isRemoved(DOMNode $node) : bool
+    public static function isRemoved(DOMNode $node): bool
     {
         return !isset($node->nodeType) || $node->parentNode == null;
     }
-
 }

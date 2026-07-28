@@ -16,7 +16,6 @@ use ACAT\Render\Condition\Action\ConditionParser;
  */
 class ConditionRender extends Render
 {
-
     /**
      * @param array $elements
      * @param array $values
@@ -25,7 +24,7 @@ class ConditionRender extends Render
      * @throws ElementException
      * @throws RenderException
      */
-    public function render(array $elements = [], array $values = []) : void
+    public function render(array $elements = [], array $values = []): void
     {
         foreach ($elements as $conditionElement) {
             $this->renderConditionElement($conditionElement, $values);
@@ -40,14 +39,16 @@ class ConditionRender extends Render
      * @throws ElementException
      * @throws RenderException
      */
-    public function renderConditionElement(ConditionElement $conditionElement, array $values) : void
+    public function renderConditionElement(ConditionElement $conditionElement, array $values): void
     {
         $conditionParser = new ConditionParser();
 
-        if (!DOMUtils::isRemoved($conditionElement->getElement()) && $conditionParser->evaluateCondition(
+        if (
+            !DOMUtils::isRemoved($conditionElement->getElement()) && $conditionParser->evaluateCondition(
                 $conditionElement,
                 $values
-            )) {
+            )
+        ) {
             $conditionAction = ConditionAction::getAction($conditionElement);
             $conditionAction->execute();
         }

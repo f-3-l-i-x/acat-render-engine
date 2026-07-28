@@ -9,12 +9,11 @@ use ACAT\Exception\ElementException;
  */
 class ViewElement extends Element
 {
-
     /**
      * @return string
      * @throws ElementException
      */
-    public function getFieldId() : string
+    public function getFieldId(): string
     {
         $id = $this->getAttributeValue('view');
         if (empty($id)) {
@@ -26,9 +25,8 @@ class ViewElement extends Element
     /**
      * @return string
      */
-    public function getType() : string
+    public function getType(): string
     {
         return "VIEW";
     }
-
 }

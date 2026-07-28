@@ -11,22 +11,19 @@ use ACAT\Parser\Element\BlockElement;
  */
 class ParagraphBlockRender extends BlockRender
 {
-
     /**
      * @param BlockElement $blockElement
      * @param array $values
      */
-    public function __construct(BlockElement $blockElement, array $values)
+    public function __construct(protected BlockElement $blockElement, protected array $values)
     {
         parent::__construct();
-        $this->values = $values;
-        $this->blockElement = $blockElement;
     }
 
     /**
      * @return void
      */
-    public function cleanUpBlock() : void
+    public function cleanUpBlock(): void
     {
         parent::cleanUpBlock();
 
@@ -38,7 +35,7 @@ class ParagraphBlockRender extends BlockRender
      * @param DOMNode $node
      * @return void
      */
-    private function deleteParentParagraph(DOMNode $node) : void
+    private function deleteParentParagraph(DOMNode $node): void
     {
         if (!DOMUtils::isRemoved($node)) {
             $paragraph = DOMUtils::getParentNode($node, 'w:p');
@@ -47,5 +44,4 @@ class ParagraphBlockRender extends BlockRender
             }
         }
     }
-
 }
