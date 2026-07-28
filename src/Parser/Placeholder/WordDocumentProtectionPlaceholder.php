@@ -12,7 +12,6 @@ use ACAT\Document\Word\DocumentProtection;
  */
 class WordDocumentProtectionPlaceholder extends ACatPlaceholder
 {
-
     /**
      * @var DocumentProtection
      */
@@ -33,7 +32,7 @@ class WordDocumentProtectionPlaceholder extends ACatPlaceholder
      * @return DOMNode
      * @throws DOMException
      */
-    public function getDOMNode(DOMDocument $domDocument) : DOMNode
+    public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         $edit = $this->documentProtection->getEditing();
         $hash = $this->documentProtection->getPassword();
@@ -86,7 +85,7 @@ class WordDocumentProtectionPlaceholder extends ACatPlaceholder
     /**
      * @return int
      */
-    public function length() : int
+    public function length(): int
     {
         return strlen($this->getXMLTagAsString());
     }
@@ -94,7 +93,7 @@ class WordDocumentProtectionPlaceholder extends ACatPlaceholder
     /**
      * @return string
      */
-    public function getXMLTagAsString() : string
+    public function getXMLTagAsString(): string
     {
         $edit = $this->documentProtection->getEditing();
         $hash = $this->documentProtection->getPassword();
@@ -116,7 +115,7 @@ class WordDocumentProtectionPlaceholder extends ACatPlaceholder
     /**
      * @return string
      */
-    public function getNodeAsString() : string
+    public function getNodeAsString(): string
     {
         return "";
     }

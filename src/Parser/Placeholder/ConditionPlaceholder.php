@@ -13,7 +13,6 @@ use ACAT\Exception\PlaceholderException;
  */
 class ConditionPlaceholder extends ACatPlaceholder
 {
-
     /**
      * @var string
      */
@@ -62,7 +61,7 @@ class ConditionPlaceholder extends ACatPlaceholder
     /**
      * @return string
      */
-    public function getExpression() : string
+    public function getExpression(): string
     {
         return $this->expression;
     }
@@ -72,7 +71,7 @@ class ConditionPlaceholder extends ACatPlaceholder
      * @return void
      * @throws PlaceholderException
      */
-    public function setExpression(string $expression) : void
+    public function setExpression(string $expression): void
     {
         foreach ($this->availableExpressions as $availableExpression) {
             if (str_contains($expression, $availableExpression)) {
@@ -89,7 +88,7 @@ class ConditionPlaceholder extends ACatPlaceholder
      * @return DOMNode
      * @throws DOMException
      */
-    public function getDOMNode(DOMDocument $domDocument) : DOMNode
+    public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         $elementNode = $domDocument->createElementNS($this->namespace, 'acat:condition');
         $expressionNode = $domDocument->createCDATASection($this->expression);
@@ -114,7 +113,7 @@ class ConditionPlaceholder extends ACatPlaceholder
     /**
      * @return string
      */
-    public function getFieldId() : string
+    public function getFieldId(): string
     {
         return $this->fieldId;
     }
@@ -122,7 +121,7 @@ class ConditionPlaceholder extends ACatPlaceholder
     /**
      * @return string
      */
-    public function getAction() : string
+    public function getAction(): string
     {
         return $this->action;
     }
@@ -132,7 +131,7 @@ class ConditionPlaceholder extends ACatPlaceholder
      * @return void
      * @throws PlaceholderException
      */
-    public function setAction(string $action) : void
+    public function setAction(string $action): void
     {
         if (!in_array($action, $this->availableActions)) {
             throw new PlaceholderException("action $action is not implemented");
@@ -146,10 +145,10 @@ class ConditionPlaceholder extends ACatPlaceholder
      * @return string
      */
     #[Pure]
-    public function getXMLTagAsString(string $prefix = 'acat') : string
+    public function getXMLTagAsString(string $prefix = 'acat'): string
     {
         $tag = "<acat:condition field=" . $this->getFieldId() . " id=" . $this->getId(
-            ) . " action=" . $this->action . ">";
+        ) . " action=" . $this->action . ">";
         $tag .= $this->expression;
         $tag .= "/>";
 
@@ -159,7 +158,7 @@ class ConditionPlaceholder extends ACatPlaceholder
     /**
      * @return int
      */
-    public function length() : int
+    public function length(): int
     {
         return strlen($this->getNodeAsString());
     }
@@ -167,9 +166,8 @@ class ConditionPlaceholder extends ACatPlaceholder
     /**
      * @return string
      */
-    public function getNodeAsString() : string
+    public function getNodeAsString(): string
     {
         return '${C:' . $this->fieldId . ':' . $this->expression . ':' . $this->action . '}';
     }
-
 }

@@ -11,13 +11,12 @@ use DOMException;
  */
 class ViewPlaceholder extends FieldPlaceholder
 {
-
     /**
      * @param DOMDocument $domDocument
      * @return DOMNode
      * @throws DOMException
      */
-    public function getDOMNode(DOMDocument $domDocument) : DOMNode
+    public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         $elementNode = $domDocument->createElementNS($this->namespace, 'acat:view');
 
@@ -36,7 +35,7 @@ class ViewPlaceholder extends FieldPlaceholder
     /**
      * @return string
      */
-    public function getXMLTagAsString() : string
+    public function getXMLTagAsString(): string
     {
         return '<acat:view id="' . $this->getId() . '" field="' . $this->fieldId . '"/>';
     }
@@ -44,7 +43,7 @@ class ViewPlaceholder extends FieldPlaceholder
     /**
      * @return string
      */
-    public function getNodeAsString() : string
+    public function getNodeAsString(): string
     {
         return '${V:' . $this->fieldId . '}';
     }

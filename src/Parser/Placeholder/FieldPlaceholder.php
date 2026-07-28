@@ -11,7 +11,6 @@ use DOMException;
  */
 class FieldPlaceholder extends ACatPlaceholder
 {
-
     /**
      * @var string
      */
@@ -29,7 +28,7 @@ class FieldPlaceholder extends ACatPlaceholder
     /**
      * @return string
      */
-    public function getFieldId() : string
+    public function getFieldId(): string
     {
         return $this->fieldId;
     }
@@ -39,7 +38,7 @@ class FieldPlaceholder extends ACatPlaceholder
      * @return DOMNode
      * @throws DOMException
      */
-    public function getDOMNode(DOMDocument $domDocument) : DOMNode
+    public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         $elementNode = $domDocument->createElementNS($this->namespace, 'acat:field');
 
@@ -58,7 +57,7 @@ class FieldPlaceholder extends ACatPlaceholder
     /**
      * @return string
      */
-    public function getXMLTagAsString() : string
+    public function getXMLTagAsString(): string
     {
         return "<acat:field id" . $this->getId() . " field=" . $this->fieldId . "/>";
     }
@@ -66,7 +65,7 @@ class FieldPlaceholder extends ACatPlaceholder
     /**
      * @return int
      */
-    public function length() : int
+    public function length(): int
     {
         return strlen($this->getNodeAsString());
     }
@@ -74,9 +73,8 @@ class FieldPlaceholder extends ACatPlaceholder
     /**
      * @return string
      */
-    public function getNodeAsString() : string
+    public function getNodeAsString(): string
     {
         return '${F:' . $this->fieldId . '}';
     }
-
 }
