@@ -12,7 +12,6 @@ use ACAT\Exception\PlaceholderException;
  */
 abstract class ACatPlaceholder
 {
-
     /**
      * @var string
      */
@@ -24,7 +23,7 @@ abstract class ACatPlaceholder
     protected string $namespace = 'https://schemas.acat.akademie.uni-bremen.de';
 
     /**
-     * ACatNode constructor.
+     * Creates a placeholder with a freshly generated UUID as its id.
      */
     public function __construct()
     {
@@ -32,11 +31,15 @@ abstract class ACatPlaceholder
     }
 
     /**
+     * Parses a "${...}" marker string and creates the matching placeholder
+     * subtype (field, condition, text, block or view) based on its leading
+     * letter.
+     *
      * @param string $placeHolderStr
      * @return ACatPlaceholder
      * @throws PlaceholderException
      */
-    public static function getPlaceholder(string $placeHolderStr) : ACatPlaceholder
+    public static function getPlaceholder(string $placeHolderStr): ACatPlaceholder
     {
         $placeHolderStr = str_replace(['$', '{', '}'], '', $placeHolderStr);
 
@@ -58,11 +61,13 @@ abstract class ACatPlaceholder
     }
 
     /**
+     * Creates a field placeholder from a "F:<fieldId>" marker string.
+     *
      * @param string $placeholderStr
      * @return FieldPlaceholder
      * @throws PlaceholderException
      */
-    private static function createFieldPlaceholder(string $placeholderStr) : FieldPlaceholder
+    private static function createFieldPlaceholder(string $placeholderStr): FieldPlaceholder
     {
         $params = explode(':', $placeholderStr);
         if (!$params || count($params) <> 2) {
@@ -72,11 +77,14 @@ abstract class ACatPlaceholder
     }
 
     /**
+     * Creates a condition placeholder from a "C:<fieldId>:<expression>:<action>"
+     * marker string.
+     *
      * @param string $placeholderStr
      * @return ConditionPlaceholder
      * @throws PlaceholderException
      */
-    private static function createConditionPlaceholder(string $placeholderStr) : ConditionPlaceholder
+    private static function createConditionPlaceholder(string $placeholderStr): ConditionPlaceholder
     {
         $params = explode(':', $placeholderStr);
         if (count($params) != 4) {
@@ -86,11 +94,13 @@ abstract class ACatPlaceholder
     }
 
     /**
+     * Creates a text placeholder from a "T:<text>" marker string.
+     *
      * @param string $placeholderStr
      * @return TextPlaceholder
      * @throws PlaceholderException
      */
-    private static function createTextPlaceholder(string $placeholderStr) : TextPlaceholder
+    private static function createTextPlaceholder(string $placeholderStr): TextPlaceholder
     {
         $params = explode(':', $placeholderStr);
         if (!$params || count($params) <> 2) {
@@ -100,11 +110,14 @@ abstract class ACatPlaceholder
     }
 
     /**
+     * Creates a start or end block placeholder from a "B:0" or "B:1" marker
+     * string.
+     *
      * @param string $placeholderStr
      * @return BlockPlaceholder
      * @throws PlaceholderException
      */
-    private static function createBlockPlaceholder(string $placeholderStr) : BlockPlaceholder
+    private static function createBlockPlaceholder(string $placeholderStr): BlockPlaceholder
     {
         $params = explode(':', $placeholderStr);
 
@@ -122,11 +135,13 @@ abstract class ACatPlaceholder
     }
 
     /**
+     * Creates a view placeholder from a "V:<fieldId>" marker string.
+     *
      * @param string $placeholderStr
      * @return ViewPlaceholder
      * @throws PlaceholderException
      */
-    private static function createViewPlaceHolder(string $placeholderStr) : ViewPlaceholder
+    private static function createViewPlaceHolder(string $placeholderStr): ViewPlaceholder
     {
         $params = explode(':', $placeholderStr);
         if (!$params || count($params) <> 2) {
@@ -136,32 +151,44 @@ abstract class ACatPlaceholder
     }
 
     /**
+     * Returns the placeholder's generated id.
+     *
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
 
     /**
+     * Returns a human-readable representation of the placeholder, used for
+     * logging.
+     *
      * @return string
      */
-    abstract public function getXMLTagAsString() : string;
+    abstract public function getXMLTagAsString(): string;
 
     /**
+     * Builds the DOM node that represents this placeholder in the document.
+     *
      * @param DOMDocument $domDocument
      * @return DOMNode
      */
-    abstract public function getDOMNode(DOMDocument $domDocument) : DOMNode;
+    abstract public function getDOMNode(DOMDocument $domDocument): DOMNode;
 
     /**
+     * Returns the length, in characters, of the original marker text this
+     * placeholder was parsed from.
+     *
      * @return int
      */
-    abstract public function length() : int;
+    abstract public function length(): int;
 
     /**
+     * Returns the original "${...}" marker text this placeholder was parsed
+     * from.
+     *
      * @return string
      */
-    abstract public function getNodeAsString() : string;
-
+    abstract public function getNodeAsString(): string;
 }

@@ -12,14 +12,14 @@ use ACAT\Document\Word\DocumentProtection;
  */
 class WordDocumentProtectionPlaceholder extends ACatPlaceholder
 {
-
     /**
      * @var DocumentProtection
      */
     private DocumentProtection $documentProtection;
 
     /**
-     * WordDocumentProtectionPlaceholder constructor.
+     * Creates a placeholder for the given document protection settings.
+     *
      * @param DocumentProtection $documentProtection
      */
     public function __construct(DocumentProtection $documentProtection)
@@ -29,11 +29,14 @@ class WordDocumentProtectionPlaceholder extends ACatPlaceholder
     }
 
     /**
+     * Builds the "w:documentProtection" DOM element that enforces Word's
+     * document-protection restrictions.
+     *
      * @param DOMDocument $domDocument
      * @return DOMNode
      * @throws DOMException
      */
-    public function getDOMNode(DOMDocument $domDocument) : DOMNode
+    public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         $edit = $this->documentProtection->getEditing();
         $hash = $this->documentProtection->getPassword();
@@ -84,17 +87,22 @@ class WordDocumentProtectionPlaceholder extends ACatPlaceholder
     }
 
     /**
+     * Returns the length of the placeholder's XML tag representation.
+     *
      * @return int
      */
-    public function length() : int
+    public function length(): int
     {
         return strlen($this->getXMLTagAsString());
     }
 
     /**
+     * Returns the placeholder's "w:documentProtection" tag as a string, used
+     * for logging.
+     *
      * @return string
      */
-    public function getXMLTagAsString() : string
+    public function getXMLTagAsString(): string
     {
         $edit = $this->documentProtection->getEditing();
         $hash = $this->documentProtection->getPassword();
@@ -114,9 +122,12 @@ class WordDocumentProtectionPlaceholder extends ACatPlaceholder
     }
 
     /**
+     * Returns an empty string, since this placeholder has no corresponding
+     * "${...}" marker text.
+     *
      * @return string
      */
-    public function getNodeAsString() : string
+    public function getNodeAsString(): string
     {
         return "";
     }

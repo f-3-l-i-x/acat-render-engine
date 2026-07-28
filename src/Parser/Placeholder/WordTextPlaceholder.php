@@ -11,7 +11,6 @@ use DOMException;
  */
 class WordTextPlaceholder extends ACatPlaceholder
 {
-
     /**
      * @var string
      */
@@ -23,7 +22,8 @@ class WordTextPlaceholder extends ACatPlaceholder
     private ?string $text;
 
     /**
-     * WordTextNode constructor.
+     * Creates a placeholder wrapping a plain "w:t" text run.
+     *
      * @param string|null $text
      */
     public function __construct(?string $text)
@@ -33,27 +33,34 @@ class WordTextPlaceholder extends ACatPlaceholder
     }
 
     /**
+     * Returns the placeholder's text.
+     *
      * @return string|null
      */
-    public function getText() : ?string
+    public function getText(): ?string
     {
         return $this->text;
     }
 
     /**
+     * Returns a human-readable representation of the text run, used for
+     * logging.
+     *
      * @return string
      */
-    public function getXMLTagAsString() : string
+    public function getXMLTagAsString(): string
     {
         return '<w:t xml:space="preserve">' . $this->text . '</w:t>';
     }
 
     /**
+     * Builds a "w:t" DOM element containing the placeholder's text.
+     *
      * @param DOMDocument $domDocument
      * @return DOMNode
      * @throws DOMException
      */
-    public function getDOMNode(DOMDocument $domDocument) : DOMNode
+    public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         if ($this->text == null) {
             $this->text = "";
@@ -72,18 +79,22 @@ class WordTextPlaceholder extends ACatPlaceholder
     }
 
     /**
+     * Returns the length of the placeholder's text.
+     *
      * @return int
      */
-    public function length() : int
+    public function length(): int
     {
         return strlen($this->getNodeAsString());
     }
 
     /**
+     * Returns the placeholder's text, or an empty string if none was set.
+     *
      * @return string
      */
-    public function getNodeAsString() : string
+    public function getNodeAsString(): string
     {
-        return $this->text;
+        return $this->text ?? '';
     }
 }

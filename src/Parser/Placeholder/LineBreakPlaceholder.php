@@ -11,39 +11,47 @@ use DOMException;
  */
 class LineBreakPlaceholder extends ACatPlaceholder
 {
-
     /**
+     * Returns a human-readable representation of the line break, used for
+     * logging.
+     *
      * @return string
      */
-    public function getXMLTagAsString() : string
+    public function getXMLTagAsString(): string
     {
         return "<w:br/>";
     }
 
     /**
+     * Builds a "w:br" DOM element representing a line break.
+     *
      * @param DOMDocument $domDocument
      * @return DOMNode
      * @throws DOMException
      */
-    public function getDOMNode(DOMDocument $domDocument) : DOMNode
+    public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         return $domDocument->createElement('w:br');
     }
 
     /**
+     * Returns 0, since a line break has no marker text of its own.
+     *
      * @return int
      */
-    public function length() : int
+    public function length(): int
     {
         return 0;
     }
 
     /**
+     * Returns an empty string, since a line break has no marker text of its
+     * own.
+     *
      * @return string
      */
-    public function getNodeAsString() : string
+    public function getNodeAsString(): string
     {
         return "";
     }
-
 }

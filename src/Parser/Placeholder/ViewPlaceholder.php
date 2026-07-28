@@ -11,13 +11,15 @@ use DOMException;
  */
 class ViewPlaceholder extends FieldPlaceholder
 {
-
     /**
+     * Builds the "acat:view" DOM element carrying the placeholder's id and
+     * view id.
+     *
      * @param DOMDocument $domDocument
      * @return DOMNode
      * @throws DOMException
      */
-    public function getDOMNode(DOMDocument $domDocument) : DOMNode
+    public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         $elementNode = $domDocument->createElementNS($this->namespace, 'acat:view');
 
@@ -34,17 +36,22 @@ class ViewPlaceholder extends FieldPlaceholder
     }
 
     /**
+     * Returns a human-readable representation of the view marker, used for
+     * logging.
+     *
      * @return string
      */
-    public function getXMLTagAsString() : string
+    public function getXMLTagAsString(): string
     {
         return '<acat:view id="' . $this->getId() . '" field="' . $this->fieldId . '"/>';
     }
 
     /**
+     * Returns the original "${V:...}" marker text.
+     *
      * @return string
      */
-    public function getNodeAsString() : string
+    public function getNodeAsString(): string
     {
         return '${V:' . $this->fieldId . '}';
     }
