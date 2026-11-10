@@ -3,7 +3,6 @@
 namespace ACAT\Render\Element;
 
 use DOMException;
-use Psr\Log\LogLevel;
 use ACAT\Render\Render;
 use ACAT\Parser\ParserConstants;
 use ACAT\Parser\Element\ViewElement;
@@ -23,6 +22,7 @@ class ViewElementRender extends Render
      * @throws DOMException
      * @throws ElementException
      */
+    #[\Override]
     public function render(array $elements, ?array $values = []): void
     {
         if (!$values) {
@@ -45,30 +45,24 @@ class ViewElementRender extends Render
     {
         $viewId = $viewElement->getFieldId();
 
-        if (!$viewId) {
-            $this->log(LogLevel::WARNING, "view element has no id. skipping");
-        }
-
-        if (array_key_exists($viewId, $values)) {
+        if (isset($values[$viewId])) {
+            // empty parts (leading, trailing or consecutive line breaks) are skipped by PREG_SPLIT_NO_EMPTY
             $elements = preg_split(
                 ParserConstants::WORD_LINE_BREAK_NODE_PATTERN,
-                $values[$viewId],
+                (string) $values[$viewId],
                 -1,
-                PREG_SPLIT_DELIM_CAPTURE
+                PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY
             );
 
             foreach ($elements as $element) {
-                if ($element === ParserConstants::WORD_LINE_BREAK_NODE) {
-                    $node = $this->createLineBreakNode();
-                } elseif ($element) {
-                    $node = $this->createWordTextPlaceholder(trim($element));
-                }
-                if (isset($node)) {
-                    $this->appendRenderedNode(
-                        $viewElement->getElement(),
-                        $node->getDOMNode($viewElement->getDomDocument())
-                    );
-                }
+                $node = $element === ParserConstants::WORD_LINE_BREAK_NODE
+                    ? $this->createLineBreakNode()
+                    : $this->createWordTextPlaceholder(trim($element));
+
+                $this->appendRenderedNode(
+                    $viewElement->getElement(),
+                    $node->getDOMNode($viewElement->getDomDocument())
+                );
             }
         }
 

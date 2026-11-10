@@ -19,6 +19,7 @@ class DeleteUntilNextElementAction extends ConditionAction
      * @return void
      * @throws RenderException
      */
+    #[\Override]
     public function execute(): void
     {
         foreach ($this->getNodesToDelete() as $nodeToDelete) {

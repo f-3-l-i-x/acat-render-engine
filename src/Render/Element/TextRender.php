@@ -19,6 +19,7 @@ class TextRender extends Render
      * @return void
      * @throws RenderException
      */
+    #[\Override]
     public function render(array $elements, array $values = []): void
     {
         foreach ($elements as $textElement) {

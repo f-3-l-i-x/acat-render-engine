@@ -47,6 +47,7 @@ class TextPlaceholder extends ACatPlaceholder
      *
      * @return string
      */
+    #[\Override]
     public function getXMLTagAsString(): string
     {
         return '<acat:text space="preserve">' . $this->text . '</acat:text>';
@@ -60,10 +61,11 @@ class TextPlaceholder extends ACatPlaceholder
      * @return DOMNode
      * @throws DOMException
      */
+    #[\Override]
     public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         $elementNode = $domDocument->createElementNS($this->namespace, 'acat:text');
-        $textNode = $domDocument->createTextNode($this->text);
+        $textNode = $domDocument->createTextNode($this->text ?? '');
 
         $idAttribute = $domDocument->createAttribute('id');
         $idAttribute->nodeValue = $this->id;
@@ -83,6 +85,7 @@ class TextPlaceholder extends ACatPlaceholder
      *
      * @return int
      */
+    #[\Override]
     public function length(): int
     {
         return strlen($this->getNodeAsString());
@@ -93,6 +96,7 @@ class TextPlaceholder extends ACatPlaceholder
      *
      * @return string
      */
+    #[\Override]
     public function getNodeAsString(): string
     {
         return '${T:' . $this->text . '}';

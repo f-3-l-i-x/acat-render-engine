@@ -23,6 +23,7 @@ class ParagraphBlockRender extends BlockRender
     /**
      * @return void
      */
+    #[\Override]
     public function cleanUpBlock(): void
     {
         parent::cleanUpBlock();

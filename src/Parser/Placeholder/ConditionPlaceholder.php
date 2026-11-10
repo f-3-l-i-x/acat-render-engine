@@ -80,14 +80,16 @@ class ConditionPlaceholder extends ACatPlaceholder
      */
     public function setExpression(string $expression): void
     {
-        foreach ($this->availableExpressions as $availableExpression) {
-            if (str_contains($expression, $availableExpression)) {
-                $this->expression = $expression;
-                return;
-            }
+        $isAvailable = array_any(
+            $this->availableExpressions,
+            fn(string $availableExpression): bool => str_contains($expression, $availableExpression)
+        );
+
+        if (!$isAvailable) {
+            throw new PlaceholderException('expression ' . $expression . ' is not implemented');
         }
 
-        throw new PlaceholderException('expression ' . $expression . ' is not implemented');
+        $this->expression = $expression;
     }
 
     /**
@@ -98,6 +100,7 @@ class ConditionPlaceholder extends ACatPlaceholder
      * @return DOMNode
      * @throws DOMException
      */
+    #[\Override]
     public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         $elementNode = $domDocument->createElementNS($this->namespace, 'acat:condition');
@@ -165,14 +168,11 @@ class ConditionPlaceholder extends ACatPlaceholder
      * @return string
      */
     #[Pure]
+    #[\Override]
     public function getXMLTagAsString(string $prefix = 'acat'): string
     {
-        $tag = "<{$prefix}:condition field=" . $this->getFieldId() . " id=" . $this->getId(
-        ) . " action=" . $this->action . ">";
-        $tag .= $this->expression;
-        $tag .= "/>";
-
-        return $tag;
+        return '<' . $prefix . ':condition field="' . $this->getFieldId() . '" id="' . $this->getId()
+            . '" action="' . $this->action . '">' . $this->expression . '</' . $prefix . ':condition>';
     }
 
     /**
@@ -180,6 +180,7 @@ class ConditionPlaceholder extends ACatPlaceholder
      *
      * @return int
      */
+    #[\Override]
     public function length(): int
     {
         return strlen($this->getNodeAsString());
@@ -190,6 +191,7 @@ class ConditionPlaceholder extends ACatPlaceholder
      *
      * @return string
      */
+    #[\Override]
     public function getNodeAsString(): string
     {
         return '${C:' . $this->fieldId . ':' . $this->expression . ':' . $this->action . '}';

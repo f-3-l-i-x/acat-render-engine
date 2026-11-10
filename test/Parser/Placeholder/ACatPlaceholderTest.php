@@ -161,7 +161,7 @@ class ACatPlaceholderTest extends TestCase
         $this->expectException(PlaceholderException::class);
 
         $blockNodeString = "\${B:1234}";
-        ACatPlaceholder::getPlaceholder($blockNodeString);
+        (void) ACatPlaceholder::getPlaceholder($blockNodeString);
     }
 
     #[Test]
@@ -170,14 +170,14 @@ class ACatPlaceholderTest extends TestCase
         $this->expectException(PlaceholderException::class);
 
         $fieldNodeString = "\${X:1234}";
-        ACatPlaceholder::getPlaceholder($fieldNodeString);
+        (void) ACatPlaceholder::getPlaceholder($fieldNodeString);
     }
 
     #[Test]
     public function aPlaceholderWithUnsupportedTypeCanNoBeCreated() : void
     {
         $this->expectException(PlaceholderException::class);
-        ACatPlaceholder::getPlaceholder('FOO');
+        (void) ACatPlaceholder::getPlaceholder('FOO');
     }
 
 }

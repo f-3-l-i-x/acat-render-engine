@@ -21,6 +21,7 @@ class TextBlockRender extends BlockRender
     /**
      *
      */
+    #[\Override]
     public function cleanUpBlock(): void
     {
         parent::cleanUpBlock();

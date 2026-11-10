@@ -22,6 +22,7 @@ class TableRowBlockRender extends BlockRender
     /**
      *
      */
+    #[\Override]
     public function cleanUpBlock(): void
     {
         parent::cleanUpBlock();
@@ -29,16 +30,14 @@ class TableRowBlockRender extends BlockRender
         $parentEndRow = DOMUtils::getParentNode($this->blockElement->getEnd(), 'w:tr');
         $parentStartRow = DOMUtils::getParentNode($this->blockElement->getStart(), 'w:tr');
 
-        if ($parentEndRow) {
-            $parentEndRow->parentNode->removeChild($parentEndRow);
-        } else {
-            $this->blockElement->getEnd()->parentNode->removeChild($this->blockElement->getEnd());
-        }
+        // the table row with the marker is removed, a marker outside a table row is removed itself
+        $nodes = [
+            $parentEndRow ?? $this->blockElement->getEnd(),
+            $parentStartRow ?? $this->blockElement->getStart(),
+        ];
 
-        if ($parentStartRow) {
-            $parentStartRow->parentNode->removeChild($parentStartRow);
-        } else {
-            $this->blockElement->getEnd()->parentNode->removeChild($this->blockElement->getStart());
+        foreach ($nodes as $node) {
+            $node->parentNode?->removeChild($node);
         }
     }
 }

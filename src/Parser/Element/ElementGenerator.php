@@ -230,7 +230,6 @@ class ElementGenerator
     {
         $this->log(LogLevel::INFO, 'looking for text elements in ' . $this->contentPart->getPath());
 
-        $found = false;
         $textElements = [];
 
         $nodes = $this->getContentPart()->getXPath()->query('//' . ParserConstants::ACAT_TEXT_NODES);
@@ -241,23 +240,20 @@ class ElementGenerator
         );
 
         foreach ($nodes as $node) {
-            foreach ($this->getBlocks() as $block) {
-                foreach ($block->getTextElements() as $textElement) {
-                    if ($node->isSameNode($textElement->getElement())) {
-                        $this->log(LogLevel::DEBUG, 'found text element ' . $node->nodeValue . ' in block -> skipping');
-                        $found = true;
-                        break;
-                    }
-                }
-                if ($found) {
-                    break;
-                }
+            $isBlockElement = array_any(
+                $this->getBlocks(),
+                fn(BlockElement $block): bool => array_any(
+                    $block->getTextElements(),
+                    fn(TextElement $textElement): bool => $node->isSameNode($textElement->getElement())
+                )
+            );
+
+            if ($isBlockElement) {
+                $this->log(LogLevel::DEBUG, 'found text element ' . $node->nodeValue . ' in block -> skipping');
+                continue;
             }
-            if (!$found) {
-                $textElements[] = new TextElement($node);
-            } else {
-                $found = false;
-            }
+
+            $textElements[] = new TextElement($node);
         }
 
         $this->log(LogLevel::INFO, 'processing ' . count($textElements) . ' text elements');
@@ -301,7 +297,6 @@ class ElementGenerator
     {
         $this->log(LogLevel::INFO, 'looking for content elements in ' . $this->contentPart->getPath());
 
-        $found = false;
         $fieldElements = [];
 
         $nodes = $this->getContentPart()->getXPath()->query('//' . $nodeType);
@@ -309,25 +304,16 @@ class ElementGenerator
         $this->log(LogLevel::INFO, 'found ' . $nodes->length . ' content elements');
 
         foreach ($nodes as $node) {
-            if ($nodeType === ParserConstants::ACAT_VIEW_NODE) {
-                $fieldElement = new ViewElement($node);
-            } else {
-                $fieldElement = new FieldElement($node);
+            $fieldElement = $nodeType === ParserConstants::ACAT_VIEW_NODE
+                ? new ViewElement($node)
+                : new FieldElement($node);
+
+            if ($this->isBlockElement($fieldElement)) {
+                $this->log(LogLevel::DEBUG, $fieldElement->getType() . ' is already in block -> skipping');
+                continue;
             }
 
-            foreach ($this->getBlocks() as $block) {
-                if (in_array($fieldElement->getId(), $block->getElementIds())) {
-                    $this->log(LogLevel::DEBUG, $fieldElement->getType() . ' is already in block -> skipping');
-
-                    $found = true;
-                    break;
-                }
-            }
-            if (!$found) {
-                $fieldElements[] = $fieldElement;
-            } else {
-                $found = false;
-            }
+            $fieldElements[] = $fieldElement;
         }
 
         $this->log(LogLevel::INFO, 'processing ' . count($fieldElements) . ' content elements');
@@ -336,12 +322,24 @@ class ElementGenerator
     }
 
     /**
+     * @param Element $element
+     * @return bool
+     * @throws ElementException
+     */
+    private function isBlockElement(Element $element): bool
+    {
+        return array_any(
+            $this->getBlocks(),
+            fn(BlockElement $block): bool => in_array($element->getId(), $block->getElementIds())
+        );
+    }
+
+    /**
      * @return array
      * @throws ElementException
      */
     public function getConditionElements(): array
     {
-        $found = false;
         $conditionElements = [];
 
         $this->log(LogLevel::INFO, 'looking for condition elements in ' . $this->contentPart->getPath());
@@ -350,16 +348,9 @@ class ElementGenerator
 
         foreach ($nodes as $node) {
             $conditionElement = new ConditionElement($node);
-            foreach ($this->getBlocks() as $block) {
-                if (in_array($conditionElement->getId(), $block->getElementIds())) {
-                    $found = true;
-                    break;
-                }
-            }
-            if (!$found) {
+
+            if (!$this->isBlockElement($conditionElement)) {
                 $conditionElements[] = $conditionElement;
-            } else {
-                $found = false;
             }
         }
 

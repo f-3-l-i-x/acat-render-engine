@@ -34,6 +34,7 @@ abstract class BlockPlaceholder extends ACatPlaceholder
      * @return string
      * @throws PlaceholderException
      */
+    #[\Override]
     public function getXMLTagAsString(): string
     {
         return '<acat:block type="' . $this->getType() . '" />';
@@ -83,6 +84,7 @@ abstract class BlockPlaceholder extends ACatPlaceholder
      * @throws PlaceholderException
      * @throws DOMException
      */
+    #[\Override]
     public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         $elementNode = $domDocument->createElementNS($this->namespace, 'acat:block');
@@ -104,6 +106,7 @@ abstract class BlockPlaceholder extends ACatPlaceholder
      *
      * @return int
      */
+    #[\Override]
     public function length(): int
     {
         return strlen($this->getNodeAsString());
@@ -114,6 +117,7 @@ abstract class BlockPlaceholder extends ACatPlaceholder
      *
      * @return string
      */
+    #[\Override]
     public function getNodeAsString(): string
     {
         return '${B:' . $this->type . '}';

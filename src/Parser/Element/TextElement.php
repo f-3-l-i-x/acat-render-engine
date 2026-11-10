@@ -23,6 +23,7 @@ class TextElement extends Element
      * @return string
      * @throws ElementException
      */
+    #[\Override]
     public function getFieldId(): string
     {
         throw new ElementException('text element never contains a field id');

@@ -15,6 +15,7 @@ class DeleteParagraphAction extends ConditionAction
      * @return void
      * @throws RenderException
      */
+    #[\Override]
     public function execute(): void
     {
         $paragraph = DOMUtils::getParentNode($this->conditionElement->getElement(), 'w:p');

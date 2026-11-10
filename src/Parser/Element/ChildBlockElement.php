@@ -17,6 +17,7 @@ class ChildBlockElement extends Element
      * @return string
      * @throws ElementException
      */
+    #[\Override]
     public function getFieldId(): string
     {
         throw new ElementException('not implemented');
@@ -27,6 +28,7 @@ class ChildBlockElement extends Element
      * @return string|null
      * @throws ElementException
      */
+    #[\Override]
     public function getAttributeValue(string $attribute): ?string
     {
         throw new ElementException('not implemented');

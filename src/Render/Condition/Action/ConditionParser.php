@@ -29,6 +29,7 @@ class ConditionParser
      * @throws ConditionParserException
      * @throws ElementException
      */
+    #[\NoDiscard]
     public function evaluateCondition(ConditionElement $conditionElement, array $values): bool
     {
         $fieldValue = null;
@@ -77,9 +78,10 @@ class ConditionParser
         $term = [];
         $operator = $this->getOperator($condition);
 
-        if (in_array($operator, $this->operators)) {
+        if ($operator !== null && in_array($operator, $this->operators, true)) {
             $term['operator'] = $operator;
-            $value = trim(str_replace($operator, '', $condition));
+            // only the leading operator is cut off, the value itself may contain operator characters
+            $value = trim(substr($condition, strlen($operator)));
             if ($value === '') {
                 $term['value'] = null;
             } else {

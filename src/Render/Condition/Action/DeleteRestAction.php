@@ -14,6 +14,7 @@ class DeleteRestAction extends ConditionAction
      * @return void
      * @throws RenderException
      */
+    #[\Override]
     public function execute(): void
     {
         $parentRunNode = DOMUtils::getParentNode($this->conditionElement->getElement(), 'w:r');

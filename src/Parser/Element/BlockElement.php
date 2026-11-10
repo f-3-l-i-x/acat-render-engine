@@ -120,7 +120,8 @@ abstract class BlockElement
                 $this->fieldIds['views'][] = $viewElement->getFieldId();
             }
             foreach ($this->fieldIds as $key => $value) {
-                $this->fieldIds[$key] = array_unique($value, SORT_NUMERIC);
+                // view ids are not numeric, a numeric comparison would treat all of them as duplicates
+                $this->fieldIds[$key] = array_unique($value);
             }
         }
 

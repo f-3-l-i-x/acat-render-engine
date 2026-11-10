@@ -4,6 +4,7 @@ namespace ACAT\Parser\Normalizer;
 
 use DOMNode;
 use Psr\Log\LogLevel;
+use ACAT\Utils\DOMUtils;
 use Psr\Log\LoggerInterface;
 use ACAT\Parser\ParserConstants;
 use ACAT\Document\Word\ContentPart;
@@ -24,6 +25,13 @@ class Normalizer
 
     /** @var DOMNode[] */
     private array $textNodes = [];
+
+    /**
+     * The paragraph the accumulated text nodes belong to.
+     *
+     * @var DOMNode|null
+     */
+    private ?DOMNode $paragraph = null;
 
     /**
      * @var ContentPart
@@ -53,6 +61,10 @@ class Normalizer
         $this->log(LogLevel::INFO, 'starting normalizer for content part ' . $contentPart->getPath());
         $this->contentPart = $contentPart;
 
+        // nodes accumulated in another content part must never be merged into this one
+        $this->textNodes = [];
+        $this->paragraph = null;
+
         $textNodes = $this->contentPart->getXPath()->query(ParserConstants::WORD_TEXT_NODES);
         foreach ($textNodes as $textNode) {
             $this->processTextNode($textNode);
@@ -76,11 +88,32 @@ class Normalizer
         $nodeValue = $textNode->nodeValue;
         $this->log(LogLevel::DEBUG, 'processing node with value ' . $nodeValue);
 
+        $this->resetNodesOnNewParagraph($textNode);
         $nodeValue = $this->removePlaceholders($nodeValue);
 
         if ($this->shouldProcessNode($nodeValue)) {
             $this->handleNodeProcessing($textNode, $nodeValue);
         }
+    }
+
+    /**
+     * A marker never spans more than one paragraph. Nodes accumulated in a
+     * previous paragraph (e.g. because of a single "$" in the text) are
+     * discarded, otherwise the next "}" would merge whole paragraphs.
+     *
+     * @return void
+     *
+     * @param   DOMNode  $textNode  The current text node being processed.
+     */
+    private function resetNodesOnNewParagraph(DOMNode $textNode): void
+    {
+        $paragraph = DOMUtils::getParentNode($textNode, 'w:p');
+
+        if ($paragraph !== $this->paragraph) {
+            $this->textNodes = [];
+        }
+
+        $this->paragraph = $paragraph;
     }
 
     /**
@@ -118,7 +151,7 @@ class Normalizer
         if (!str_contains($nodeValue, self::PLACEHOLDER_END)) {
             $this->textNodes[] = $textNode;
         } elseif ($this->shouldProcessPartialPlaceholder($nodeValue)) {
-            $this->processPartialPlaceholder($textNode, $nodeValue);
+            $this->processPartialPlaceholder($textNode);
         } else {
             $this->textNodes[] = $textNode;
             $this->mergeNodes();
@@ -154,21 +187,24 @@ class Normalizer
     }
 
     /**
-     * Closes the pending marker with the text preceding the next marker
-     * start, merges it, then starts a new accumulation for the marker that
-     * begins right after.
+     * Closes the pending marker with the text up to the first marker end,
+     * merges it, then starts a new accumulation with the rest of the node,
+     * which contains the start of the next marker. The node is cut by
+     * position, so complete markers in between stay where they are.
      *
      * @return void
      *
-     * @param   string   $nodeValue  The value of the current node being processed for a partial placeholder.
      * @param   DOMNode  $textNode   The text node containing the partial placeholder to process.
      */
-    private function processPartialPlaceholder(DOMNode $textNode, string $nodeValue): void
+    private function processPartialPlaceholder(DOMNode $textNode): void
     {
-        [$end] = explode(self::PLACEHOLDER_START, $nodeValue);
-        $this->textNodes[count($this->textNodes) - 1]->nodeValue .= $end;
+        $nodeValue = $textNode->nodeValue;
+        $length = strpos($nodeValue, self::PLACEHOLDER_END) + 1;
+
+        array_last($this->textNodes)->nodeValue .= substr($nodeValue, 0, $length);
         $this->mergeNodes();
-        $textNode->nodeValue = str_replace($end, '', $textNode->nodeValue);
+
+        $textNode->nodeValue = substr($nodeValue, $length);
         $this->textNodes[] = $textNode;
     }
 

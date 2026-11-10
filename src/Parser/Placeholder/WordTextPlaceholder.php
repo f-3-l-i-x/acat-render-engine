@@ -21,7 +21,7 @@ class WordTextPlaceholder extends ACatPlaceholder
      *
      * @param string|null $text
      */
-    public function __construct(private ?string $text)
+    public function __construct(private readonly ?string $text)
     {
         parent::__construct();
     }
@@ -42,6 +42,7 @@ class WordTextPlaceholder extends ACatPlaceholder
      *
      * @return string
      */
+    #[\Override]
     public function getXMLTagAsString(): string
     {
         return '<w:t xml:space="preserve">' . $this->text . '</w:t>';
@@ -54,14 +55,11 @@ class WordTextPlaceholder extends ACatPlaceholder
      * @return DOMNode
      * @throws DOMException
      */
+    #[\Override]
     public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
-        if ($this->text == null) {
-            $this->text = "";
-        }
-
         $elementNode = $domDocument->createElement('w:t');
-        $textNode = $domDocument->createTextNode($this->text);
+        $textNode = $domDocument->createTextNode($this->text ?? '');
 
         $preserverAttribute = $domDocument->createAttribute('xml:space');
         $preserverAttribute->value = "preserve";
@@ -77,6 +75,7 @@ class WordTextPlaceholder extends ACatPlaceholder
      *
      * @return int
      */
+    #[\Override]
     public function length(): int
     {
         return strlen($this->getNodeAsString());
@@ -87,6 +86,7 @@ class WordTextPlaceholder extends ACatPlaceholder
      *
      * @return string
      */
+    #[\Override]
     public function getNodeAsString(): string
     {
         return $this->text ?? '';

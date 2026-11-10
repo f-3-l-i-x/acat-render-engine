@@ -19,6 +19,7 @@ class ViewPlaceholder extends FieldPlaceholder
      * @return DOMNode
      * @throws DOMException
      */
+    #[\Override]
     public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         $elementNode = $domDocument->createElementNS($this->namespace, 'acat:view');
@@ -41,6 +42,7 @@ class ViewPlaceholder extends FieldPlaceholder
      *
      * @return string
      */
+    #[\Override]
     public function getXMLTagAsString(): string
     {
         return '<acat:view id="' . $this->getId() . '" field="' . $this->fieldId . '"/>';
@@ -51,6 +53,7 @@ class ViewPlaceholder extends FieldPlaceholder
      *
      * @return string
      */
+    #[\Override]
     public function getNodeAsString(): string
     {
         return '${V:' . $this->fieldId . '}';

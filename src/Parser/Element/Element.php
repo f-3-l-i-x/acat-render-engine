@@ -62,7 +62,7 @@ abstract class Element
         if (!$this->domXPath) {
             $this->domXPath = new DOMXPath($this->domDocument);
             foreach (ParserConstants::$wordNamespaces as $prefix => $url) {
-                $this->getXpath()->registerNamespace($prefix, $url);
+                $this->domXPath->registerNamespace($prefix, $url);
             }
         }
         return $this->domXPath;

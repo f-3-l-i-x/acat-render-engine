@@ -65,4 +65,15 @@ class DocumentProtectionTest extends TestCase
 
     }
 
+    #[Test]
+    public function generatesASaltOfSixteenBytesOnlyOnce() : void {
+
+        $protection = new DocumentProtection('secret');
+        $salt = $protection->getSalt();
+
+        $this->assertSame(16, strlen($salt));
+        $this->assertSame($salt, $protection->getSalt());
+
+    }
+
 }

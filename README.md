@@ -7,7 +7,7 @@ against PHP data at render time.
 ## Requirements
 
 - PHP >= 8.5
-- Extensions: `dom`, `json`, `mbstring`, `openssl`, `xml`, `zip`, `libxml`
+- Extensions: `dom`, `json`, `mbstring`, `xml`, `zip`, `libxml`
 
 ## Installation
 

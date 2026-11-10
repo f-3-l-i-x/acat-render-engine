@@ -17,6 +17,7 @@ class LineBreakPlaceholder extends ACatPlaceholder
      *
      * @return string
      */
+    #[\Override]
     public function getXMLTagAsString(): string
     {
         return "<w:br/>";
@@ -29,6 +30,7 @@ class LineBreakPlaceholder extends ACatPlaceholder
      * @return DOMNode
      * @throws DOMException
      */
+    #[\Override]
     public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         return $domDocument->createElement('w:br');
@@ -39,6 +41,7 @@ class LineBreakPlaceholder extends ACatPlaceholder
      *
      * @return int
      */
+    #[\Override]
     public function length(): int
     {
         return 0;
@@ -50,6 +53,7 @@ class LineBreakPlaceholder extends ACatPlaceholder
      *
      * @return string
      */
+    #[\Override]
     public function getNodeAsString(): string
     {
         return "";

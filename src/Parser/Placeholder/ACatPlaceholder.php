@@ -27,7 +27,7 @@ abstract class ACatPlaceholder
      */
     public function __construct()
     {
-        $this->id = Uuid::v4();
+        $this->id = Uuid::v4()->toRfc4122();
     }
 
     /**
@@ -39,6 +39,7 @@ abstract class ACatPlaceholder
      * @return ACatPlaceholder
      * @throws PlaceholderException
      */
+    #[\NoDiscard]
     public static function getPlaceholder(string $placeHolderStr): ACatPlaceholder
     {
         $placeHolderStr = str_replace(['$', '{', '}'], '', $placeHolderStr);

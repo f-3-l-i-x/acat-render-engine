@@ -2,29 +2,19 @@
 
 namespace ACAT\Render\Condition\Action;
 
-use ACAT\Exception\RenderException;
-
 /**
- *
+ * deletes all field, text and view elements behind the condition element in its paragraph
  */
 class DeleteRemainingElementsAction extends ConditionAction
 {
     /**
      * @return void
-     * @throws RenderException
      */
+    #[\Override]
     public function execute(): void
     {
-        $nodes = $this->conditionElement->getXpath()
-                                        ->query(
-                                            './/acat:field|.//acat:text|.//acat:view',
-                                            $this->conditionElement->getElement()
-                                        );
-        foreach ($nodes as $node) {
-            $deletedNode = $node->parentNode->removeChild($node);
-            if (!$deletedNode->isSameNode($node)) {
-                throw new RenderException($node->nodeName . ' could not removed');
-            }
+        foreach ($this->getFollowingElements() as $node) {
+            $node->parentNode?->removeChild($node);
         }
     }
 }

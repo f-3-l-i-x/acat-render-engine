@@ -129,6 +129,7 @@ class PasswordEncoder
      * @return string
      * @throws DocumentException
      */
+    #[\NoDiscard]
     public static function hashPassword(
         string $password,
         string $algorithmName = self::ALGORITHM_SHA_1,

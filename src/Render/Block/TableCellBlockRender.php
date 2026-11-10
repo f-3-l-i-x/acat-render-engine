@@ -21,6 +21,7 @@ class TableCellBlockRender extends BlockRender
     /**
      *
      */
+    #[\Override]
     public function cleanUpBlock(): void
     {
         // TODO: Implement cleanUpBlock() method.

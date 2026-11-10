@@ -40,7 +40,7 @@ final class RenderEngine
     /**
      * @var Normalizer
      */
-    private Normalizer $normalizer;
+    private readonly Normalizer $normalizer;
 
     /**
      * @var ElementGenerator
@@ -52,6 +52,7 @@ final class RenderEngine
      */
     public function __construct(private readonly ?LoggerInterface $logger = null)
     {
+        $this->normalizer = new Normalizer($this->logger);
     }
 
     /**
@@ -64,11 +65,10 @@ final class RenderEngine
      * @throws ElementException
      * @throws RenderException
      */
-    public function render(?WordDocument $wordDocument = null, array $values = []): void
+    public function render(WordDocument $wordDocument, array $values = []): void
     {
         try {
             $wordDocument->open();
-            $this->normalizer = new Normalizer($this->logger);
 
             if ($values) {
                 $this->documentValues = $values;

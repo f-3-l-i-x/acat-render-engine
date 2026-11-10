@@ -30,6 +30,7 @@ class WordDocumentProtectionPlaceholder extends ACatPlaceholder
      * @return DOMNode
      * @throws DOMException
      */
+    #[\Override]
     public function getDOMNode(DOMDocument $domDocument): DOMNode
     {
         $edit = $this->documentProtection->getEditing();
@@ -85,6 +86,7 @@ class WordDocumentProtectionPlaceholder extends ACatPlaceholder
      *
      * @return int
      */
+    #[\Override]
     public function length(): int
     {
         return strlen($this->getXMLTagAsString());
@@ -96,6 +98,7 @@ class WordDocumentProtectionPlaceholder extends ACatPlaceholder
      *
      * @return string
      */
+    #[\Override]
     public function getXMLTagAsString(): string
     {
         $edit = $this->documentProtection->getEditing();
@@ -121,6 +124,7 @@ class WordDocumentProtectionPlaceholder extends ACatPlaceholder
      *
      * @return string
      */
+    #[\Override]
     public function getNodeAsString(): string
     {
         return "";

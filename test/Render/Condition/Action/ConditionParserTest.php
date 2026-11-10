@@ -40,6 +40,15 @@ class ConditionParserTest extends TestCase
 
     }
 
+    public function testGetCompareValueKeepsOperatorCharactersInsideTheValue() : void {
+
+        $term = (new ConditionParser())->getCompareValue('=a=b');
+
+        $this->assertSame('=', $term['operator']);
+        $this->assertSame('a=b', $term['value']);
+
+    }
+
     public function testGetCompareValueWithNoValueIsNull() : void {
 
         $term = (new ConditionParser())->getCompareValue('<>');

@@ -13,6 +13,7 @@ class ViewElement extends Element
      * @return string
      * @throws ElementException
      */
+    #[\Override]
     public function getFieldId(): string
     {
         $id = $this->getAttributeValue('view');
@@ -25,6 +26,7 @@ class ViewElement extends Element
     /**
      * @return string
      */
+    #[\Override]
     public function getType(): string
     {
         return "VIEW";

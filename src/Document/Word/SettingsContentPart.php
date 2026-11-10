@@ -26,6 +26,16 @@ class SettingsContentPart extends ContentPart
             throw new DocumentException($this->path . ' has no root node');
         }
 
+        // An already protected document must not end up with two protection nodes. A node created by an earlier
+        // call has no namespace until the document is parsed again, so it is also selected by its name.
+        $documentProtectionNodes = $this->getXPath()->query(
+            '//w:settings/w:documentProtection|//w:settings/*[name() = "w:documentProtection"]'
+        );
+
+        foreach ($documentProtectionNodes as $documentProtectionNode) {
+            $documentProtectionNode->parentNode->removeChild($documentProtectionNode);
+        }
+
         $nodes->item(0)->appendChild($wordDocumentProtectionPlaceHolder->getDOMNode($this->getDomDocument()));
     }
 }

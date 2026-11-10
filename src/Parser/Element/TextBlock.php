@@ -12,6 +12,7 @@ class TextBlock extends BlockElement
     /**
      * @return DOMNode
      */
+    #[\Override]
     public function getContextNode(): DOMNode
     {
         return $this->getEnd();

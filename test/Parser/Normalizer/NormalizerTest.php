@@ -10,6 +10,7 @@ use ACAT\Document\Word\WordDocument;
 use ACAT\Exception\DocumentException;
 use ACAT\Parser\Normalizer\Normalizer;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use ACAT\Exception\PlaceholderException;
 use ACAT\Parser\Placeholder\ACatPlaceholder;
 use ACAT\Parser\Placeholder\TextPlaceholder;
@@ -181,6 +182,123 @@ class NormalizerTest extends TestCase
         $textNodes = $contentPart->getXPath()->query('//w:t');
         $this->assertCount(1, $textNodes);
         $this->assertSame('${F:1121}', $textNodes->item(0)->nodeValue);
+    }
+
+    /**
+     * @return array
+     */
+    public static function textNodes() : array
+    {
+        return [
+            'complete placeholder'                   => [
+                [['${F:1}'], ['Text']],
+                ['${F:1}', 'Text'],
+            ],
+            'placeholder in two runs'                => [
+                [['${F:', '12}']],
+                ['${F:12}'],
+            ],
+            'placeholder in three runs'              => [
+                [['Feld ${', 'F:12', '} Ende']],
+                ['Feld ${F:12} Ende'],
+            ],
+            'end and start of placeholders in a run' => [
+                [['${F:1', '2} und ${F:4', '5}']],
+                ['${F:12}', ' und ${F:45}'],
+            ],
+            'complete placeholder between two parts' => [
+                [['${F:1', '2} und ${F:3} und ${F:4', '5}']],
+                ['${F:12}', ' und ${F:3} und ${F:45}'],
+            ],
+            'restart of an unfinished placeholder'   => [
+                [['Preis 5$ ', '${F:', '1}']],
+                ['Preis 5$ ', '${F:1}'],
+            ],
+            'dollar and brace without a placeholder' => [
+                [['Preis 5$'], ['Absatz zwei'], ['Menge {a}']],
+                ['Preis 5$', 'Absatz zwei', 'Menge {a}'],
+            ],
+            'unfinished placeholder in a paragraph'  => [
+                [['Preis 5$'], ['${F:1}'], ['Menge {a}']],
+                ['Preis 5$', '${F:1}', 'Menge {a}'],
+            ],
+        ];
+    }
+
+    /**
+     * @param array $paragraphs text of the runs of every paragraph
+     * @param array $expected text nodes after the normalizer was running
+     * @return void
+     */
+    #[Test]
+    #[DataProvider('textNodes')]
+    public function normalizeTextNodes(array $paragraphs, array $expected) : void
+    {
+        $contentPart = $this->getContentPart($paragraphs);
+
+        $normalizer = new Normalizer();
+        $normalizer->normalize($contentPart);
+
+        $this->assertSame($expected, $this->getTextNodeValues($contentPart));
+        $this->assertCount(count($paragraphs), $contentPart->getXPath()->query('//w:p'));
+    }
+
+    /**
+     * text nodes of a content part must not be merged into the next content part
+     *
+     * @return void
+     */
+    #[Test]
+    public function normalizeSeveralContentParts() : void
+    {
+        $firstContentPart = $this->getContentPart([['Preis 5$']]);
+        $secondContentPart = $this->getContentPart([['${F:1}'], ['Menge {a}']]);
+
+        $normalizer = new Normalizer();
+        $normalizer->normalize($firstContentPart);
+        $normalizer->normalize($secondContentPart);
+
+        $this->assertSame(['Preis 5$'], $this->getTextNodeValues($firstContentPart));
+        $this->assertSame(['${F:1}', 'Menge {a}'], $this->getTextNodeValues($secondContentPart));
+    }
+
+    /**
+     * @param array $paragraphs
+     * @return ContentPart
+     */
+    private function getContentPart(array $paragraphs) : ContentPart
+    {
+        $content = '';
+
+        foreach ($paragraphs as $runs) {
+            $content .= '<w:p>';
+            foreach ($runs as $text) {
+                $content .= '<w:r><w:t xml:space="preserve">' . $text . '</w:t></w:r>';
+            }
+            $content .= '</w:p>';
+        }
+
+        return new ContentPart(
+            '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'
+            . $content
+            . '</w:body></w:document>',
+            'word/document.xml'
+        );
+    }
+
+    /**
+     * @param ContentPart $contentPart
+     * @return array
+     */
+    private function getTextNodeValues(ContentPart $contentPart) : array
+    {
+        $values = [];
+
+        foreach ($contentPart->getXPath()->query('//w:t') as $textNode) {
+            $values[] = $textNode->nodeValue;
+        }
+
+        return $values;
     }
 
 }

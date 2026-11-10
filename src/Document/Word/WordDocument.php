@@ -78,8 +78,8 @@ class WordDocument
         }
 
         foreach ($nodes as $node) {
-            if ($node->hasAttributes()) {
-                $path = FileUtils::stripTrailingSlash($node->attributes->getNamedItem('PartName')->nodeValue);
+            if ($node->hasAttribute('PartName')) {
+                $path = FileUtils::stripTrailingSlash($node->getAttribute('PartName'));
                 $content = $this->readFromFile($path);
 
                 if ($path === 'word/settings.xml') {

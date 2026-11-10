@@ -18,7 +18,7 @@ class PasswordEncoderTest extends TestCase
 
         $this->expectException(DocumentException::class);
 
-        PasswordEncoder::hashPassword('secret', 'bogus', '0123456789012345');
+        (void) PasswordEncoder::hashPassword('secret', 'bogus', '0123456789012345');
 
     }
 
@@ -30,7 +30,7 @@ class PasswordEncoderTest extends TestCase
 
         try {
             try {
-                PasswordEncoder::hashPassword('secret', 'bogus', '0123456789012345');
+                (void) PasswordEncoder::hashPassword('secret', 'bogus', '0123456789012345');
                 $this->fail('expected a DocumentException');
             } catch (DocumentException) {
                 // expected

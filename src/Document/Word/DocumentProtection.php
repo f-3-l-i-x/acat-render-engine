@@ -60,7 +60,7 @@ class DocumentProtection
     /**
      * @var string|null
      */
-    private ?string $salt;
+    private ?string $salt = null;
 
     /**
      * @param string|null $password
@@ -108,13 +108,11 @@ class DocumentProtection
 
     /**
      * @return string
+     * @throws Exception
      */
     public function getSalt(): string
     {
-        if (empty($this->salt)) {
-            $this->salt = openssl_random_pseudo_bytes(16);
-        }
-        return $this->salt;
+        return $this->salt ??= random_bytes(16);
     }
 
     /**

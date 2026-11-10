@@ -7,6 +7,10 @@ use DOMNode;
 class DOMUtils
 {
     /**
+     * Returns the closest node (the given node included) with the given name. Without a name the direct parent
+     * is returned. The search stops at the root node, at the top of the document (header, footer, ... do not
+     * have a w:document root) and at the top of a detached subtree.
+     *
      * @param DOMNode $node
      * @param string|null $parentNodeName
      * @param string $rootNode
@@ -21,15 +25,16 @@ class DOMUtils
             return $node->parentNode;
         }
 
-        if ($node->tagName != $rootNode) {
-            if ($node->tagName === $parentNodeName) {
-                return $node;
-            } else {
-                return self::getParentNode($node->parentNode, $parentNodeName);
+        for ($current = $node; $current !== null; $current = $current->parentNode) {
+            if ($current->nodeName === $rootNode) {
+                return null;
             }
-        } else {
-            return null;
+            if ($current->nodeName === $parentNodeName) {
+                return $current;
+            }
         }
+
+        return null;
     }
 
     /**
